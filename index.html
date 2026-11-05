@@ -835,7 +835,7 @@
         function openAdminDataPage() {
             const db = MatrixHub.getDB();
             const syncPayload = encodeURIComponent(JSON.stringify(db));
-            window.open(`https://admin-data-two.vercel.app/#sync=${syncPayload}`, '_blank');
+           window.open(`https://admin-data-two.vercel.app/#sync=${encodedPayload}`, '_blank');
         }
 
         window.addEventListener('keydown', function(e) {
