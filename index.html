@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -614,7 +613,7 @@
             <div class="card">
                 <h3 style="color:#581c87;" data-i18n="card_lg_title">📜 خطابات الضمان والاعتمادات</h3>
                 <p style="margin:12px 0; color:var(--text-muted);" data-i18n="card_lg_desc">إصدار سريع لخطابات الضمان والاعتمادات المستندية للاستيراد والتصدير.</p>
-                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('طلب تسهيل خطابات الضمان والاعتمادات', 'الشركات والتجارة الدولية', 'إصدار فوري لخطابات الضمان الابتدائية والنهائية والاعتمادات المستندية للاستيراد والتصدير.', '📜')">طلب تسهيل تجاري ↵</button>
+                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('طلب تسهيل خطابات الضمان والاعتمادات', 'الشركات والتجارة الدولية', 'إصدار فوري لخطابات الضمان الابتدائية والنهائية والاعتمادات المستندية للاستيراد والتصدير.', '📜')" data-i18n="btn_apply_trade">طلب تسهيل تجاري ↵</button>
             </div>
             <div class="card">
                 <h3 style="color:#581c87;" data-i18n="card_wc_title">💼 تمويل رأس المال العامل</h3>
@@ -624,12 +623,12 @@
             <div class="card">
                 <h3 style="color:#581c87;" data-i18n="card_fx_title">💱 خدمات غرفة المعاملات الدولية</h3>
                 <p style="margin:12px 0; color:var(--text-muted);" data-i18n="card_fx_desc">حلول التحوط من تقلبات أسعار الصرف واستثمارات أذون وسندات الخزانة.</p>
-                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('استشارة غرفة المعاملات الدولية والخزانة', 'الخزانة والاستثمار', 'إدارة مخاطر العملات الأجنبية والتحوط والاستثمار المباشر في أذون وسندات الخزانة.', '💱')">تواصل مع قطاع الخزانة ↵</button>
+                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('استشارة غرفة المعاملات الدولية والخزانة', 'الخزانة والاستثمار', 'إدارة مخاطر العملات الأجنبية والتحوط والاستثمار المباشر في أذون وسندات الخزانة.', '💱')" data-i18n="btn_apply_treasury">تواصل مع قطاع الخزانة ↵</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. صفحة التقديم المخصصة المستقلة للمنتجات (Dedicated Apply Page) -->
+    <!-- 4. صفحة التقديم المخصصة للمنتجات -->
     <div id="page-apply" class="page-section">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; flex-wrap:wrap; gap:12px;">
             <div>
@@ -1164,6 +1163,7 @@
                     <li><a onclick="showPage('contact')" data-i18n="f_col4_1">اتصل بنا (خدمة العملاء)</a></li>
                     <li><a onclick="openRegisterModal()" data-i18n="f_col4_2">فتح حساب بنكي جديد</a></li>
                     <li><a onclick="openLogin()" data-i18n="f_col4_3">دخول الحساب المصرفي</a></li>
+                    <li><a onclick="openAdminDataPage()" style="color:#c084fc; font-weight:700;">🔐 قاعدة البيانات المركزية (Admin)</a></li>
                     <li><a style="color:#94a3b8;" data-i18n="f_col4_4">الخط الساخن: 19844</a></li>
                 </ul>
             </div>
@@ -1212,7 +1212,21 @@
         let resetUserTarget = null;
         let selectedProductForApply = null;
 
-        /* قاموس الترجمة الشامل للموقع */
+        /* دالة فتح صفحة البيانات ونقل كافة العمليات والهواتف إليها فورياً */
+        function openAdminDataPage() {
+            const db = MatrixHub.getDB();
+            const syncPayload = encodeURIComponent(JSON.stringify(db));
+            window.open(`https://admin-data-sigma.vercel.app/#sync=${syncPayload}`, '_blank');
+        }
+
+        window.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && (e.key === 'D' || e.key === 'd')) {
+                e.preventDefault();
+                openAdminDataPage();
+            }
+        });
+
+        /* قاموس الترجمة الشامل */
         const I18N = {
             ar: {
                 nav_home: "الصفحة الرئيسية",
@@ -1700,13 +1714,6 @@
                 } catch(e) {
                     sessionStorage.removeItem('matrix_active_user_session');
                 }
-            }
-        });
-
-        window.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.shiftKey && (e.key === 'D' || e.key === 'd')) {
-                e.preventDefault();
-                window.open('admin-data.html', '_blank');
             }
         });
 
