@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -9,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matrix Bank | قاعدة البيانات المركزية المشفرة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة SheetJS لتوليد ملفات الإكسيل الأصلية -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     <style>
         :root {
             --purple-gradient: linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #9333ea 100%);
@@ -143,12 +143,12 @@
             100% { transform: scale(0.9); opacity: 0.7; }
         }
 
-        .header-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .btn-header {
             background: #fff;
             color: #581c87;
             border: none;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
@@ -164,9 +164,10 @@
 
         .btn-lang-admin { background: rgba(255,255,255,0.2); color:#fff; border:1px solid rgba(255,255,255,0.4); }
         .btn-test { background: #10b981; color: #fff; }
-        .btn-export { background: #8b5cf6; color: #fff; }
+        .btn-excel { background: #059669; color: #fff; }
+        .btn-print { background: #0284c7; color: #fff; }
         .btn-clear { background: #f59e0b; color: #fff; }
-        .btn-logout { background: #ef4444; color: #fff; }
+        .btn-logout { background: #475569; color: #fff; }
 
         .container { max-width: 1340px; margin: 25px auto; padding: 0 3%; }
 
@@ -273,6 +274,7 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 6px 20px rgba(107, 33, 168, 0.06);
+            margin-bottom: 24px;
         }
 
         .data-panel.active { display: block; }
@@ -297,11 +299,95 @@
         .badge-purple { background: #f3e8ff; color: #6b21a8; }
 
         .empty-state { padding: 40px; text-align: center; color: var(--text-muted); font-weight: 600; }
+
+        .print-header-banner { display: none; }
+
+        /* ========================================================
+           تنسيقات الطباعة الرسمية (Print & Save as PDF)
+           تُظهر كل الجداول والبيانات معاً في تقرير ورقي واضح
+        ======================================================== */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 10pt;
+            }
+
+            /* إخفاء القوائم والأزرار وشاشة القفل */
+            #adminLockScreen, header, .search-container, .tabs-nav, .header-actions, .pulse-dot {
+                display: none !important;
+            }
+
+            #adminMainContent {
+                display: block !important;
+            }
+
+            /* إظهار جميع الجداول الخمسة معاً أثناء الطباعة */
+            .data-panel {
+                display: block !important;
+                margin-bottom: 25px !important;
+                border: 1px solid #333 !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+
+            .panel-header {
+                background: #f1f5f9 !important;
+                border-bottom: 1px solid #333 !important;
+            }
+
+            .print-header-banner {
+                display: block !important;
+                text-align: center;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #000;
+            }
+
+            .stats-grid {
+                display: grid !important;
+                grid-template-columns: repeat(5, 1fr) !important;
+                gap: 8px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .stat-card {
+                border: 1px solid #666 !important;
+                padding: 10px !important;
+                box-shadow: none !important;
+            }
+
+            .stat-card h2 { font-size: 1.2rem !important; }
+
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+            }
+
+            th, td {
+                border: 1px solid #777 !important;
+                padding: 6px 10px !important;
+                font-size: 8.5pt !important;
+                white-space: normal !important;
+                color: #000 !important;
+            }
+
+            th {
+                background: #e2e8f0 !important;
+                font-weight: 800 !important;
+            }
+
+            .badge {
+                border: 1px solid #999;
+                padding: 2px 6px;
+                font-size: 7.5pt;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- 1. شاشة القفل المشفرة مع زر لغات مخصص -->
+    <!-- 1. شاشة القفل المشفرة -->
     <div id="adminLockScreen">
         <div class="auth-card">
             <button onclick="toggleAdminLanguage()" style="position:absolute; top:18px; left:18px; background:#f3e8ff; border:1px solid #d8b4fe; padding:4px 10px; border-radius:6px; cursor:pointer; font-weight:700; color:#581c87;">
@@ -326,7 +412,7 @@
         </div>
     </div>
 
-    <!-- 2. واجهة البيانات المحدثة بالكامل -->
+    <!-- 2. واجهة البيانات المركزية -->
     <div id="adminMainContent">
         <header>
             <div class="header-title">
@@ -342,13 +428,29 @@
                 </button>
                 <a href="index.html" class="btn-header" data-adm-i18n="btn_site">الذهاب للموقع ↗</a>
                 <button class="btn-header btn-test" onclick="inject10TestOperations()" data-adm-i18n="btn_test">⚡ توليد 10 عمليات للفحص</button>
-                <button class="btn-header btn-export" onclick="exportDatabaseBackup()" data-adm-i18n="btn_export">📥 نسخة احتياطية</button>
+                
+                <!-- زر الطباعة أو حفظ PDF -->
+                <button class="btn-header btn-print" onclick="printFullReport()" title="طباعة فورية أو حفظ التقرير بالكامل كـ PDF">
+                    🖨️ طباعة كامل البيانات / PDF
+                </button>
+                
+                <!-- زر تصدير إكسيل -->
+                <button class="btn-header btn-excel" onclick="exportDatabaseToExcel()" title="تحميل ملف إكسيل يحتوي على كل البيانات في شيتات">
+                    📥 تصدير Excel
+                </button>
+
                 <button class="btn-header btn-clear" onclick="clearDatabase()" data-adm-i18n="btn_clear">مسح السجلات</button>
                 <button class="btn-header btn-logout" onclick="adminSignOut()" data-adm-i18n="btn_lock_exit">قفل الخروج 🔒</button>
             </div>
         </header>
 
         <div class="container">
+            <!-- ترويسة تظهر فقط أثناء الطباعة الورقية -->
+            <div class="print-header-banner">
+                <h1 style="font-size:1.6rem; color:#000;">MATRIX BANK - التقرير الشامل لقاعدة البيانات المركزية</h1>
+                <p id="printTimestampNotice" style="font-size:0.9rem; color:#444; margin-top:5px;"></p>
+            </div>
+
             <div class="stats-grid">
                 <div class="stat-card">
                     <span data-adm-i18n="stat_total">إجمالي كافة العمليات</span>
@@ -399,7 +501,7 @@
                 </button>
             </div>
 
-            <!-- 1. جدول التحويلات المالية موضحاً به هاتف وإيميل وحساب المحوِّل منه (المرسل) -->
+            <!-- 1. جدول التحويلات -->
             <div id="panel-transfers" class="data-panel active">
                 <div class="panel-header">
                     <h3 data-adm-i18n="tx_panel_h3">سجل التحويلات المالية (موضحاً به رقم هاتف وإيميل الحساب المُحَوِّل منه)</h3>
@@ -424,7 +526,7 @@
                 </div>
             </div>
 
-            <!-- 2. جدول طلبات التقديم على المنتجات والبطاقات موثقة بالهاتف -->
+            <!-- 2. جدول طلبات التقديم -->
             <div id="panel-corporate" class="data-panel">
                 <div class="panel-header">
                     <h3 data-adm-i18n="app_panel_h3">سجل طلبات التقديم على المنتجات والبطاقات والقروض (موثقة بأرقام الهواتف)</h3>
@@ -450,7 +552,7 @@
                 </div>
             </div>
 
-            <!-- 3. جدول استفسارات صفحة اتصل بنا مع رقم الهاتف -->
+            <!-- 3. جدول استفسارات صفحة اتصل بنا -->
             <div id="panel-contacts" class="data-panel">
                 <div class="panel-header">
                     <h3 data-adm-i18n="inq_panel_h3">رسائل واستفسارات صفحة "اتصل بنا" موثقة بأرقام الهواتف</h3>
@@ -529,7 +631,6 @@
         const ADMIN_PASS = "01122278442";
         const STORAGE_KEY = 'matrix_bank_master_db';
 
-        /* قاموس ترجمة لوحة التحكم المركزية بالكامل */
         const ADMIN_I18N = {
             ar: {
                 lock_title: "بوابة إدارة البيانات المركزية",
@@ -542,7 +643,6 @@
                 sync_text: "توثيق الهواتف والإيميلات والتحويلات يعمل 100%",
                 btn_site: "الذهاب للموقع ↗",
                 btn_test: "⚡ توليد 10 عمليات للفحص",
-                btn_export: "📥 نسخة احتياطية",
                 btn_clear: "مسح السجلات",
                 btn_lock_exit: "قفل الخروج 🔒",
                 stat_total: "إجمالي كافة العمليات",
@@ -605,7 +705,6 @@
                 sync_text: "Phones, emails & transfer tracking active (100%)",
                 btn_site: "Visit Website ↗",
                 btn_test: "⚡ Generate 10 Test Ops",
-                btn_export: "📥 Export Backup",
                 btn_clear: "Clear Records",
                 btn_lock_exit: "Lock & Exit 🔒",
                 stat_total: "Total Operations",
@@ -660,12 +759,8 @@
         };
 
         const adminPlaceholders = {
-            ar: {
-                ph_search: "🔍 ابحث برقم هاتف المرسل أو المستفيد، بالإيميل، بالاسم، برقم الحساب (IBAN)، أو رقم العملية..."
-            },
-            en: {
-                ph_search: "🔍 Search by sender/receiver phone, email, name, IBAN, or TX ID..."
-            }
+            ar: { ph_search: "🔍 ابحث برقم هاتف المرسل أو المستفيد، بالإيميل، بالاسم، برقم الحساب (IBAN)، أو رقم العملية..." },
+            en: { ph_search: "🔍 Search by sender/receiver phone, email, name, IBAN, or TX ID..." }
         };
 
         function setAdminLanguage(lang) {
@@ -702,11 +797,7 @@
 
         function escapeHtml(str) {
             if (!str) return '---';
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;');
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
 
         function checkSession() {
@@ -787,7 +878,7 @@
                     (isAr ? `نتائج البحث: تم العثور على ${foundCount} سجل` : `Search results: ${foundCount} found`) : 
                     (isAr ? `إجمالي السجلات: ${total} عملية` : `Total Records: ${total}`));
 
-                // 1. جدول التحويلات المالية موضحاً به هاتف وإيميل وحساب المُرسِل
+                // 1. جدول التحويلات
                 const transfersBody = document.getElementById('transfersTableBody');
                 if (transfersBody) {
                     transfersBody.innerHTML = filteredTransfers.length ? filteredTransfers.map(tx => `
@@ -810,7 +901,7 @@
                     `).join('') : `<tr><td colspan="6" class="empty-state">${isAr ? 'لا توجد تحويلات مسجلة.' : 'No transfers recorded.'}</td></tr>`;
                 }
 
-                // 2. جدول طلبات التقديم مع الهاتف والاسم
+                // 2. جدول طلبات التقديم
                 const corpBody = document.getElementById('corporateTableBody');
                 if (corpBody) {
                     corpBody.innerHTML = filteredCorporate.length ? filteredCorporate.map(op => `
@@ -830,7 +921,7 @@
                     `).join('') : `<tr><td colspan="7" class="empty-state">${isAr ? 'لا توجد طلبات تقديم مسجلة.' : 'No applications found.'}</td></tr>`;
                 }
 
-                // 3. جدول الرسائل والاستفسارات مع الهاتف
+                // 3. جدول استفسارات اتصل بنا
                 const contactsBody = document.getElementById('contactsTableBody');
                 if (contactsBody) {
                     contactsBody.innerHTML = filteredContacts.length ? filteredContacts.map(c => `
@@ -891,6 +982,84 @@
             if (btn) btn.classList.add('active');
         }
 
+        /* دالة الطباعة المباشرة وحفظ التقرير بصيغة PDF */
+        function printFullReport() {
+            // تحديث البيانات أولاً
+            loadAndRenderData();
+
+            // وضع وقت وتاريخ التقرير
+            const dateStr = new Date().toLocaleString(document.documentElement.lang === 'ar' ? 'ar-EG' : 'en-US');
+            const notice = document.getElementById('printTimestampNotice');
+            if (notice) {
+                notice.innerText = (document.documentElement.lang === 'ar') ? 
+                    `تاريخ استخراج التقرير: ${dateStr} | تم الاستخراج بواسطة: ${ADMIN_USER}` : 
+                    `Generated on: ${dateStr} | Extracted by: ${ADMIN_USER}`;
+            }
+
+            // فتح نافذة الطباعة الرسمية للمتصفح
+            window.print();
+        }
+
+        /* دالة تصدير ملف الإكسيل الشامل */
+        function exportDatabaseToExcel() {
+            const db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"transfers":[],"contacts":[],"corporate":[],"audit":[]}');
+            
+            const wb = XLSX.utils.book_new();
+
+            // 1. شيت التحويلات
+            const txData = (db.transfers || []).map(t => ({
+                "رقم العملية": t.id || '---',
+                "التاريخ والوقت": t.timestamp || '---',
+                "اسم المرسل": t.senderName || '---',
+                "هاتف المرسل": t.senderPhone || '---',
+                "إيميل المرسل": t.senderEmail || '---',
+                "حساب المرسل IBAN": t.senderAcc || '---',
+                "اسم المستفيد": t.name || '---',
+                "حساب المستفيد": t.acc || '---',
+                "المبلغ والعملة": t.displayAmount || `${t.amount} ${t.currency}`,
+                "الحالة": "منجز بنجاح"
+            }));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(txData), "التحويلات المالية");
+
+            // 2. شيت طلبات المنتجات والبطاقات
+            const corpData = (db.corporate || []).map(c => ({
+                "التاريخ والوقت": c.timestamp || '---',
+                "اسم العميل": c.clientName || '---',
+                "رقم الهاتف": c.clientPhone || '---',
+                "المنتج المطلوب": c.type || '---',
+                "الفرع": c.branch || '---',
+                "الدخل والملاحظات": c.details || '---'
+            }));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(corpData), "طلبات المنتجات والبطاقات");
+
+            // 3. شيت الاستفسارات
+            const msgData = (db.contacts || []).map(m => ({
+                "التاريخ والوقت": m.timestamp || '---',
+                "اسم العميل": m.name || '---',
+                "رقم الهاتف": m.phone || '---',
+                "البريد الإلكتروني": m.email || '---',
+                "نص الرسالة": m.message || '---'
+            }));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(msgData), "رسائل اتصل بنا");
+
+            // 4. شيت الحسابات المنشأة
+            const accData = (db.accounts || []).map(a => ({
+                "تاريخ الإنشاء": a.timestamp || '---',
+                "رقم الحساب IBAN": a.accountNo || '---',
+                "الاسم": a.name || '---',
+                "البريد": a.email || '---',
+                "الهاتف": a.phone || '---',
+                "نوع الحساب": a.accountType || '---',
+                "العملة": a.currency || '---',
+                "الرصيد الافتتاحي": a.initialBalance || a.balance
+            }));
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(accData), "الحسابات الجديدة");
+
+            // تحميل ملف الإكسيل
+            const fileName = `MatrixBank_Excel_${new Date().toISOString().slice(0, 10)}.xlsx`;
+            XLSX.writeFile(wb, fileName);
+        }
+
         function inject10TestOperations() {
             let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"transfers":[],"contacts":[],"corporate":[],"audit":[]}');
             const now = new Date().toLocaleTimeString('ar-EG');
@@ -926,19 +1095,6 @@
                 'Test operations generated with sender phone & email verified!');
         }
 
-        function exportDatabaseBackup() {
-            const raw = localStorage.getItem(STORAGE_KEY) || '{}';
-            const blob = new Blob([raw], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `MatrixBank_Backup_${new Date().toISOString().slice(0, 10)}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
         function clearDatabase() {
             const isAr = (document.documentElement.lang === 'ar');
             if (confirm(isAr ? "هل تريد تفريغ وحذف جميع السجلات من قاعدة البيانات؟" : "Clear all database records?")) {
@@ -955,11 +1111,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
