@@ -6,7 +6,7 @@
     <title>Matrix Bank | قاعدة البيانات المركزية المشفرة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- مكتبة SheetJS لتوليد ملفات الإكسيل الأصلية -->
+    <!-- مكتبة SheetJS لتصدير ملفات الإكسيل -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
@@ -78,24 +78,20 @@
 
         .form-group { text-align: right; margin-bottom: 18px; }
         .form-group label { display: block; margin-bottom: 6px; font-weight: 700; color: #3b0764; font-size: 0.85rem; }
-        .form-group input { width: 100%; padding: 13px; border: 1px solid #d8b4fe; border-radius: 10px; outline: none; background: #faf5ff; font-size: 0.95rem; }
-        .form-group input:focus { border-color: #9333ea; box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.15); }
-
-        .btn-auth {
-            width: 100%;
-            padding: 13px;
-            background: var(--purple-gradient);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(107, 33, 168, 0.3);
-            transition: all 0.2s;
+        .form-group input, .form-group select {
+            width: 100%; padding: 13px; border: 1px solid #d8b4fe; border-radius: 10px;
+            outline: none; background: #faf5ff; font-size: 0.95rem;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #9333ea; box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.15);
         }
 
+        .btn-auth {
+            width: 100%; padding: 13px; background: var(--purple-gradient); color: #fff;
+            border: none; border-radius: 10px; font-weight: 800; font-size: 1rem;
+            cursor: pointer; margin-top: 10px; box-shadow: 0 4px 15px rgba(107, 33, 168, 0.3);
+            transition: all 0.2s;
+        }
         .btn-auth:hover { opacity: 0.95; transform: translateY(-1px); }
 
         .auth-error { color: #ef4444; font-size: 0.85rem; font-weight: 700; margin-top: 12px; display: none; }
@@ -103,40 +99,24 @@
         #adminMainContent { display: none; padding-bottom: 50px; }
 
         header {
-            background: var(--purple-gradient);
-            color: #fff;
-            padding: 15px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 20px rgba(107, 33, 168, 0.25);
-            flex-wrap: wrap;
-            gap: 15px;
+            background: var(--purple-gradient); color: #fff; padding: 15px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 4px 20px rgba(107, 33, 168, 0.25); flex-wrap: wrap; gap: 15px;
         }
 
         .header-title { display: flex; align-items: center; gap: 12px; }
         .header-title h1 { font-size: 1.35rem; font-weight: 800; }
 
         .sync-badge {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; display: flex;
+            align-items: center; gap: 6px;
         }
 
         .pulse-dot {
-            width: 9px;
-            height: 9px;
-            background: #4ade80;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #4ade80;
-            animation: pulse 1.2s infinite;
+            width: 9px; height: 9px; background: #4ade80; border-radius: 50%;
+            box-shadow: 0 0 10px #4ade80; animation: pulse 1.2s infinite;
         }
-
         @keyframes pulse {
             0% { transform: scale(0.9); opacity: 0.7; }
             50% { transform: scale(1.3); opacity: 1; }
@@ -145,21 +125,10 @@
 
         .header-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
         .btn-header {
-            background: #fff;
-            color: #581c87;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
+            background: #fff; color: #581c87; border: none; padding: 8px 14px;
+            border-radius: 8px; font-weight: 700; cursor: pointer; text-decoration: none;
+            font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;
         }
-
         .btn-header:hover { opacity: 0.9; transform: translateY(-1px); }
 
         .btn-lang-admin { background: rgba(255,255,255,0.2); color:#fff; border:1px solid rgba(255,255,255,0.4); }
@@ -167,221 +136,127 @@
         .btn-excel { background: #059669; color: #fff; }
         .btn-print { background: #0284c7; color: #fff; }
         .btn-clear { background: #f59e0b; color: #fff; }
-        .btn-logout { background: #475569; color: #fff; }
+        .btn-logout { background: #ef4444; color: #fff; }
 
-        .container { max-width: 1340px; margin: 25px auto; padding: 0 3%; }
+        .container { max-width: 1360px; margin: 25px auto; padding: 0 3%; }
+
+        .cbe-alert-banner {
+            background: #fffbeb; border: 2px solid #f59e0b; border-radius: 14px;
+            padding: 16px 20px; margin-bottom: 22px; display: none; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+        }
 
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-            margin-bottom: 25px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px; margin-bottom: 25px;
         }
 
         .stat-card {
-            background: #fff;
-            padding: 22px;
-            border-radius: 16px;
-            border: 1px solid var(--border-purple);
+            background: #fff; padding: 22px; border-radius: 16px; border: 1px solid var(--border-purple);
             box-shadow: 0 4px 15px rgba(107, 33, 168, 0.05);
         }
-
         .stat-card span { font-size: 0.85rem; color: var(--text-muted); font-weight: 700; }
         .stat-card h2 { font-size: 1.9rem; margin-top: 6px; color: #581c87; }
 
         .search-container {
-            background: #ffffff;
-            border: 1px solid var(--border-purple);
-            border-radius: 16px;
-            padding: 16px 22px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(107, 33, 168, 0.04);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
+            background: #ffffff; border: 1px solid var(--border-purple); border-radius: 16px;
+            padding: 16px 22px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(107, 33, 168, 0.04);
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
         }
 
         .search-box-input { flex: 1; min-width: 260px; }
         .search-box-input input {
-            width: 100%;
-            padding: 12px 18px;
-            border-radius: 10px;
-            border: 1.5px solid #d8b4fe;
-            background: #faf5ff;
-            outline: none;
-            font-size: 0.95rem;
-            font-weight: 600;
+            width: 100%; padding: 12px 18px; border-radius: 10px; border: 1.5px solid #d8b4fe;
+            background: #faf5ff; outline: none; font-size: 0.95rem; font-weight: 600;
         }
-
         .search-box-input input:focus {
-            border-color: #9333ea;
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.12);
+            border-color: #9333ea; background: #fff; box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.12);
         }
 
         .search-stats-badge {
-            background: #f3e8ff;
-            color: #581c87;
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-size: 0.88rem;
-            font-weight: 800;
-            white-space: nowrap;
+            background: #f3e8ff; color: #581c87; padding: 8px 16px; border-radius: 10px;
+            font-size: 0.88rem; font-weight: 800; white-space: nowrap;
         }
 
         .tabs-nav {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e9d5ff;
-            padding-bottom: 10px;
-            overflow-x: auto;
+            display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #e9d5ff;
+            padding-bottom: 10px; overflow-x: auto;
         }
 
         .tab-btn {
-            background: none;
-            border: none;
-            padding: 10px 18px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-radius: 8px;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
+            background: none; border: none; padding: 10px 18px; font-size: 0.95rem;
+            font-weight: 700; color: var(--text-muted); cursor: pointer; border-radius: 8px;
+            white-space: nowrap; display: flex; align-items: center; gap: 8px; transition: all 0.2s;
         }
-
         .tab-btn span.tab-count {
-            background: #e9d5ff;
-            color: #581c87;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.78rem;
-            font-weight: 800;
+            background: #e9d5ff; color: #581c87; padding: 2px 8px; border-radius: 12px;
+            font-size: 0.78rem; font-weight: 800;
         }
-
         .tab-btn.active { background: #f3e8ff; color: #581c87; }
         .tab-btn.active span.tab-count { background: #581c87; color: #fff; }
 
         .data-panel {
-            display: none;
-            background: #fff;
-            border: 1px solid var(--border-purple);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(107, 33, 168, 0.06);
+            display: none; background: #fff; border: 1px solid var(--border-purple);
+            border-radius: 16px; overflow: hidden; box-shadow: 0 6px 20px rgba(107, 33, 168, 0.06);
             margin-bottom: 24px;
         }
-
         .data-panel.active { display: block; }
 
         .panel-header {
-            padding: 18px 24px;
-            background: #faf5ff;
-            border-bottom: 1px solid #f3e8ff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 18px 24px; background: #faf5ff; border-bottom: 1px solid #f3e8ff;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
         }
 
         .table-responsive { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: right; }
-        th, td { padding: 14px 18px; border-bottom: 1px solid #f3e8ff; font-size: 0.9rem; white-space: nowrap; }
+        th, td { padding: 13px 16px; border-bottom: 1px solid #f3e8ff; font-size: 0.9rem; white-space: nowrap; }
         th { background: #faf5ff; color: #581c87; font-weight: 800; }
 
         .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; display: inline-block; }
         .badge-success { background: #dcfce7; color: #166534; }
         .badge-danger { background: #fee2e2; color: #991b1b; }
         .badge-purple { background: #f3e8ff; color: #6b21a8; }
+        .badge-warning { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+
+        /* أزرار الإجراءات في الجداول */
+        .btn-table-action {
+            border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.78rem;
+            font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex;
+            align-items: center; gap: 4px;
+        }
+        .btn-edit { background: #f3e8ff; color: #6b21a8; border: 1px solid #d8b4fe; }
+        .btn-edit:hover { background: #6b21a8; color: #fff; }
+
+        .btn-ban { background: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+        .btn-ban:hover { background: #b45309; color: #fff; }
+
+        .btn-unban { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .btn-unban:hover { background: #15803d; color: #fff; }
+
+        .btn-del { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .btn-del:hover { background: #b91c1c; color: #fff; }
 
         .empty-state { padding: 40px; text-align: center; color: var(--text-muted); font-weight: 600; }
 
-        .print-header-banner { display: none; }
+        /* نافذة التعديل المنبثقة Modal */
+        .modal-edit-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(30, 5, 56, 0.75);
+            backdrop-filter: blur(8px); justify-content: center; align-items: center;
+            z-index: 10000; padding: 20px;
+        }
+        .modal-edit-box {
+            background: #fff; border-radius: 20px; width: 100%; max-width: 540px;
+            padding: 30px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); max-height: 90vh;
+            overflow-y: auto; text-align: right;
+        }
 
-        /* ========================================================
-           تنسيقات الطباعة الرسمية (Print & Save as PDF)
-           تُظهر كل الجداول والبيانات معاً في تقرير ورقي واضح
-        ======================================================== */
         @media print {
-            body {
-                background: #ffffff !important;
-                color: #000000 !important;
-                font-size: 10pt;
-            }
-
-            /* إخفاء القوائم والأزرار وشاشة القفل */
-            #adminLockScreen, header, .search-container, .tabs-nav, .header-actions, .pulse-dot {
+            body { background: #fff !important; color: #000 !important; }
+            #adminLockScreen, header, .search-container, .tabs-nav, .header-actions, .pulse-dot, .btn-table-action, .modal-edit-overlay {
                 display: none !important;
             }
-
-            #adminMainContent {
-                display: block !important;
-            }
-
-            /* إظهار جميع الجداول الخمسة معاً أثناء الطباعة */
-            .data-panel {
-                display: block !important;
-                margin-bottom: 25px !important;
-                border: 1px solid #333 !important;
-                box-shadow: none !important;
-                page-break-inside: avoid;
-            }
-
-            .panel-header {
-                background: #f1f5f9 !important;
-                border-bottom: 1px solid #333 !important;
-            }
-
-            .print-header-banner {
-                display: block !important;
-                text-align: center;
-                margin-bottom: 20px;
-                padding-bottom: 10px;
-                border-bottom: 2px solid #000;
-            }
-
-            .stats-grid {
-                display: grid !important;
-                grid-template-columns: repeat(5, 1fr) !important;
-                gap: 8px !important;
-                margin-bottom: 20px !important;
-            }
-
-            .stat-card {
-                border: 1px solid #666 !important;
-                padding: 10px !important;
-                box-shadow: none !important;
-            }
-
-            .stat-card h2 { font-size: 1.2rem !important; }
-
-            table {
-                width: 100% !important;
-                border-collapse: collapse !important;
-            }
-
-            th, td {
-                border: 1px solid #777 !important;
-                padding: 6px 10px !important;
-                font-size: 8.5pt !important;
-                white-space: normal !important;
-                color: #000 !important;
-            }
-
-            th {
-                background: #e2e8f0 !important;
-                font-weight: 800 !important;
-            }
-
-            .badge {
-                border: 1px solid #999;
-                padding: 2px 6px;
-                font-size: 7.5pt;
-            }
+            #adminMainContent, .data-panel { display: block !important; border: 1px solid #333 !important; }
+            table, th, td { border: 1px solid #777 !important; font-size: 8.5pt !important; color: #000 !important; }
         }
     </style>
 </head>
@@ -412,7 +287,7 @@
         </div>
     </div>
 
-    <!-- 2. واجهة البيانات المركزية -->
+    <!-- 2. واجهة البيانات المركزية الكاملة -->
     <div id="adminMainContent">
         <header>
             <div class="header-title">
@@ -428,29 +303,30 @@
                 </button>
                 <a href="index.html" class="btn-header" data-adm-i18n="btn_site">الذهاب للموقع ↗</a>
                 <button class="btn-header btn-test" onclick="inject10TestOperations()" data-adm-i18n="btn_test">⚡ توليد 10 عمليات للفحص</button>
-                
-                <!-- زر الطباعة أو حفظ PDF -->
-                <button class="btn-header btn-print" onclick="printFullReport()" title="طباعة فورية أو حفظ التقرير بالكامل كـ PDF">
-                    🖨️ طباعة كامل البيانات / PDF
-                </button>
-                
-                <!-- زر تصدير إكسيل -->
-                <button class="btn-header btn-excel" onclick="exportDatabaseToExcel()" title="تحميل ملف إكسيل يحتوي على كل البيانات في شيتات">
-                    📥 تصدير Excel
-                </button>
-
+                <button class="btn-header btn-print" onclick="window.print()">🖨️ طباعة كامل البيانات / PDF</button>
+                <button class="btn-header btn-excel" onclick="exportDatabaseToExcel()">📥 تصدير Excel</button>
                 <button class="btn-header btn-clear" onclick="clearDatabase()" data-adm-i18n="btn_clear">مسح السجلات</button>
                 <button class="btn-header btn-logout" onclick="adminSignOut()" data-adm-i18n="btn_lock_exit">قفل الخروج 🔒</button>
             </div>
         </header>
 
         <div class="container">
-            <!-- ترويسة تظهر فقط أثناء الطباعة الورقية -->
-            <div class="print-header-banner">
-                <h1 style="font-size:1.6rem; color:#000;">MATRIX BANK - التقرير الشامل لقاعدة البيانات المركزية</h1>
-                <p id="printTimestampNotice" style="font-size:0.9rem; color:#444; margin-top:5px;"></p>
+            <!-- شريط تنبيه البنك المركزي للحسابات التي تتجاوز 100 ألف لمن هم تحت السن -->
+            <div id="cbeAlertBanner" class="cbe-alert-banner">
+                <div>
+                    <h3 style="color:#b45309; display:flex; align-items:center; gap:8px;">
+                        🚨 إشعار رقابي: تم رصد حسابات تتخطى 100,000 ج.م تحت السن القانوني (مكافحة غسل الأموال AML)
+                    </h3>
+                    <p style="color:#78350f; font-size:0.86rem; margin-top:4px;">
+                        طبقا للضوابط الرقابية لحسابات الشباب، تم تمييز هذه الحسابات في الجدول باللون الأصفر لفحص المستندات والإبلاغ.
+                    </p>
+                </div>
+                <button class="btn-header" style="background:#b45309; color:#fff;" onclick="filterCbeAccounts()">
+                    عرض حسابات الفحص الرقابي فقط
+                </button>
             </div>
 
+            <!-- شبكة الإحصائيات الأصلية -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <span data-adm-i18n="stat_total">إجمالي كافة العمليات</span>
@@ -461,8 +337,12 @@
                     <h2 id="statTransfers">0</h2>
                 </div>
                 <div class="stat-card">
-                    <span data-adm-i18n="stat_accounts">الحسابات المنشأة</span>
-                    <h2 id="statAccounts">0</h2>
+                    <span data-adm-i18n="stat_accounts">الحسابات النشطة</span>
+                    <h2 id="statAccounts" style="color:#10b981;">0</h2>
+                </div>
+                <div class="stat-card">
+                    <span>الحسابات المحظورة</span>
+                    <h2 id="statBanned" style="color:#ef4444;">0</h2>
                 </div>
                 <div class="stat-card">
                     <span data-adm-i18n="stat_inquiries">استفسارات الدعم (بالهاتف)</span>
@@ -517,10 +397,11 @@
                                 <th data-adm-i18n="th_tx_receiver">المستفيد (المحول إليه)</th>
                                 <th data-adm-i18n="th_tx_amt">المبلغ والعملة</th>
                                 <th data-adm-i18n="th_tx_status">الحالة</th>
+                                <th>إجراءات</th>
                             </tr>
                         </thead>
                         <tbody id="transfersTableBody">
-                            <tr><td colspan="6" class="empty-state">لا توجد عمليات تحويل حتى الآن.</td></tr>
+                            <tr><td colspan="7" class="empty-state">لا توجد عمليات تحويل حتى الآن.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -543,10 +424,11 @@
                                 <th data-adm-i18n="th_app_branch">الفرع المفضل</th>
                                 <th data-adm-i18n="th_app_details">الدخل / الملاحظات</th>
                                 <th data-adm-i18n="th_app_status">الحالة</th>
+                                <th>إجراءات</th>
                             </tr>
                         </thead>
                         <tbody id="corporateTableBody">
-                            <tr><td colspan="7" class="empty-state">لا توجد طلبات تقديم مسجلة.</td></tr>
+                            <tr><td colspan="8" class="empty-state">لا توجد طلبات تقديم مسجلة.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -566,19 +448,20 @@
                                 <th data-adm-i18n="th_inq_phone">رقم الهاتف المحمول 📱</th>
                                 <th data-adm-i18n="th_inq_email">البريد الإلكتروني</th>
                                 <th data-adm-i18n="th_inq_msg">نص الاستفسار والرسالة</th>
+                                <th>إجراءات</th>
                             </tr>
                         </thead>
                         <tbody id="contactsTableBody">
-                            <tr><td colspan="5" class="empty-state">لا توجد رسائل مسجلة.</td></tr>
+                            <tr><td colspan="6" class="empty-state">لا توجد رسائل مسجلة.</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- 4. جدول الحسابات المنشأة -->
+            <!-- 4. جدول الحسابات المنشأة مع ميزات (التعديل ✏️ - فك الحظر 🟢 - الحظر 🚫 - فحص البنك المركزي 🏛️) -->
             <div id="panel-accounts" class="data-panel">
                 <div class="panel-header">
-                    <h3 data-adm-i18n="acc_panel_h3">سجل العملاء والحسابات الجديدة المنشأة</h3>
+                    <h3 data-adm-i18n="acc_panel_h3">سجل العملاء والحسابات الجديدة المنشأة (إدارة وتعديل وحظر وفك حظر)</h3>
                     <span style="color:#10b981; font-weight:700;" data-adm-i18n="acc_panel_badge">● توثيق فوري</span>
                 </div>
                 <div class="table-responsive">
@@ -588,11 +471,11 @@
                                 <th data-adm-i18n="th_acc_date">تاريخ الإنشاء</th>
                                 <th data-adm-i18n="th_acc_iban">رقم الحساب المصرفي (IBAN)</th>
                                 <th data-adm-i18n="th_acc_name">اسم العميل</th>
-                                <th data-adm-i18n="th_acc_email">البريد الإلكتروني</th>
                                 <th data-adm-i18n="th_acc_phone">رقم الهاتف</th>
-                                <th data-adm-i18n="th_acc_type">نوع الحساب والعملة</th>
-                                <th data-adm-i18n="th_acc_bal">الرصيد الافتتاحي</th>
+                                <th data-adm-i18n="th_acc_bal">الرصيد المالي الحالي</th>
+                                <th>فحص البنك المركزي 🏛️</th>
                                 <th data-adm-i18n="th_acc_status">الحالة</th>
+                                <th style="background:#f3e8ff; color:#581c87;">التحكم والتعديل ⚙️</th>
                             </tr>
                         </thead>
                         <tbody id="accountsTableBody">
@@ -626,6 +509,72 @@
         </div>
     </div>
 
+    <!-- 3. نافذة التعديل المنبثقة (Edit Modal) لتعديل أي حساب -->
+    <div class="modal-edit-overlay" id="editModalOverlay">
+        <div class="modal-edit-box">
+            <h3 style="color:#581c87; margin-bottom:15px; font-size:1.25rem; display:flex; align-items:center; gap:8px;">
+                ✏️ تعديل بيانات الحساب المصرفي
+            </h3>
+            
+            <input type="hidden" id="editTargetAccNo">
+
+            <div class="form-group">
+                <label>اسم العميل بالكامل *</label>
+                <input type="text" id="editClientName">
+            </div>
+
+            <div class="form-group">
+                <label>رقم الهاتف المحمول المسجل 📱 *</label>
+                <input type="tel" id="editClientPhone">
+            </div>
+
+            <div class="form-group">
+                <label>البريد الإلكتروني المعتمد</label>
+                <input type="email" id="editClientEmail">
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                <div class="form-group">
+                    <label>الرصيد المالي الحالي *</label>
+                    <input type="number" id="editClientBalance">
+                </div>
+                <div class="form-group">
+                    <label>عملة الحساب</label>
+                    <select id="editClientCurrency">
+                        <option value="EGP">EGP - جنيه مصري</option>
+                        <option value="USD">USD - دولار أمريكي</option>
+                        <option value="EUR">EUR - يورو</option>
+                        <option value="SAR">SAR - ريال سعودي</option>
+                        <option value="AED">AED - درهم إماراتي</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>الرقم القومي (14 رقم لحساب السن والبنك المركزي)</label>
+                <input type="text" id="editClientNatId" placeholder="الرقم القومي المصري المكون من 14 رقم">
+            </div>
+
+            <div class="form-group">
+                <label>نوع الحساب</label>
+                <input type="text" id="editClientAccType">
+            </div>
+
+            <div class="form-group">
+                <label>حالة الصلاحية والدخول</label>
+                <select id="editClientStatus">
+                    <option value="active">🟢 نشط ومصرّح بالدخول للموقع</option>
+                    <option value="banned">🚫 محظور ومُعطّل (ممنوع من تسجيل الدخول)</option>
+                </select>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button class="btn-auth" style="margin-top:0; background:#10b981;" onclick="submitAccountUpdates()">💾 حفظ التعديلات الآن</button>
+                <button class="btn-auth" style="margin-top:0; background:#94a3b8;" onclick="closeEditModal()">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const ADMIN_USER = "ahmed.adelgin@gmail.com";
         const ADMIN_PASS = "01122278442";
@@ -647,7 +596,7 @@
                 btn_lock_exit: "قفل الخروج 🔒",
                 stat_total: "إجمالي كافة العمليات",
                 stat_transfers: "التحويلات المصرفية",
-                stat_accounts: "الحسابات المنشأة",
+                stat_accounts: "الحسابات النشطة",
                 stat_inquiries: "استفسارات الدعم (بالهاتف)",
                 stat_apps: "طلبات التقديم على المنتجات",
                 tab_tx: "سجل التحويلات وتفاصيل المرسل",
@@ -683,10 +632,8 @@
                 th_acc_date: "تاريخ الإنشاء",
                 th_acc_iban: "رقم الحساب المصرفي (IBAN)",
                 th_acc_name: "اسم العميل",
-                th_acc_email: "البريد الإلكتروني",
                 th_acc_phone: "رقم الهاتف",
-                th_acc_type: "نوع الحساب والعملة",
-                th_acc_bal: "الرصيد الافتتاحي",
+                th_acc_bal: "الرصيد المالي الحالي",
                 th_acc_status: "الحالة",
                 audit_panel_h3: "سجل الأمان وتسجيل الدخول",
                 th_aud_time: "الوقت",
@@ -709,7 +656,7 @@
                 btn_lock_exit: "Lock & Exit 🔒",
                 stat_total: "Total Operations",
                 stat_transfers: "Bank Transfers",
-                stat_accounts: "Created Accounts",
+                stat_accounts: "Active Accounts",
                 stat_inquiries: "Inquiries (with phone)",
                 stat_apps: "Product Applications",
                 tab_tx: "Transfers & Sender Details",
@@ -745,10 +692,8 @@
                 th_acc_date: "Created Date",
                 th_acc_iban: "Account Number (IBAN)",
                 th_acc_name: "Client Name",
-                th_acc_email: "Email Address",
                 th_acc_phone: "Phone Number",
-                th_acc_type: "Account Type & Currency",
-                th_acc_bal: "Opening Balance",
+                th_acc_bal: "Current Balance",
                 th_acc_status: "Status",
                 audit_panel_h3: "Security & Login Audit Trail",
                 th_aud_time: "Timestamp",
@@ -766,33 +711,25 @@
         function setAdminLanguage(lang) {
             document.documentElement.lang = lang;
             document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            
             const labelEl = document.getElementById('adminLangLabel');
             if (labelEl) labelEl.textContent = (lang === 'ar') ? 'English' : 'العربية';
-            
-            document.querySelectorAll('.lockLangLabel').forEach(el => {
-                el.textContent = (lang === 'ar') ? 'English' : 'العربية';
-            });
-
+            document.querySelectorAll('.lockLangLabel').forEach(el => el.textContent = (lang === 'ar') ? 'English' : 'العربية');
             const dict = ADMIN_I18N[lang];
             document.querySelectorAll('[data-adm-i18n]').forEach(el => {
                 const key = el.getAttribute('data-adm-i18n');
                 if (dict[key]) el.innerText = dict[key];
             });
-
             const ph = adminPlaceholders[lang];
             document.querySelectorAll('[data-adm-ph]').forEach(el => {
                 const key = el.getAttribute('data-adm-ph');
                 if (ph[key]) el.placeholder = ph[key];
             });
-
             localStorage.setItem('matrix_admin_lang', lang);
             loadAndRenderData();
         }
 
         function toggleAdminLanguage() {
-            const current = document.documentElement.lang === 'ar' ? 'en' : 'ar';
-            setAdminLanguage(current);
+            setAdminLanguage(document.documentElement.lang === 'ar' ? 'en' : 'ar');
         }
 
         function escapeHtml(str) {
@@ -815,7 +752,6 @@
             const email = document.getElementById('adminEmail').value.trim().toLowerCase();
             const pass = document.getElementById('adminPass').value.trim();
             const activePass = localStorage.getItem('matrix_master_pass_override') || ADMIN_PASS;
-
             if (email === ADMIN_USER.toLowerCase() && (pass === ADMIN_PASS || pass === activePass)) {
                 sessionStorage.setItem('matrix_admin_logged', 'true');
                 document.getElementById('authErrorMsg').style.display = 'none';
@@ -839,6 +775,18 @@
             if (el) el.innerText = text;
         }
 
+        /* فحص الرقم القومي المصري لحساب السن بدقة */
+        function calculateAgeFromNationalId(natId) {
+            if (!natId || natId.length < 14) return null;
+            try {
+                const c = natId.charAt(0);
+                const prefix = (c === '2') ? '19' : (c === '3' ? '20' : '19');
+                const birthYear = parseInt(prefix + natId.substr(1, 2), 10);
+                const age = new Date().getFullYear() - birthYear;
+                return (age > 0 && age < 120) ? age : null;
+            } catch(e) { return null; }
+        }
+
         function loadAndRenderData() {
             if (sessionStorage.getItem('matrix_admin_logged') !== 'true') return;
 
@@ -852,9 +800,24 @@
 
                 const isAr = (document.documentElement.lang === 'ar');
                 const total = transfers.length + accounts.length + contacts.length + corporate.length;
+                
+                let activeAccs = 0;
+                let bannedAccs = 0;
+                let cbeAlertCount = 0;
+
+                accounts.forEach(a => {
+                    if (a.status === 'banned') bannedAccs++; else activeAccs++;
+                    const bal = parseFloat(a.balance || 0);
+                    const age = calculateAgeFromNationalId(a.nationalId);
+                    if (bal >= 100000 && ((age !== null && age < 21) || !a.nationalId)) {
+                        cbeAlertCount++;
+                    }
+                });
+
                 safeSetText('statTotalOperations', isAr ? `${total} عملية` : `${total} Ops`);
                 safeSetText('statTransfers', isAr ? `${transfers.length} عملية` : `${transfers.length} Transfers`);
-                safeSetText('statAccounts', isAr ? `${accounts.length} حساب` : `${accounts.length} Accounts`);
+                safeSetText('statAccounts', activeAccs);
+                safeSetText('statBanned', bannedAccs);
                 safeSetText('statMessages', isAr ? `${contacts.length} رسالة` : `${contacts.length} Messages`);
                 safeSetText('statCorp', isAr ? `${corporate.length} طلب وحركة` : `${corporate.length} Requests`);
 
@@ -863,6 +826,9 @@
                 safeSetText('countTabContacts', contacts.length);
                 safeSetText('countTabCorporate', corporate.length);
                 safeSetText('countTabAudit', audit.length);
+
+                const banner = document.getElementById('cbeAlertBanner');
+                if (banner) banner.style.display = (cbeAlertCount > 0) ? 'flex' : 'none';
 
                 const q = (document.getElementById('globalSearchInput')?.value || '').trim().toLowerCase();
                 const match = item => !q || JSON.stringify(item).toLowerCase().includes(q);
@@ -881,75 +847,110 @@
                 // 1. جدول التحويلات
                 const transfersBody = document.getElementById('transfersTableBody');
                 if (transfersBody) {
-                    transfersBody.innerHTML = filteredTransfers.length ? filteredTransfers.map(tx => `
+                    transfersBody.innerHTML = filteredTransfers.length ? filteredTransfers.map((tx, idx) => `
                         <tr>
                             <td><span class="badge badge-purple">${escapeHtml(tx.id || 'TX-000')}</span></td>
-                            <td>${escapeHtml(tx.timestamp || (isAr ? 'اليوم' : 'Today'))}</td>
+                            <td>${escapeHtml(tx.timestamp || 'اليوم')}</td>
                             <td style="background:#faf5ff;">
-                                <strong>👤 ${escapeHtml(tx.senderName || tx.sender || 'أحمد عادل')}</strong><br>
+                                <strong>👤 ${escapeHtml(tx.senderName || 'أحمد عادل')}</strong><br>
                                 <span style="color:#10b981; font-weight:800;">📱 ${escapeHtml(tx.senderPhone || '01122278442')}</span><br>
                                 <span style="color:#64748b; font-size:0.82rem;">✉ ${escapeHtml(tx.senderEmail || 'ahmed.adelgin@gmail.com')}</span>
-                                ${tx.senderAcc ? `<br><small style="color:#7c3aed;">IBAN: ${escapeHtml(tx.senderAcc)}</small>` : ''}
                             </td>
-                            <td>
-                                <strong>${escapeHtml(tx.name || (isAr ? 'عميل مستفيد' : 'Beneficiary'))}</strong><br>
-                                <small style="color:#64748b;">${escapeHtml(tx.acc || '---')}</small>
-                            </td>
+                            <td><strong>${escapeHtml(tx.name || 'عميل مستفيد')}</strong><br><small style="color:#64748b;">${escapeHtml(tx.acc || '---')}</small></td>
                             <td style="color:#7c3aed; font-weight:800; font-size:1rem;">${escapeHtml(tx.displayAmount || tx.amount)}</td>
-                            <td><span class="badge badge-success">● ${isAr ? 'منجز وناجح' : 'Completed'}</span></td>
+                            <td><span class="badge badge-success">● منجز وناجح</span></td>
+                            <td><button class="btn-table-action btn-del" onclick="deleteItem('transfers', ${idx})">🗑️ حذف</button></td>
                         </tr>
-                    `).join('') : `<tr><td colspan="6" class="empty-state">${isAr ? 'لا توجد تحويلات مسجلة.' : 'No transfers recorded.'}</td></tr>`;
+                    `).join('') : `<tr><td colspan="7" class="empty-state">لا توجد تحويلات مسجلة.</td></tr>`;
                 }
 
                 // 2. جدول طلبات التقديم
                 const corpBody = document.getElementById('corporateTableBody');
                 if (corpBody) {
-                    corpBody.innerHTML = filteredCorporate.length ? filteredCorporate.map(op => `
+                    corpBody.innerHTML = filteredCorporate.length ? filteredCorporate.map((op, idx) => `
                         <tr>
-                            <td>${escapeHtml(op.timestamp || (isAr ? 'اليوم' : 'Today'))}</td>
-                            <td><strong>${escapeHtml(op.clientName || (isAr ? 'عميل معتمد' : 'Verified Client'))}</strong></td>
-                            <td>
-                                <span class="badge badge-success" style="font-size:0.92rem; font-weight:800;">
-                                    📞 ${escapeHtml(op.clientPhone || (isAr ? 'مسجل بالبيان' : 'In details'))}
-                                </span>
-                            </td>
+                            <td>${escapeHtml(op.timestamp || 'اليوم')}</td>
+                            <td><strong>${escapeHtml(op.clientName || 'عميل')}</strong></td>
+                            <td><span class="badge badge-success" style="font-size:0.92rem; font-weight:800;">📞 ${escapeHtml(op.clientPhone || '---')}</span></td>
                             <td><span class="badge badge-purple">${escapeHtml(op.type || 'Request')}</span></td>
-                            <td>${escapeHtml(op.branch || (isAr ? 'الفرع الرئيسي' : 'HQ Branch'))}</td>
-                            <td style="white-space:normal; max-width:320px;">${escapeHtml(op.details || op.income || '---')}</td>
-                            <td><span class="badge badge-success">● ${isAr ? 'تم التوثيق' : 'Verified'}</span></td>
+                            <td>${escapeHtml(op.branch || 'الفرع الرئيسي')}</td>
+                            <td style="white-space:normal; max-width:300px;">${escapeHtml(op.details || op.income || '---')}</td>
+                            <td><span class="badge badge-success">● موثق</span></td>
+                            <td><button class="btn-table-action btn-del" onclick="deleteItem('corporate', ${idx})">🗑️ حذف</button></td>
                         </tr>
-                    `).join('') : `<tr><td colspan="7" class="empty-state">${isAr ? 'لا توجد طلبات تقديم مسجلة.' : 'No applications found.'}</td></tr>`;
+                    `).join('') : `<tr><td colspan="8" class="empty-state">لا توجد طلبات تقديم مسجلة.</td></tr>`;
                 }
 
-                // 3. جدول استفسارات اتصل بنا
+                // 3. جدول الرسائل
                 const contactsBody = document.getElementById('contactsTableBody');
                 if (contactsBody) {
-                    contactsBody.innerHTML = filteredContacts.length ? filteredContacts.map(c => `
+                    contactsBody.innerHTML = filteredContacts.length ? filteredContacts.map((c, idx) => `
                         <tr>
-                            <td>${escapeHtml(c.timestamp || (isAr ? 'اليوم' : 'Today'))}</td>
+                            <td>${escapeHtml(c.timestamp || 'اليوم')}</td>
                             <td><strong>${escapeHtml(c.name || '---')}</strong></td>
-                            <td><span class="badge badge-purple" style="font-size:0.92rem;">📞 ${escapeHtml(c.phone || (isAr ? 'غير مسجل' : 'N/A'))}</span></td>
+                            <td><span class="badge badge-purple">📞 ${escapeHtml(c.phone || '---')}</span></td>
                             <td>${escapeHtml(c.email || '---')}</td>
                             <td style="white-space:normal; max-width:320px;">${escapeHtml(c.message || '---')}</td>
+                            <td><button class="btn-table-action btn-del" onclick="deleteItem('contacts', ${idx})">🗑️ حذف</button></td>
                         </tr>
-                    `).join('') : `<tr><td colspan="5" class="empty-state">${isAr ? 'لا توجد استفسارات مسجلة.' : 'No messages found.'}</td></tr>`;
+                    `).join('') : `<tr><td colspan="6" class="empty-state">لا توجد استفسارات مسجلة.</td></tr>`;
                 }
 
-                // 4. جدول الحسابات
+                // 4. جدول الحسابات مع ميزة (تعديل ✏️ - فك حظر 🟢 - حظر 🚫 - فحص البنك المركزي 🏛️)
                 const accountsBody = document.getElementById('accountsTableBody');
                 if (accountsBody) {
-                    accountsBody.innerHTML = filteredAccounts.length ? filteredAccounts.map(acc => `
-                        <tr>
-                            <td>${escapeHtml(acc.timestamp || (isAr ? 'اليوم' : 'Today'))}</td>
-                            <td><span class="badge badge-purple">${escapeHtml(acc.accountNo || 'EG-MXB-000')}</span></td>
-                            <td><strong>${escapeHtml(acc.name || '---')}</strong></td>
-                            <td>${escapeHtml(acc.email || '---')}</td>
-                            <td><strong style="color:#581c87;">${escapeHtml(acc.phone || '---')}</strong></td>
-                            <td>${escapeHtml(acc.accountType || (isAr ? 'جاري' : 'Current'))} (${escapeHtml(acc.currency || 'EGP')})</td>
-                            <td style="color:#10b981; font-weight:800;">${escapeHtml(acc.initialBalance || '5,000')}</td>
-                            <td><span class="badge badge-success">● ${isAr ? 'نشط' : 'Active'}</span></td>
-                        </tr>
-                    `).join('') : `<tr><td colspan="8" class="empty-state">${isAr ? 'لا توجد حسابات جديدة.' : 'No accounts found.'}</td></tr>`;
+                    accountsBody.innerHTML = filteredAccounts.length ? filteredAccounts.map(acc => {
+                        const isBanned = (acc.status === 'banned');
+                        const bal = parseFloat(acc.balance || 0);
+                        const age = calculateAgeFromNationalId(acc.nationalId);
+                        const isCbeAlert = (bal >= 100000 && ((age !== null && age < 21) || !acc.nationalId));
+
+                        return `
+                            <tr style="${isCbeAlert ? 'background:#fffbeb;' : (isBanned ? 'background:#fef2f2;' : '')}">
+                                <td>${escapeHtml(acc.timestamp || 'اليوم')}</td>
+                                <td><span class="badge badge-purple">${escapeHtml(acc.accountNo)}</span></td>
+                                <td><strong>${escapeHtml(acc.name)}</strong></td>
+                                <td><strong style="color:#581c87;">${escapeHtml(acc.phone)}</strong></td>
+                                <td style="color:${bal >= 100000 ? '#b91c1c' : '#10b981'}; font-weight:800; font-size:1rem;">
+                                    ${bal.toLocaleString()} ${escapeHtml(acc.currency || 'EGP')}
+                                </td>
+                                <td>
+                                    ${isCbeAlert ? `
+                                        <span class="badge badge-warning" title="حساب يتجاوز 100 ألف تحت السن القانوني للمصارف">
+                                            🚨 تنبيه بنك مركزي (>100 ألف / ${age ? age + ' سنة' : 'فحص'})
+                                        </span>
+                                    ` : (age ? `<span class="badge badge-success">${age} سنة (بالغ)</span>` : '<span style="color:#94a3b8;">طبيعي</span>')}
+                                </td>
+                                <td>
+                                    ${isBanned ? 
+                                        '<span class="badge badge-danger">● محظور ومُعطّل</span>' : 
+                                        '<span class="badge badge-success">● نشط ومصرّح</span>'}
+                                </td>
+                                <td>
+                                    <!-- زر التعديل -->
+                                    <button class="btn-table-action btn-edit" onclick="openEditAccountModal('${escapeHtml(acc.accountNo)}')">
+                                        ✏️ تعديل
+                                    </button>
+
+                                    <!-- زر فك الحظر أو الحظر -->
+                                    ${isBanned ? `
+                                        <button class="btn-table-action btn-unban" onclick="toggleAccountBanStatus('${escapeHtml(acc.accountNo)}', false)">
+                                            🟢 فك الحظر
+                                        </button>
+                                    ` : `
+                                        <button class="btn-table-action btn-ban" onclick="toggleAccountBanStatus('${escapeHtml(acc.accountNo)}', true)">
+                                            🚫 حظر
+                                        </button>
+                                    `}
+
+                                    <!-- زر الحذف -->
+                                    <button class="btn-table-action btn-del" onclick="deleteAccountPermanent('${escapeHtml(acc.accountNo)}')">
+                                        🗑️ حذف
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('') : `<tr><td colspan="8" class="empty-state">لا توجد حسابات مسجلة.</td></tr>`;
                 }
 
                 // 5. جدول الأمان
@@ -957,23 +958,142 @@
                 if (auditBody) {
                     auditBody.innerHTML = filteredAudit.length ? filteredAudit.map(log => `
                         <tr>
-                            <td>${escapeHtml(log.timestamp || (isAr ? 'اليوم' : 'Today'))}</td>
+                            <td>${escapeHtml(log.timestamp || 'اليوم')}</td>
                             <td>${escapeHtml(log.event || 'Auth')}</td>
                             <td><strong>${escapeHtml(log.user || '---')}</strong></td>
                             <td><span class="badge ${log.success ? 'badge-success' : 'badge-danger'}">${escapeHtml(log.result || 'OK')}</span></td>
                         </tr>
-                    `).join('') : `<tr><td colspan="4" class="empty-state">${isAr ? 'لا توجد سجلات أمان.' : 'No audit logs.'}</td></tr>`;
+                    `).join('') : `<tr><td colspan="4" class="empty-state">لا توجد سجلات أمان.</td></tr>`;
                 }
 
             } catch(e) { console.error(e); }
         }
 
-        setInterval(() => {
-            const input = document.getElementById('globalSearchInput');
-            if (!input || document.activeElement !== input) loadAndRenderData();
-        }, 1200);
+        /* ========================================================
+           دوال التعديل والحظر وفك الحظر والحذف
+        ======================================================== */
 
-        function handleSearch() { loadAndRenderData(); }
+        // فتح نافذة التعديل
+        function openEditAccountModal(accountNo) {
+            const db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[]}');
+            const acc = (db.accounts || []).find(a => a.accountNo === accountNo);
+            if (!acc) return alert('الحساب غير موجود!');
+
+            document.getElementById('editTargetAccNo').value = acc.accountNo;
+            document.getElementById('editClientName').value = acc.name || '';
+            document.getElementById('editClientPhone').value = acc.phone || '';
+            document.getElementById('editClientEmail').value = acc.email || '';
+            document.getElementById('editClientBalance').value = (acc.balance !== undefined) ? acc.balance : 0;
+            document.getElementById('editClientCurrency').value = acc.currency || 'EGP';
+            document.getElementById('editClientNatId').value = acc.nationalId || '';
+            document.getElementById('editClientAccType').value = acc.accountType || 'حساب جاري استثماري';
+            document.getElementById('editClientStatus').value = acc.status || 'active';
+
+            document.getElementById('editModalOverlay').style.display = 'flex';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModalOverlay').style.display = 'none';
+        }
+
+        // حفظ التعديلات في قاعدة البيانات
+        function submitAccountUpdates() {
+            const accNo = document.getElementById('editTargetAccNo').value;
+            let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"audit":[]}');
+            let idx = (db.accounts || []).findIndex(a => a.accountNo === accNo);
+            if (idx === -1) return;
+
+            const name = document.getElementById('editClientName').value.trim();
+            const phone = document.getElementById('editClientPhone').value.trim();
+            const email = document.getElementById('editClientEmail').value.trim();
+            const balance = parseFloat(document.getElementById('editClientBalance').value) || 0;
+            const currency = document.getElementById('editClientCurrency').value;
+            const natId = document.getElementById('editClientNatId').value.trim();
+            const accType = document.getElementById('editClientAccType').value.trim();
+            const status = document.getElementById('editClientStatus').value;
+
+            if (!name || !phone) return alert('يرجى كتابة الاسم ورقم الهاتف على الأقل.');
+
+            // تطبيق التحديثات
+            db.accounts[idx].name = name;
+            db.accounts[idx].phone = phone;
+            db.accounts[idx].email = email;
+            db.accounts[idx].balance = balance;
+            db.accounts[idx].currency = currency;
+            db.accounts[idx].nationalId = natId;
+            db.accounts[idx].accountType = accType;
+            db.accounts[idx].status = status;
+
+            // توثيق التعديل في سجل الأمان
+            if (!db.audit) db.audit = [];
+            db.audit.unshift({
+                timestamp: new Date().toLocaleTimeString('ar-EG'),
+                event: `تعديل بيانات الحساب: ${name}`,
+                user: `${phone} (${accNo})`,
+                success: true,
+                result: `تم تعديل البيانات والرصيد (${balance.toLocaleString()} ${currency})`
+            });
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+            closeEditModal();
+            loadAndRenderData();
+            alert('تم حفظ التعديلات بنجاح وتحديث بيانات الحساب!');
+        }
+
+        // فك الحظر أو الحظر
+        function toggleAccountBanStatus(accountNo, shouldBan) {
+            let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"audit":[]}');
+            let acc = (db.accounts || []).find(a => a.accountNo === accountNo);
+            if (!acc) return;
+
+            if (shouldBan) {
+                if (confirm(`هل أنت متأكد من حظر حساب (${acc.name})؟ لن يستطيع تسجيل الدخول للموقع نهائياً.`)) {
+                    acc.status = 'banned';
+                } else return;
+            } else {
+                if (confirm(`هل تريد فك الحظر واسترجاع حساب (${acc.name})؟ سيتمكن من تسجيل الدخول فوراً.`)) {
+                    acc.status = 'active';
+                } else return;
+            }
+
+            if (!db.audit) db.audit = [];
+            db.audit.unshift({
+                timestamp: new Date().toLocaleTimeString('ar-EG'),
+                event: shouldBan ? `حظر الحساب: ${acc.name}` : `فك حظر واسترجاع: ${acc.name}`,
+                user: `${acc.phone} (${accountNo})`,
+                success: !shouldBan,
+                result: shouldBan ? 'تم الحظر ومنع الدخول' : 'تم استرجاع الحساب وفك الحظر'
+            });
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+            loadAndRenderData();
+        }
+
+        // حذف نهائي
+        function deleteAccountPermanent(accountNo) {
+            if (confirm(`هل أنت متأكد من حذف الحساب (${accountNo}) نهائياً من قاعدة البيانات؟`)) {
+                let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[]}');
+                db.accounts = (db.accounts || []).filter(a => a.accountNo !== accountNo);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+                loadAndRenderData();
+            }
+        }
+
+        function deleteItem(category, idx) {
+            if (confirm("هل تريد حذف هذا السجل؟")) {
+                let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                if (db[category]) {
+                    db[category].splice(idx, 1);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+                    loadAndRenderData();
+                }
+            }
+        }
+
+        function filterCbeAccounts() {
+            document.getElementById('globalSearchInput').value = 'تنبيه بنك مركزي';
+            loadAndRenderData();
+        }
 
         function switchTab(tabId, btn) {
             document.querySelectorAll('.data-panel').forEach(p => p.classList.remove('active'));
@@ -982,126 +1102,85 @@
             if (btn) btn.classList.add('active');
         }
 
-        /* دالة الطباعة المباشرة وحفظ التقرير بصيغة PDF */
-        function printFullReport() {
-            // تحديث البيانات أولاً
-            loadAndRenderData();
+        function handleSearch() { loadAndRenderData(); }
 
-            // وضع وقت وتاريخ التقرير
-            const dateStr = new Date().toLocaleString(document.documentElement.lang === 'ar' ? 'ar-EG' : 'en-US');
-            const notice = document.getElementById('printTimestampNotice');
-            if (notice) {
-                notice.innerText = (document.documentElement.lang === 'ar') ? 
-                    `تاريخ استخراج التقرير: ${dateStr} | تم الاستخراج بواسطة: ${ADMIN_USER}` : 
-                    `Generated on: ${dateStr} | Extracted by: ${ADMIN_USER}`;
-            }
-
-            // فتح نافذة الطباعة الرسمية للمتصفح
-            window.print();
-        }
-
-        /* دالة تصدير ملف الإكسيل الشامل */
         function exportDatabaseToExcel() {
             const db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"transfers":[],"contacts":[],"corporate":[],"audit":[]}');
-            
             const wb = XLSX.utils.book_new();
 
-            // 1. شيت التحويلات
             const txData = (db.transfers || []).map(t => ({
                 "رقم العملية": t.id || '---',
                 "التاريخ والوقت": t.timestamp || '---',
-                "اسم المرسل": t.senderName || '---',
+                "المرسل": t.senderName || '---',
                 "هاتف المرسل": t.senderPhone || '---',
-                "إيميل المرسل": t.senderEmail || '---',
-                "حساب المرسل IBAN": t.senderAcc || '---',
-                "اسم المستفيد": t.name || '---',
-                "حساب المستفيد": t.acc || '---',
-                "المبلغ والعملة": t.displayAmount || `${t.amount} ${t.currency}`,
-                "الحالة": "منجز بنجاح"
+                "المستفيد": t.name || '---',
+                "المبلغ": t.displayAmount || t.amount,
+                "الحالة": "ناجح"
             }));
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(txData), "التحويلات المالية");
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(txData), "التحويلات");
 
-            // 2. شيت طلبات المنتجات والبطاقات
-            const corpData = (db.corporate || []).map(c => ({
-                "التاريخ والوقت": c.timestamp || '---',
-                "اسم العميل": c.clientName || '---',
-                "رقم الهاتف": c.clientPhone || '---',
-                "المنتج المطلوب": c.type || '---',
-                "الفرع": c.branch || '---',
-                "الدخل والملاحظات": c.details || '---'
-            }));
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(corpData), "طلبات المنتجات والبطاقات");
-
-            // 3. شيت الاستفسارات
-            const msgData = (db.contacts || []).map(m => ({
-                "التاريخ والوقت": m.timestamp || '---',
-                "اسم العميل": m.name || '---',
-                "رقم الهاتف": m.phone || '---',
-                "البريد الإلكتروني": m.email || '---',
-                "نص الرسالة": m.message || '---'
-            }));
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(msgData), "رسائل اتصل بنا");
-
-            // 4. شيت الحسابات المنشأة
             const accData = (db.accounts || []).map(a => ({
                 "تاريخ الإنشاء": a.timestamp || '---',
                 "رقم الحساب IBAN": a.accountNo || '---',
                 "الاسم": a.name || '---',
-                "البريد": a.email || '---',
                 "الهاتف": a.phone || '---',
-                "نوع الحساب": a.accountType || '---',
-                "العملة": a.currency || '---',
-                "الرصيد الافتتاحي": a.initialBalance || a.balance
+                "الرصيد": a.balance || 0,
+                "العملة": a.currency || 'EGP',
+                "الرقم القومي": a.nationalId || '---',
+                "الحالة": (a.status === 'banned') ? 'محظور' : 'نشط'
             }));
-            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(accData), "الحسابات الجديدة");
+            XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(accData), "الحسابات المصرفية");
 
-            // تحميل ملف الإكسيل
-            const fileName = `MatrixBank_Excel_${new Date().toISOString().slice(0, 10)}.xlsx`;
-            XLSX.writeFile(wb, fileName);
+            XLSX.writeFile(wb, `MatrixBank_Master_${new Date().toISOString().slice(0, 10)}.xlsx`);
         }
 
         function inject10TestOperations() {
             let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"transfers":[],"contacts":[],"corporate":[],"audit":[]}');
             const now = new Date().toLocaleTimeString('ar-EG');
 
+            // إضافة حساب تجريبي تحت السن برصيد فوق 100 ألف لفحص تنبيه البنك المركزي
+            db.accounts.unshift({
+                accountNo: 'EG-MXB-10022334',
+                name: 'يوسف رامي فهمي (شاب)',
+                phone: '01099887766',
+                email: 'youssef@test.com',
+                balance: 145000,
+                currency: 'EGP',
+                nationalId: '30705120104432', // مواليد 2007 (أقل من 21 سنة)
+                accountType: 'حساب توفير الشباب',
+                status: 'active',
+                timestamp: now
+            });
+
             db.transfers.unshift({
-                id: 'TX-7788',
+                id: 'TX-9921',
                 timestamp: now,
                 name: 'سارة إبراهيم منصور',
                 acc: 'EG99MXB445566',
-                amount: 15000,
+                amount: 25000,
                 currency: 'EGP',
-                displayAmount: '15,000 EGP',
+                displayAmount: '25,000 EGP',
                 senderName: 'أحمد عادل',
                 senderPhone: '01122278442',
-                senderEmail: 'ahmed.adelgin@gmail.com',
-                senderAcc: 'EG-MXB-99420000'
-            });
-
-            db.corporate.unshift({
-                timestamp: now,
-                type: 'طلب تقديم (بطاقة Matrix Infinite)',
-                clientName: 'كريم عبد العزيز',
-                clientPhone: '01155443322',
-                branch: 'فرع التجمع الخامس',
-                income: '60,000 EGP',
-                details: 'طلب بطاقة ائتمانية بحد مليون جنيه'
+                senderEmail: 'ahmed.adelgin@gmail.com'
             });
 
             localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
             loadAndRenderData();
-            alert(document.documentElement.lang === 'ar' ? 
-                'تم توليد العمليات وتوثيق هاتف وإيميل الحساب المحول منه بنجاح!' : 
-                'Test operations generated with sender phone & email verified!');
+            alert('تم توليد العمليات بنجاح، وإضافة حساب شاب برصيد يتخطى 100 ألف لاختبار إشعار البنك المركزي!');
         }
 
         function clearDatabase() {
-            const isAr = (document.documentElement.lang === 'ar');
-            if (confirm(isAr ? "هل تريد تفريغ وحذف جميع السجلات من قاعدة البيانات؟" : "Clear all database records?")) {
+            if (confirm("هل تريد تفريغ وحذف جميع السجلات من قاعدة البيانات؟")) {
                 localStorage.removeItem(STORAGE_KEY);
                 loadAndRenderData();
             }
         }
+
+        setInterval(() => {
+            const input = document.getElementById('globalSearchInput');
+            if (!input || document.activeElement !== input) loadAndRenderData();
+        }, 1500);
 
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('matrix_admin_lang') || 'ar';
