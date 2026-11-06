@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -13,11 +12,9 @@
             --purple-primary: #7c3aed;
             --purple-accent: #c084fc;
             --purple-soft: #faf5ff;
-            --purple-glow: rgba(147, 51, 234, 0.25);
             --text-dark: #1e1b4b;
             --text-muted: #64748b;
             --border-purple: rgba(147, 51, 234, 0.2);
-            --card-bg: #ffffff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; transition: background 0.2s, color 0.2s, border-color 0.2s; }
@@ -25,45 +22,73 @@
         html[dir="ltr"] * { font-family: 'Plus Jakarta Sans', sans-serif; }
 
         body { background-color: var(--purple-soft); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; }
-        html[dir="ltr"] .form-group { text-align: left; }
-        html[dir="ltr"] table { text-align: left; }
+        html[dir="ltr"] .form-group, html[dir="ltr"] table { text-align: left; }
 
-        .top-nav { background: var(--purple-gradient); color: #fff; padding: 10px 6%; display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; position: sticky; top: 0; z-index: 200; }
+        .top-nav {
+            background: var(--purple-gradient); color: #fff; padding: 10px 6%;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.88rem; position: sticky; top: 0; z-index: 200;
+        }
         .nav-cluster { display: flex; align-items: center; gap: 14px; }
         .brand-logo { font-size: 1.45rem; font-weight: 800; color: #fff; cursor: pointer; display: flex; align-items: center; gap: 6px; user-select: none; }
         .brand-logo span { background: #fff; color: #581c87; padding: 2px 8px; border-radius: 6px; }
         .top-nav a, .sub-nav a { color: #f3e8ff; text-decoration: none; font-weight: 600; cursor: pointer; }
         .top-nav a:hover, .sub-nav a:hover { color: var(--purple-accent); }
-        .btn-register-top { background: #10b981; color: #fff; font-weight: 800; padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
+
+        .btn-register-top {
+            background: #10b981; color: #fff; font-weight: 800; padding: 8px 16px;
+            border-radius: 8px; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
         .btn-register-top:hover { background: #059669; }
-        .btn-lang { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-        .user-session-badge { display: none; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.35); padding: 6px 14px; border-radius: 30px; align-items: center; gap: 10px; font-size: 0.85rem; }
+
+        .btn-lang {
+            background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-weight: 700;
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        .user-session-badge {
+            display: none; background: rgba(255, 255, 255, 0.18); border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 6px 14px; border-radius: 30px; align-items: center; gap: 10px; font-size: 0.85rem;
+        }
         .session-timer { color: #4ade80; font-weight: 700; }
+
         .login-dropdown-wrapper { position: relative; display: inline-block; }
-        .btn-login-trigger { background: #fff; color: #581c87; font-weight: 800; padding: 9px 18px; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .btn-login-trigger {
+            background: #fff; color: #581c87; font-weight: 800; padding: 9px 18px;
+            border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
         .btn-login-trigger:hover { background: #f3e8ff; }
-        .login-dropdown-menu { display: none; position: absolute; top: calc(100% + 10px); left: 0; width: 580px; background: #ffffff; border-radius: 16px; box-shadow: 0 20px 45px rgba(59, 7, 100, 0.28); border: 1px solid var(--border-purple); padding: 22px; z-index: 300; animation: fadeInDrop 0.25s ease forwards; }
+
+        .login-dropdown-menu {
+            display: none; position: absolute; top: calc(100% + 10px); left: 0; width: 580px;
+            background: #ffffff; border-radius: 16px; box-shadow: 0 20px 45px rgba(59, 7, 100, 0.28);
+            border: 1px solid var(--border-purple); padding: 22px; z-index: 300;
+        }
         html[dir="ltr"] .login-dropdown-menu { left: auto; right: 0; }
         .login-dropdown-menu.show { display: flex; gap: 20px; }
-        @keyframes fadeInDrop { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
         .drop-col { flex: 1; }
         .drop-col-header { font-size: 0.95rem; font-weight: 800; color: #581c87; padding-bottom: 8px; margin-bottom: 12px; border-bottom: 2px solid #f3e8ff; display: flex; align-items: center; gap: 8px; }
         .drop-item { display: flex; align-items: center; gap: 8px; padding: 9px 12px; color: #334155; text-decoration: none; border-radius: 8px; font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; cursor: pointer; transition: all 0.2s; }
-        .drop-item:hover { background: #faf5ff; color: #7c3aed; transform: translateX(-3px); }
-        html[dir="ltr"] .drop-item:hover { transform: translateX(3px); }
+        .drop-item:hover { background: #faf5ff; color: #7c3aed; }
         .drop-item.primary-portal { background: #f3e8ff; color: #581c87; font-weight: 700; }
+
         .sub-nav { background: var(--purple-dark); padding: 12px 6%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-purple); overflow-x: auto; }
         .sub-nav-links { display: flex; gap: 22px; list-style: none; white-space: nowrap; }
 
-        .page-section { display: none; padding: 40px 6%; max-width: 1240px; margin: 0 auto; animation: fadeIn 0.3s ease; }
+        .page-section { display: none; padding: 40px 6%; max-width: 1240px; margin: 0 auto; }
         .page-section.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hero-banner { position: relative; height: 500px; background: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat; display: flex; align-items: center; padding: 0 8%; border-radius: 20px; overflow: hidden; margin-bottom: 40px; }
+        .hero-banner {
+            position: relative; height: 480px;
+            background: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+            display: flex; align-items: center; padding: 0 8%; border-radius: 20px; overflow: hidden; margin-bottom: 40px;
+        }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to left, rgba(30, 5, 56, 0.9) 0%, rgba(107, 33, 168, 0.45) 55%, transparent 100%); }
         html[dir="ltr"] .hero-overlay { background: linear-gradient(to right, rgba(30, 5, 56, 0.9) 0%, rgba(107, 33, 168, 0.45) 55%, transparent 100%); }
         .hero-content { position: relative; z-index: 2; color: #fff; max-width: 600px; }
-        .hero-content h1 { font-size: 3.4rem; font-weight: 800; margin-bottom: 12px; }
+        .hero-content h1 { font-size: 3.2rem; font-weight: 800; margin-bottom: 12px; }
         .hero-content p { font-size: 1.15rem; margin-bottom: 24px; color: #f3e8ff; line-height: 1.6; }
         .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
 
@@ -83,8 +108,10 @@
         .modal { display: none; position: fixed; inset: 0; background: rgba(30, 5, 56, 0.75); backdrop-filter: blur(10px); justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
         .modal-box { background: #fff; padding: 34px; border-radius: 22px; width: 100%; max-width: 500px; box-shadow: 0 25px 60px rgba(59, 7, 100, 0.4); position: relative; max-height: 90vh; overflow-y: auto; }
         .security-seal { display: flex; align-items: center; justify-content: center; gap: 6px; color: #10b981; font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; }
+
         .otp-inputs { display: flex; gap: 8px; justify-content: center; margin: 20px 0; direction: ltr; }
         .otp-inputs input { width: 48px; height: 54px; text-align: center; font-size: 1.4rem; font-weight: 800; border: 2px solid #d8b4fe; border-radius: 10px; background: #faf5ff; color: #581c87; outline: none; }
+
         .badge-status { background: #dcfce7; color: #166534; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; }
 
         footer { background: #1e0538; color: #f3e8ff; padding: 40px 6% 25px; margin-top: 60px; border-top: 1px solid var(--border-purple); font-size: 0.9rem; }
@@ -105,7 +132,6 @@
 </head>
 <body>
 
-    <!-- 1. الشريط العلوي الرئيسي -->
     <header class="top-nav">
         <div class="nav-cluster">
             <div class="brand-logo" onclick="showPage('home')">MATRIX <span>BANK</span></div>
@@ -119,6 +145,7 @@
             <a onclick="showPage('converter')" data-i18n="nav_converter">⇄ محول العملات</a>
             <a onclick="showPage('branches')" data-i18n="nav_branches">📍 الفروع والصرّافات</a>
             <a onclick="showPage('contact')" data-i18n="nav_contact">📞 اتصل بنا</a>
+            <a href="admin-data.html" target="_blank" style="background:rgba(255,255,255,0.2); padding:5px 10px; border-radius:6px; color:#fff;">📊 لوحة البيانات</a>
 
             <div class="user-session-badge" id="topUserBadge">
                 <span>👤 <strong id="topUserName">عميل مسجل</strong></span>
@@ -154,7 +181,6 @@
         </div>
     </header>
 
-    <!-- 2. الشريط الثاني للقوائم -->
     <nav class="sub-nav">
         <ul class="sub-nav-links">
             <li><a onclick="showPage('about')" data-i18n="sub_about">عن بنك ماتريكس</a></li>
@@ -167,7 +193,7 @@
         </ul>
     </nav>
 
-    <!-- 1. الرئيسية (Home) -->
+    <!-- 1. الرئيسية -->
     <div id="page-home" class="page-section active">
         <section class="hero-banner">
             <div class="hero-overlay"></div>
@@ -197,7 +223,7 @@
         </div>
     </div>
 
-    <!-- 2. صفحة خدمات الأفراد (Personal Banking) -->
+    <!-- 2. خدمات الأفراد -->
     <div id="page-personal" class="page-section">
         <div style="margin-bottom:24px;">
             <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="personal_h2">الخدمات المصرفية للأفراد</h2>
@@ -222,7 +248,7 @@
         </div>
     </div>
 
-    <!-- 3. صفحة خدمات الشركات (Corporate Services) -->
+    <!-- 3. خدمات الشركات -->
     <div id="page-corporate-services" class="page-section">
         <div style="margin-bottom:24px;">
             <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="corp_h2">حلول الأعمال والشركات الكبرى</h2>
@@ -232,29 +258,29 @@
             <div class="card">
                 <h3 style="color:#581c87;" data-i18n="card_lg_title">📜 خطابات الضمان والاعتمادات</h3>
                 <p style="margin:12px 0; color:var(--text-muted);" data-i18n="card_lg_desc">إصدار سريع لخطابات الضمان والاعتمادات المستندية للاستيراد والتصدير.</p>
-                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('طلب تسهيل خطابات الضمان والاعتمادات', 'الشركات والتجارة الدولية', 'إصدار فوري لخطابات الضمان الابتدائية والنهائية والاعتمادات المستندية للاستيراد والتصدير.', '📜')" data-i18n="btn_apply_trade">طلب تسهيل تجاري ↵</button>
+                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('طلب تسهيل خطابات الضمان والاعتمادات', 'الشركات والتجارة الدولية', 'إصدار فوري لخطابات الضمان الابتدائية والنهائية والاعتمادات المستندية للاستيراد والتصدير.', '📜')">طلب تسهيل تجاري ↵</button>
             </div>
             <div class="card">
                 <h3 style="color:#581c87;" data-i18n="card_wc_title">💼 تمويل رأس المال العامل</h3>
                 <p style="margin:12px 0; color:var(--text-muted);" data-i18n="card_wc_desc">قروض قصيرة ومتوسطة الأجل لتمويل المشتريات ودعم السيولة النقدية لشركتك.</p>
-                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('تمويل رأس المال العامل للشركات', 'تمويل المشروعات والشركات', 'حلول ائتمانية مرنة لدعم التدفقات النقدية وسلاسل الإمداد ومشتريات الشركات الكبرى.', '💼')" data-i18n="btn_apply_consult">استشارة مصرفية للشركات ↵</button>
+                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('تمويل رأس المال العامل للشركات', 'تمويل المشروعات والشركات', 'حلول ائتمانية مرنة لدعم التدفقات النقدية وسلاسل الإمداد ومشتريات الشركات الكبرى.', '💼')">استشارة مصرفية للشركات ↵</button>
             </div>
             <div class="card">
                 <h3 style="color:#581c87;" data-i18n="card_fx_title">💱 خدمات غرفة المعاملات الدولية</h3>
                 <p style="margin:12px 0; color:var(--text-muted);" data-i18n="card_fx_desc">حلول التحوط من تقلبات أسعار الصرف واستثمارات أذون وسندات الخزانة.</p>
-                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('استشارة غرفة المعاملات الدولية والخزانة', 'الخزانة والاستثمار', 'إدارة مخاطر العملات الأجنبية والتحوط والاستثمار المباشر في أذون وسندات الخزانة.', '💱')" data-i18n="btn_apply_treasury">تواصل مع قطاع الخزانة ↵</button>
+                <button class="btn-purple" style="font-size:0.85rem;" onclick="goToApplyPage('استشارة غرفة المعاملات الدولية والخزانة', 'الخزانة والاستثمار', 'إدارة مخاطر العملات الأجنبية والتحوط والاستثمار المباشر في أذون وسندات الخزانة.', '💱')">تواصل مع قطاع الخزانة ↵</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. صفحة التقديم المخصصة للمنتجات -->
+    <!-- 4. صفحة التقديم -->
     <div id="page-apply" class="page-section">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; flex-wrap:wrap; gap:12px;">
             <div>
                 <span id="applyPageBadge" class="badge-status" style="background:#f3e8ff; color:#6b21a8; font-size:0.9rem; padding:6px 14px;" data-i18n="apply_badge">بوابة التقديم المصرفية الرسمية</span>
                 <h2 id="applyPageTitle" style="color:#3b0764; font-size:2rem; margin-top:10px;">تقديم طلب جديد</h2>
             </div>
-            <button class="btn-login-trigger" onclick="history.back() || showPage('personal')" data-i18n="btn_back">↩ العودة للخلف</button>
+            <button class="btn-login-trigger" onclick="showPage('personal')" data-i18n="btn_back">↩ العودة للخلف</button>
         </div>
 
         <div class="grid-2">
@@ -276,7 +302,7 @@
 
                 <div class="form-group">
                     <label data-i18n="lbl_name">الاسم بالكامل (ثلاثي أو رباعي) *</label>
-                    <input type="text" id="applyFullName" placeholder="أحمد عادل مصطفى" data-i18n-ph="ph_name">
+                    <input type="text" id="applyFullName" placeholder="أحمد عادل مصطفى">
                 </div>
 
                 <div class="form-group">
@@ -292,26 +318,26 @@
                 <div class="grid-2">
                     <div class="form-group">
                         <label data-i18n="lbl_id">الرقم القومي / رقم الهوية</label>
-                        <input type="text" id="applyNationalId" placeholder="14 رقم" data-i18n-ph="ph_id">
+                        <input type="text" id="applyNationalId" placeholder="14 رقم">
                     </div>
                     <div class="form-group">
                         <label data-i18n="lbl_income">الدخل الشهري / التمويل المطلوب</label>
-                        <input type="text" id="applyIncome" placeholder="50,000 ج.م" data-i18n-ph="ph_income">
+                        <input type="text" id="applyIncome" placeholder="50,000 ج.م">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label data-i18n="lbl_branch">الفرع المفضل لإنهاء الإجراءات</label>
                     <select id="applyBranchSelect">
-                        <option value="فرع التجمع الخامس (الفرع الرئيسي)" data-i18n="opt_branch_1">فرع التجمع الخامس (الفرع الرئيسي)</option>
-                        <option value="فرع المهندسين - شارع جامعة الدول" data-i18n="opt_branch_2">فرع المهندسين - شارع جامعة الدول</option>
-                        <option value="فرع سموحة - الإسكندرية" data-i18n="opt_branch_3">فرع سموحة - الإسكندرية</option>
+                        <option value="فرع التجمع الخامس (الفرع الرئيسي)">فرع التجمع الخامس (الفرع الرئيسي)</option>
+                        <option value="فرع المهندسين - شارع جامعة الدول">فرع المهندسين - شارع جامعة الدول</option>
+                        <option value="فرع سموحة - الإسكندرية">فرع سموحة - الإسكندرية</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label data-i18n="lbl_notes">ملاحظات إضافية أو وقت الاتصال المفضل</label>
-                    <textarea id="applyNotes" rows="3" placeholder="أرغب في استلام البطاقة أو الاستفسار عن الشروط بالتفصيل..." data-i18n-ph="ph_notes"></textarea>
+                    <textarea id="applyNotes" rows="3" placeholder="أرغب في استلام البطاقة أو الاستفسار عن الشروط بالتفصيل..."></textarea>
                 </div>
 
                 <button class="btn-purple" style="width:100%; font-size:1.05rem; padding:14px; background:#10b981;" onclick="submitDedicatedApplication()" data-i18n="btn_submit_apply">تأكيد وإرسال طلب التقديم وحفظ الهاتف 🚀</button>
@@ -319,121 +345,98 @@
         </div>
     </div>
 
-    <!-- 5. صفحة التسوية الدولية (Global Network) -->
+    <!-- 5. التسوية الدولية -->
     <div id="page-network" class="page-section">
-        <div style="margin-bottom:24px;">
-            <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="net_h2">شبكة التسوية والتحويلات الدولية</h2>
-            <p style="color:var(--text-muted);" data-i18n="net_sub">بنية تحتية مشفرة تربط Matrix Bank بأكبر مراكز المقاصة العالمية</p>
-        </div>
         <div class="grid-2">
             <div class="card">
-                <h3 style="color:#581c87; margin-bottom:12px;" data-i18n="net_card1_h3">مؤشرات كفاءة التحويلات العالمية</h3>
-                <p style="margin-bottom:10px;" data-i18n="net_p1">✔ السرعة: تسوية خلال ثوانٍ معدودة عبر تقنيات ISO 20022 و SWIFT gpi.</p>
-                <p style="margin-bottom:10px;" data-i18n="net_p2">✔ التغطية: أكثر من 80 دولة ومدفوعات مباشرة بـ 35 عملة دولية.</p>
-                <p style="margin-bottom:10px;" data-i18n="net_p3">✔ الأمان: مصادقة متعددة المراحل لكل حوالة مصرفية ضخمة.</p>
+                <h3 style="color:#581c87; margin-bottom:12px;">مؤشرات كفاءة التحويلات العالمية</h3>
+                <p style="margin-bottom:10px;">✔ السرعة: تسوية خلال ثوانٍ معدودة عبر تقنيات ISO 20022 و SWIFT gpi.</p>
+                <p style="margin-bottom:10px;">✔ التغطية: أكثر من 80 دولة ومدفوعات مباشرة بـ 35 عملة دولية.</p>
+                <p style="margin-bottom:10px;">✔ الأمان: مصادقة متعددة المراحل لكل حوالة مصرفية ضخمة.</p>
             </div>
             <div class="card" style="background:var(--purple-gradient); color:#fff;">
-                <h3 data-i18n="net_card2_h3">احصائيات شبكة Matrix Bank</h3>
+                <h3>احصائيات شبكة Matrix Bank</h3>
                 <h2 style="font-size:2.8rem; margin:14px 0;">$48.5B+</h2>
-                <p data-i18n="net_card2_desc">إجمالي المعاملات المالية الدولية المسواة بنجاح عبر منصتنا خلال العام الحالي.</p>
+                <p>إجمالي المعاملات المالية الدولية المسواة بنجاح عبر منصتنا خلال العام الحالي.</p>
             </div>
         </div>
     </div>
 
-    <!-- 6. صفحة الاستدامة (Sustainability) -->
+    <!-- 6. الاستدامة -->
     <div id="page-sustainability" class="page-section">
-        <div style="margin-bottom:24px;">
-            <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="sust_h2">الاستدامة والتمويل المسؤول (ESG)</h2>
-            <p style="color:var(--text-muted);" data-i18n="sust_sub">التزامنا ببناء مستقبل اقتصادي أخضر ودعم التنمية المستدامة</p>
-        </div>
         <div class="grid-3">
             <div class="card">
-                <h3 style="color:#581c87;" data-i18n="sust_c1_h3">🌱 السندات الخضراء</h3>
-                <p style="margin:10px 0; color:var(--text-muted);" data-i18n="sust_c1_p">تمويل مشاريع الطاقة الشمسية ومحطات معالجة المياه النظيفة بأسعار فائدة تشجيعية.</p>
+                <h3 style="color:#581c87;">🌱 السندات الخضراء</h3>
+                <p style="margin:10px 0; color:var(--text-muted);">تمويل مشاريع الطاقة الشمسية ومحطات معالجة المياه النظيفة بأسعار فائدة تشجيعية.</p>
             </div>
             <div class="card">
-                <h3 style="color:#581c87;" data-i18n="sust_c2_h3">⚡ فروع خالية من الانبعاثات</h3>
-                <p style="margin:10px 0; color:var(--text-muted);" data-i18n="sust_c2_p">فروع خالية من الورق بنسبة 100% واعتماد كامل على الطاقة النظيفة في مقراتنا.</p>
+                <h3 style="color:#581c87;">⚡ فروع خالية من الانبعاثات</h3>
+                <p style="margin:10px 0; color:var(--text-muted);">فروع خالية من الورق بنسبة 100% واعتماد كامل على الطاقة النظيفة في مقراتنا.</p>
             </div>
             <div class="card">
-                <h3 style="color:#581c87;" data-i18n="sust_c3_h3">🤝 الشمول المالي والتمكين</h3>
-                <p style="margin:10px 0; color:var(--text-muted);" data-i18n="sust_c3_p">توفير الحسابات المصرفية المجانية للشباب وأصحاب المشاريع المتناهية الصغر.</p>
+                <h3 style="color:#581c87;">🤝 الشمول المالي والتمكين</h3>
+                <p style="margin:10px 0; color:var(--text-muted);">توفير الحسابات المصرفية المجانية للشباب وأصحاب المشاريع المتناهية الصغر.</p>
             </div>
         </div>
     </div>
 
-    <!-- 7. صفحة علاقات المستثمرين (Investors) -->
+    <!-- 7. علاقات المستثمرين -->
     <div id="page-investors" class="page-section">
-        <div style="margin-bottom:24px;">
-            <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="inv_h2">علاقات المستثمرين والتقارير المالية</h2>
-            <p style="color:var(--text-muted);" data-i18n="inv_sub">بيانات الأداء المالي، تقارير الحوكمة، ومؤشرات القوة المصرفية</p>
-        </div>
         <div class="grid-4">
             <div class="card">
-                <span style="font-size:0.85rem; color:var(--text-muted);" data-i18n="inv_car">كفاية رأس المال (CAR)</span>
+                <span style="font-size:0.85rem; color:var(--text-muted);">كفاية رأس المال (CAR)</span>
                 <h2 style="color:#10b981; font-size:1.8rem; margin-top:6px;">21.4%</h2>
             </div>
             <div class="card">
-                <span style="font-size:0.85rem; color:var(--text-muted);" data-i18n="inv_roe">العائد على حقوق الملكية</span>
+                <span style="font-size:0.85rem; color:var(--text-muted);">العائد على حقوق الملكية</span>
                 <h2 style="color:#7c3aed; font-size:1.8rem; margin-top:6px;">28.6%</h2>
             </div>
             <div class="card">
-                <span style="font-size:0.85rem; color:var(--text-muted);" data-i18n="inv_rating">التصنيف الائتماني</span>
-                <h2 style="color:#581c87; font-size:1.8rem; margin-top:6px;" data-i18n="inv_rating_val">AA+ (مستقر)</h2>
+                <span style="font-size:0.85rem; color:var(--text-muted);">التصنيف الائتماني</span>
+                <h2 style="color:#581c87; font-size:1.8rem; margin-top:6px;">AA+ (مستقر)</h2>
             </div>
             <div class="card">
-                <span style="font-size:0.85rem; color:var(--text-muted);" data-i18n="inv_assets">إجمالي الأصول</span>
+                <span style="font-size:0.85rem; color:var(--text-muted);">إجمالي الأصول</span>
                 <h2 style="color:#10b981; font-size:1.8rem; margin-top:6px;">$12.8B</h2>
             </div>
         </div>
     </div>
 
-    <!-- 8. مركز الإعلام (Media Center) -->
+    <!-- 8. مركز الإعلام -->
     <div id="page-media" class="page-section">
-        <div style="margin-bottom:24px;">
-            <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="media_h2">مركز الأخبار والبيانات الصحفية</h2>
-            <p style="color:var(--text-muted);" data-i18n="media_sub">آخر أخبار وإنجازات ومبادرات بنك ماتريكس</p>
-        </div>
         <div class="grid-2">
             <div class="card">
-                <span class="badge-status" data-i18n="badge_press">بيان صحفي</span>
-                <h3 style="color:#581c87; margin:10px 0;" data-i18n="news1_title">ماتريكس بنك يحصد جائزة أفضل منصة مصرفية ذكية لعام 2026</h3>
-                <p style="color:var(--text-muted); line-height:1.6;" data-i18n="news1_desc">تقديراً لريادته في تطبيق أحدث أنظمة الأمان وتسهيل المعاملات الرقمية للأفراد والمؤسسات.</p>
+                <span class="badge-status">بيان صحفي</span>
+                <h3 style="color:#581c87; margin:10px 0;">ماتريكس بنك يحصد جائزة أفضل منصة مصرفية ذكية لعام 2026</h3>
+                <p style="color:var(--text-muted); line-height:1.6;">تقديراً لريادته في تطبيق أحدث أنظمة الأمان وتسهيل المعاملات الرقمية للأفراد والمؤسسات.</p>
             </div>
             <div class="card">
-                <span class="badge-status" data-i18n="badge_service">تطوير الخدمات</span>
-                <h3 style="color:#581c87; margin:10px 0;" data-i18n="news2_title">إطلاق الجيل الثاني من محفظة الرواتب والمدفوعات الإلكترونية</h3>
-                <p style="color:var(--text-muted); line-height:1.6;" data-i18n="news2_desc">تحديث شامل يتيح للشركات صرف الرواتب لحظياً عبر شبكة المدفوعات اللحظية IPN وبطاقات ميزة.</p>
+                <span class="badge-status">تطوير الخدمات</span>
+                <h3 style="color:#581c87; margin:10px 0;">إطلاق الجيل الثاني من محفظة الرواتب والمدفوعات الإلكترونية</h3>
+                <p style="color:var(--text-muted); line-height:1.6;">تحديث شامل يتيح للشركات صرف الرواتب لحظياً عبر شبكة المدفوعات اللحظية IPN وبطاقات ميزة.</p>
             </div>
         </div>
     </div>
 
-    <!-- 9. عن البنك (About Matrix Bank) -->
+    <!-- 9. عن البنك -->
     <div id="page-about" class="page-section">
-        <div style="margin-bottom:24px;">
-            <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="about_h2">عن بنك ماتريكس (Matrix Bank)</h2>
-            <p style="color:var(--text-muted);" data-i18n="about_sub">ريادة العمل المصرفي الذكي لإدارة الثروات الخاصة وحلول 2027</p>
-        </div>
         <div class="card">
-            <h3 style="color:#581c87; margin-bottom:12px;" data-i18n="about_v_title">الرؤية والرسالة</h3>
-            <p style="line-height:1.8; color:var(--text-muted);" data-i18n="about_v_desc">تأسس بنك ماتريكس ليكون الواجهة المالية الذكية التي تجمع بين الثقة المصرفية الصلبة والابتكار التكنولوجي غير المسبوق. نعمل على تمكين الأفراد والشركات من إدارة ثرواتهم بسيولة فورية، وتحصين أصولهم عبر أعلى بروتوكولات الأمان العالمية.</p>
+            <h3 style="color:#581c87; margin-bottom:12px;">الرؤية والرسالة</h3>
+            <p style="line-height:1.8; color:var(--text-muted);">تأسس بنك ماتريكس ليكون الواجهة المالية الذكية التي تجمع بين الثقة المصرفية الصلبة والابتكار التكنولوجي غير المسبوق. نعمل على تمكين الأفراد والشركات من إدارة ثرواتهم بسيولة فورية، وتحصين أصولهم عبر أعلى بروتوكولات الأمان العالمية.</p>
         </div>
     </div>
 
-    <!-- 10. محول العملات (Currency Converter) -->
+    <!-- 10. محول العملات -->
     <div id="page-converter" class="page-section">
-        <div style="margin-bottom:24px;">
-            <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="conv_h2">محول العملات المباشر</h2>
-            <p style="color:var(--text-muted);" data-i18n="conv_sub">أسعار الصرف المعتمدة المحدثة لحظياً لدى غرفة المعاملات</p>
-        </div>
         <div class="card" style="max-width: 650px;">
+            <h2 style="color:#3b0764; margin-bottom:16px;">محول العملات المباشر</h2>
             <div class="form-group">
-                <label data-i18n="conv_lbl_amt">المبلغ المراد تحويله</label>
+                <label>المبلغ المراد تحويله</label>
                 <input type="number" id="convAmount" value="1000">
             </div>
             <div class="grid-2">
                 <div class="form-group">
-                    <label data-i18n="conv_lbl_from">من عملة</label>
+                    <label>من عملة</label>
                     <select id="convFrom">
                         <option value="USD">USD - دولار أمريكي ($)</option>
                         <option value="EGP" selected>EGP - جنيه مصري (ج.م)</option>
@@ -445,7 +448,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label data-i18n="conv_lbl_to">إلى عملة</label>
+                    <label>إلى عملة</label>
                     <select id="convTo">
                         <option value="USD" selected>USD - دولار أمريكي ($)</option>
                         <option value="EGP">EGP - جنيه مصري (ج.م)</option>
@@ -457,117 +460,110 @@
                     </select>
                 </div>
             </div>
-            <button class="btn-purple" style="width:100%; margin-top:10px;" onclick="calculateCurrency()" data-i18n="conv_btn">احسب القيمة ومزامنة السعر</button>
+            <button class="btn-purple" style="width:100%; margin-top:10px;" onclick="calculateCurrency()">احسب القيمة ومزامنة السعر</button>
             <div id="convResult" style="margin-top:20px; padding:15px; background:#f3e8ff; border-radius:10px; font-weight:700; text-align:center; color:#581c87;">
                 1000 EGP = 20.35 USD
             </div>
         </div>
     </div>
 
-    <!-- 11. الفروع والصرّافات (Branches) -->
+    <!-- 11. الفروع -->
     <div id="page-branches" class="page-section">
-        <div style="margin-bottom:24px;">
-            <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="br_h2">شبكة الفروع وماكينات الصراف الآلي</h2>
-            <p style="color:var(--text-muted);" data-i18n="br_sub">فروع وخدمات بنك ماتريكس لخدمتكم على مدار الساعة</p>
-        </div>
         <div class="grid-3">
             <div class="card">
-                <h3 style="color:#581c87;" data-i18n="br_c1_h3">📍 فرع التجمع الخامس (الفرع الرئيسي)</h3>
-                <p style="margin:10px 0; color:var(--text-muted);" data-i18n="br_c1_p">شارع التسعين الشمالي، مجمع ماتريكس المالي، القاهرة الجديدة.</p>
-                <span class="badge-status" data-i18n="br_c1_s">● مفتوح حتى 4:30 م</span>
+                <h3 style="color:#581c87;">📍 فرع التجمع الخامس (الفرع الرئيسي)</h3>
+                <p style="margin:10px 0; color:var(--text-muted);">شارع التسعين الشمالي، مجمع ماتريكس المالي، القاهرة الجديدة.</p>
+                <span class="badge-status">● مفتوح حتى 4:30 م</span>
             </div>
             <div class="card">
-                <h3 style="color:#581c87;" data-i18n="br_c2_h3">📍 فرع المهندسين</h3>
-                <p style="margin:10px 0; color:var(--text-muted);" data-i18n="br_c2_p">شارع جامعة الدول العربية، الجيزة.</p>
-                <span class="badge-status" data-i18n="br_c2_s">● صراف آلي متاح 24/7</span>
+                <h3 style="color:#581c87;">📍 فرع المهندسين</h3>
+                <p style="margin:10px 0; color:var(--text-muted);">شارع جامعة الدول العربية، الجيزة.</p>
+                <span class="badge-status">● صراف آلي متاح 24/7</span>
             </div>
             <div class="card">
-                <h3 style="color:#581c87;" data-i18n="br_c3_h3">📍 فرع سموحة - الإسكندرية</h3>
-                <p style="margin:10px 0; color:var(--text-muted);" data-i18n="br_c3_p">طريق 14 مايو، برج الأعمال، سموحة.</p>
-                <span class="badge-status" data-i18n="br_c3_s">● مركز كبار العملاء Wealth</span>
+                <h3 style="color:#581c87;">📍 فرع سموحة - الإسكندرية</h3>
+                <p style="margin:10px 0; color:var(--text-muted);">طريق 14 مايو، برج الأعمال، سموحة.</p>
+                <span class="badge-status">● مركز كبار العملاء Wealth</span>
             </div>
         </div>
     </div>
 
-    <!-- 12. اتصل بنا (Contact) -->
+    <!-- 12. اتصل بنا -->
     <div id="page-contact" class="page-section">
         <div style="margin-bottom:24px;">
-            <h2 style="color:#3b0764; font-size:1.8rem;" data-i18n="con_h2">اتصل بنا والاستفسارات المباشرة</h2>
-            <p style="color:var(--text-muted);" data-i18n="con_sub">فريق خدمة عملاء Matrix Bank مستعد دائماً للإجابة على استفساراتكم ومتابعتكم هاتفياً</p>
+            <h2 style="color:#3b0764; font-size:1.8rem;">اتصل بنا والاستفسارات المباشرة</h2>
+            <p style="color:var(--text-muted);">فريق خدمة عملاء Matrix Bank مستعد دائماً للإجابة على استفساراتكم ومتابعتكم هاتفياً</p>
         </div>
         <div class="grid-2">
             <div class="card">
                 <div class="form-group">
-                    <label data-i18n="con_lbl_name">الاسم بالكامل *</label>
+                    <label>الاسم بالكامل *</label>
                     <input type="text" id="contactName" placeholder="أحمد عادل">
                 </div>
                 <div class="form-group">
-                    <label style="color:#7c3aed;" data-i18n="con_lbl_phone">رقم الهاتف المحمول (مهم لمتابعة الرد معك) 📱 *</label>
+                    <label style="color:#7c3aed;">رقم الهاتف المحمول (مهم لمتابعة الرد معك) 📱 *</label>
                     <input type="tel" id="contactPhone" placeholder="01012345678" style="border:2px solid #c084fc; font-weight:700;">
                 </div>
                 <div class="form-group">
-                    <label data-i18n="con_lbl_email">البريد الإلكتروني</label>
+                    <label>البريد الإلكتروني</label>
                     <input type="email" id="contactEmail" placeholder="name@domain.com">
                 </div>
                 <div class="form-group">
-                    <label data-i18n="con_lbl_msg">رسالتك أو استفسارك *</label>
-                    <textarea id="contactMsg" rows="4" placeholder="كيف يمكننا مساعدتك اليوم؟" data-i18n-ph="ph_msg"></textarea>
+                    <label>رسالتك أو استفسارك *</label>
+                    <textarea id="contactMsg" rows="4" placeholder="كيف يمكننا مساعدتك اليوم؟"></textarea>
                 </div>
-                <button class="btn-purple" onclick="submitContactForm()" data-i18n="con_btn_submit">إرسال الاستفسار وتوثيق الهاتف</button>
+                <button class="btn-purple" onclick="submitContactForm()">إرسال الاستفسار وتوثيق الهاتف</button>
             </div>
             <div class="card" style="background:#faf5ff;">
-                <h3 style="color:#581c87; margin-bottom:15px;" data-i18n="con_info_h3">قنوات التواصل المباشرة</h3>
-                <p style="margin-bottom:12px;" data-i18n="con_info_p1">📞 الخط الساخن المباشر: 19844</p>
-                <p style="margin-bottom:12px;" data-i18n="con_info_p2">📧 البريد المعتمد: support@matrixbank.com</p>
-                <p style="margin-bottom:12px;" data-i18n="con_info_p3">🏢 المقر العام: القاهرة الجديدة، جمهورية مصر العربية</p>
+                <h3 style="color:#581c87; margin-bottom:15px;">قنوات التواصل المباشرة</h3>
+                <p style="margin-bottom:12px;">📞 الخط الساخن المباشر: 19844</p>
+                <p style="margin-bottom:12px;">📧 البريد المعتمد: support@matrixbank.com</p>
+                <p style="margin-bottom:12px;">🏢 المقر العام: القاهرة الجديدة، جمهورية مصر العربية</p>
             </div>
         </div>
     </div>
 
-    <!-- 13. لوحة تحكم الحساب الخاص بالعميل (Dashboard) -->
+    <!-- 13. لوحة تحكم العميل -->
     <div id="page-dashboard" class="page-section">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
             <div>
-                <h2 style="color:#3b0764;" data-i18n="dash_h2">لوحة الحساب المصرفي الخاص بالعميل</h2>
-                <p id="dashWelcomeUser" style="color:var(--text-muted); font-weight:600;">مرحباً بك: جاري التحميل...</p>
+                <h2 style="color:#3b0764;">لوحة الحساب المصرفي الخاص بالعميل</h2>
+                <p id="dashWelcomeUser" style="color:var(--text-muted); font-weight:600;">مرحباً بك...</p>
             </div>
-            <button class="btn-login-trigger" style="background:#dc2626; color:#fff;" onclick="logout()" data-i18n="dash_btn_logout">تسجيل الخروج الآمن</button>
+            <button class="btn-login-trigger" style="background:#dc2626; color:#fff;" onclick="logout()">تسجيل الخروج الآمن</button>
         </div>
 
         <div class="grid-2">
             <div class="card">
-                <span style="color:var(--text-muted); font-size:0.85rem;" data-i18n="dash_balance_lbl">الرصيد المتاح بالحساب الخاص</span>
+                <span style="color:var(--text-muted); font-size:0.85rem;">الرصيد المتاح بالحساب الخاص</span>
                 <h2 id="totalBalanceDisplay" style="color:#7c3aed; font-size:2.3rem; margin-top:8px;">0.00</h2>
                 <p id="dashAccountTypeDisplay" style="margin-top:8px; font-size:0.85rem; color:#10b981; font-weight:700;">نوع الحساب: جاري استثماري</p>
             </div>
 
             <div class="card">
-                <span style="color:var(--text-muted); font-size:0.85rem;" data-i18n="dash_iban_lbl">رقم الحساب المصرفي المعتمد (IBAN)</span>
+                <span style="color:var(--text-muted); font-size:0.85rem;">رقم الحساب المصرفي المعتمد (IBAN)</span>
                 <h3 id="dashAccountIbanDisplay" style="color:#581c87; font-size:1.4rem; margin-top:8px; word-break:break-all;">EG-MXB-00000000</h3>
                 <p id="dashAccountCurrencyDisplay" style="margin-top:8px; font-size:0.85rem; color:var(--text-muted);">العملة الأساسية: EGP</p>
             </div>
         </div>
 
         <div class="card" style="max-width: 650px;">
-            <h3 style="color:#581c87; margin-bottom:15px;" data-i18n="dash_transfer_h3">💸 إجراء تحويل مالي من حسابك</h3>
-            
+            <h3 style="color:#581c87; margin-bottom:15px;">💸 إجراء تحويل مالي من حسابك</h3>
             <div class="form-group">
-                <label data-i18n="dash_lbl_to_iban">رقم حساب المستفيد (IBAN / Account No)</label>
+                <label>رقم حساب المستفيد (IBAN / Account No)</label>
                 <input type="text" id="transferAcc" placeholder="EG00MXB0000123456789">
             </div>
-            
             <div class="form-group">
-                <label data-i18n="dash_lbl_to_name">اسم المستفيد بالكامل</label>
+                <label>اسم المستفيد بالكامل</label>
                 <input type="text" id="transferName" placeholder="محمد علي محمود">
             </div>
-
             <div class="grid-2">
                 <div class="form-group">
-                    <label data-i18n="dash_lbl_amount">المبلغ المراد تحويله</label>
+                    <label>المبلغ المراد تحويله</label>
                     <input type="number" id="transferAmount" placeholder="1000">
                 </div>
                 <div class="form-group">
-                    <label data-i18n="dash_lbl_curr">عملة التحويل</label>
+                    <label>عملة التحويل</label>
                     <select id="transferCurrency">
                         <option value="USD">USD - دولار أمريكي ($)</option>
                         <option value="EGP" selected>EGP - جنيه مصري (ج.م)</option>
@@ -577,43 +573,55 @@
                     </select>
                 </div>
             </div>
-
-            <button class="btn-purple" onclick="executeTransfer()" data-i18n="dash_btn_exec_transfer">تأكيد التحويل وخصم المبلغ من الحساب</button>
+            <button class="btn-purple" onclick="executeTransfer()">تأكيد التحويل وخصم المبلغ من الحساب</button>
         </div>
     </div>
+
+    <!-- صفحات إضافية من القائمة -->
+    <div id="page-bonus" class="page-section"><div class="card"><h2>🎁 برنامج مكافآت BONUS</h2><p style="margin-top:10px;">اجمع النقاط مع كل معاملة مصرفية واستبدلها بقسائم شرائية فورية.</p></div></div>
+    <div id="page-corp-portal" class="page-section"><div class="card"><h2>🌐 البوابة الإلكترونية للشركات</h2><p style="margin-top:10px;">إدارة متكاملة لحسابات الشركات والتدفقات النقدية والاعتمادات.</p></div></div>
+    <div id="page-ach" class="page-section"><div class="card"><h2>⚡ غرفة المقاصة الآلية ACH</h2><p style="margin-top:10px;">تنفيذ وتسوية التحويلات البنكية الجماعية والمباشرة بأعلى معايير الأمان.</p></div></div>
+    <div id="page-payroll" class="page-section"><div class="card"><h2>💳 صرف الرواتب الإلكترونية</h2><p style="margin-top:10px;">منظومة تحويل وصرف رواتب موظفي الشركات لحظياً.</p></div></div>
+    <div id="page-cps" class="page-section"><div class="card"><h2>🏛️ المدفوعات الحكومية (CPS)</h2><p style="margin-top:10px;">سداد الضرائب والرسوم الجمركية والتأمينات إلكترونياً على مدار الساعة.</p></div></div>
+    <div id="page-downloads" class="page-section"><div class="card"><h2>📥 مركز تحميل المستندات</h2><p style="margin-top:10px;">تحميل كافة النماذج والطلبات البنكية الرسمية بصيغة PDF.</p></div></div>
 
     <!-- نافذة إنشاء حساب بنكي جديد -->
     <div class="modal" id="registerModal">
         <div class="modal-box">
-            <h2 style="color:#3b0764; margin-bottom:6px;" data-i18n="reg_h2">فتح حساب مصرفي جديد</h2>
-            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:20px;" data-i18n="reg_sub">يمكنك تسجيل الدخول لاحقاً بالإيميل أو برقم الهاتف</p>
+            <h2 style="color:#3b0764; margin-bottom:6px;">فتح حساب مصرفي جديد</h2>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:20px;">يتم حفظ الحساب فوراً في قاعدة البيانات المركزية</p>
 
             <div class="form-group">
-                <label data-i18n="reg_lbl_name">الاسم بالكامل</label>
+                <label>الاسم بالكامل *</label>
                 <input type="text" id="regName" placeholder="محمود كريم السعيد">
             </div>
 
             <div class="form-group">
-                <label data-i18n="reg_lbl_email">البريد الإلكتروني المعتمد</label>
+                <label>البريد الإلكتروني المعتمد *</label>
                 <input type="email" id="regEmail" placeholder="client@domain.com">
             </div>
 
             <div class="form-group">
-                <label data-i18n="reg_lbl_phone">رقم الهاتف المحمول (يمكنك الدخول به أيضاً)</label>
+                <label>رقم الهاتف المحمول *</label>
                 <input type="tel" id="regPhone" placeholder="01012345678">
+            </div>
+
+            <div class="form-group">
+                <label>الرقم القومي (14 رقم) *</label>
+                <input type="text" id="regNationalId" maxlength="14" placeholder="29901010101234">
             </div>
 
             <div class="grid-2">
                 <div class="form-group">
-                    <label data-i18n="reg_lbl_type">نوع الحساب</label>
+                    <label>نوع الحساب</label>
                     <select id="regType">
-                        <option value="حساب جاري استثماري" data-i18n="opt_acc_1">حساب جاري استثماري</option>
-                        <option value="حساب توفير العائد اليومي" data-i18n="opt_acc_2">حساب توفير العائد اليومي</option>
-                        <option value="محفظة كبار العملاء Wealth" data-i18n="opt_acc_3">محفظة كبار العملاء Wealth</option>
+                        <option value="حساب جاري استثماري">حساب جاري استثماري</option>
+                        <option value="حساب توفير العائد اليومي">حساب توفير العائد اليومي</option>
+                        <option value="محفظة كبار العملاء Wealth">محفظة كبار العملاء Wealth</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label data-i18n="reg_lbl_curr">عملة الحساب الأساسية</label>
+                    <label>عملة الحساب الأساسية</label>
                     <select id="regCurrency">
                         <option value="EGP" selected>EGP</option>
                         <option value="USD">USD</option>
@@ -625,68 +633,67 @@
             </div>
 
             <div class="form-group">
-                <label data-i18n="reg_lbl_pass">كلمة المرور الخاصة بالحساب</label>
+                <label>كلمة المرور الخاصة بالحساب *</label>
                 <input type="password" id="regPass" placeholder="••••••••">
             </div>
 
-            <button class="btn-purple" style="width:100%; margin-top:10px; background:#10b981;" onclick="handleCreateAccount()" data-i18n="reg_btn_submit">تأكيد وفتح الحساب الآن</button>
-            <button style="width:100%; margin-top:12px; background:none; border:none; color:gray; cursor:pointer;" onclick="closeRegisterModal()" data-i18n="btn_cancel">إلغاء</button>
+            <button class="btn-purple" style="width:100%; margin-top:10px; background:#10b981;" onclick="handleCreateAccount()">تأكيد وفتح الحساب الآن</button>
+            <button style="width:100%; margin-top:12px; background:none; border:none; color:gray; cursor:pointer;" onclick="closeRegisterModal()">إلغاء</button>
         </div>
     </div>
 
     <!-- نافذة تسجيل الدخول -->
     <div class="modal" id="loginModal">
         <div class="modal-box">
-            <div class="security-seal">
-                🛡️ <span data-i18n="login_seal">اتصال بنكي مشفر بمعيار AES-256 Bit SSL</span>
-            </div>
+            <div class="security-seal">🛡️ اتصال بنكي مشفر بمعيار AES-256 Bit SSL</div>
 
             <div id="loginStep1">
-                <h2 style="color:#3b0764; margin-bottom:6px;" data-i18n="login_h2">تسجيل الدخول إلى حسابك</h2>
-                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:18px;" data-i18n="login_sub">سجل الدخول بالبريد الإلكتروني أو برقم الهاتف المسجل</p>
+                <h2 style="color:#3b0764; margin-bottom:6px;">تسجيل الدخول إلى حسابك</h2>
+                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:18px;">سجل الدخول بالبريد الإلكتروني أو برقم الهاتف المسجل</p>
 
                 <div class="form-group">
-                    <label data-i18n="login_lbl_id">البريد الإلكتروني أو رقم الهاتف</label>
-                    <input type="text" id="loginIdentifierInput" placeholder="أدخل إيميلك أو رقم هاتفك" data-i18n-ph="ph_login_id">
+                    <label>البريد الإلكتروني أو رقم الهاتف</label>
+                    <input type="text" id="loginIdentifierInput" placeholder="أدخل إيميلك أو رقم هاتفك">
                 </div>
 
                 <div class="form-group">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                        <label style="margin-bottom:0;" data-i18n="login_lbl_pass">كلمة السر</label>
-                        <a onclick="openForgotPassModal()" style="color:#7c3aed; font-size:0.82rem; font-weight:700; cursor:pointer;" data-i18n="login_forgot_link">نسيت كلمة السر؟</a>
+                        <label style="margin-bottom:0;">كلمة السر</label>
+                        <a onclick="openForgotPassModal()" style="color:#7c3aed; font-size:0.82rem; font-weight:700; cursor:pointer;">نسيت كلمة السر؟</a>
                     </div>
                     <input type="password" id="passInput" placeholder="••••••••">
                 </div>
 
                 <button class="btn-purple" id="btnSubmitLogin" style="width:100%; margin-top:10px;" onclick="handleInitialAuth()">
-                    <span id="loginBtnText" data-i18n="login_btn_submit">تسجيل الدخول الآمن</span>
+                    <span id="loginBtnText">تسجيل الدخول الآمن</span>
                 </button>
 
                 <div style="text-align:center; margin-top:15px; font-size:0.88rem;">
-                    <span style="color:var(--text-muted);" data-i18n="login_no_acc">ليس لديك حساب على السيستم؟</span>
-                    <a style="color:#7c3aed; font-weight:700; cursor:pointer;" onclick="closeLogin(); openRegisterModal();" data-i18n="login_open_now">افتح حساباً جديداً الآن</a>
+                    <span style="color:var(--text-muted);">ليس لديك حساب على السيستم؟</span>
+                    <a style="color:#7c3aed; font-weight:700; cursor:pointer;" onclick="closeLogin(); openRegisterModal();">افتح حساباً جديداً الآن</a>
                 </div>
-                <button style="width:100%; margin-top:12px; background:none; border:none; color:gray; cursor:pointer;" onclick="closeLogin()" data-i18n="btn_cancel">إلغاء</button>
+                <button style="width:100%; margin-top:12px; background:none; border:none; color:gray; cursor:pointer;" onclick="closeLogin()">إلغاء</button>
             </div>
 
             <div id="loginStep2" style="display:none; text-align:center;">
                 <div style="font-size:2.4rem; margin-bottom:10px;">📱</div>
-                <h2 style="color:#3b0764; margin-bottom:6px;" data-i18n="otp_h2">رمز التحقق الثنائي (2FA)</h2>
-                <p style="color:var(--text-muted); font-size:0.85rem;" data-i18n="otp_sub">تم إرسال رمز الأمان لهاتفك المسجل <br><strong id="maskedPhoneDisplay" style="color:#581c87;">(011****8442)</strong></p>
+                <h2 style="color:#3b0764; margin-bottom:6px;">رمز التحقق الثنائي (2FA)</h2>
+                <p style="color:var(--text-muted); font-size:0.85rem;">تم إرسال رمز الأمان لهاتفك المسجل <br><strong id="maskedPhoneDisplay" style="color:#581c87;"></strong></p>
+                <div style="background:#f3e8ff; color:#581c87; padding:8px; border-radius:8px; margin-top:10px; font-weight:800; font-size:0.9rem;">
+                    رمز التحقق الفوري الخاص بك هو: <span id="displayGeneratedOtp" style="color:#10b981; font-size:1.1rem;"></span>
+                </div>
 
                 <div class="otp-inputs" id="loginOtpGroup">
-                    <input type="text" maxlength="1" value="8">
-                    <input type="text" maxlength="1" value="4">
-                    <input type="text" maxlength="1" value="4">
-                    <input type="text" maxlength="1" value="2">
+                    <input type="text" maxlength="1" inputmode="numeric">
+                    <input type="text" maxlength="1" inputmode="numeric">
+                    <input type="text" maxlength="1" inputmode="numeric">
+                    <input type="text" maxlength="1" inputmode="numeric">
                 </div>
 
                 <button class="btn-purple" id="btnSubmitOtp" style="width:100%;" onclick="confirmOtpAndLogin()">
-                    <span id="otpBtnText" data-i18n="otp_btn_confirm">تأكيد الرمز والدخول إلى حسابي</span>
+                    <span id="otpBtnText">تأكيد الرمز والدخول إلى حسابي</span>
                 </button>
-
-                <p style="margin-top:14px; font-size:0.8rem; color:var(--text-muted);"><span data-i18n="otp_no_code">لم يصلك الرمز؟</span> <a style="color:#7c3aed; font-weight:700; cursor:pointer;" onclick="alert('تمت إعادة إرسال رمز التحقق بنجاح.')" data-i18n="otp_resend">إعادة الإرسال (30 ثانية)</a></p>
-                <button style="width:100%; margin-top:10px; background:none; border:none; color:gray; cursor:pointer;" onclick="resetLoginSteps()" data-i18n="btn_back">الرجوع للخلف</button>
+                <button style="width:100%; margin-top:10px; background:none; border:none; color:gray; cursor:pointer;" onclick="resetLoginSteps()">الرجوع للخلف</button>
             </div>
         </div>
     </div>
@@ -694,629 +701,177 @@
     <!-- نافذة استرجاع كلمة السر -->
     <div class="modal" id="forgotModal">
         <div class="modal-box">
-            <div class="security-seal">
-                🔐 <span data-i18n="forgot_seal">منظومة استعادة الحساب المصرفي المشفرة</span>
-            </div>
+            <div class="security-seal">🔐 منظومة استعادة الحساب المصرفي المشفرة</div>
 
             <div id="forgotStep1">
-                <h2 style="color:#3b0764; margin-bottom:6px;" data-i18n="forgot_h2">استرجاع كلمة السر</h2>
-                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:20px;" data-i18n="forgot_sub">أدخل البريد الإلكتروني أو رقم الهاتف المسجل على حسابك لإرسال رمز التأكيد</p>
-
+                <h2 style="color:#3b0764; margin-bottom:6px;">استرجاع كلمة السر</h2>
+                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:20px;">أدخل البريد الإلكتروني أو رقم الهاتف المسجل</p>
                 <div class="form-group">
-                    <label data-i18n="login_lbl_id">البريد الإلكتروني أو رقم الهاتف</label>
-                    <input type="text" id="forgotInputIdentifier" placeholder="client@domain.com أو 01012345678" data-i18n-ph="ph_forgot_id">
+                    <label>البريد الإلكتروني أو رقم الهاتف</label>
+                    <input type="text" id="forgotInputIdentifier" placeholder="client@domain.com أو 01012345678">
                 </div>
-
-                <button class="btn-purple" id="btnSendForgotOtp" style="width:100%; margin-top:10px;" onclick="handleSendForgotOtp()" data-i18n="forgot_btn_send">إرسال رمز التأكيد</button>
-                <button style="width:100%; margin-top:12px; background:none; border:none; color:gray; cursor:pointer;" onclick="closeForgotPassModal()" data-i18n="btn_cancel">إلغاء والعودة</button>
+                <button class="btn-purple" style="width:100%; margin-top:10px;" onclick="handleSendForgotOtp()">إرسال رمز التأكيد</button>
+                <button style="width:100%; margin-top:12px; background:none; border:none; color:gray; cursor:pointer;" onclick="closeForgotPassModal()">إلغاء والعودة</button>
             </div>
 
             <div id="forgotStep2" style="display:none; text-align:center;">
-                <div style="font-size:2.2rem; margin-bottom:8px;">📩</div>
-                <h2 style="color:#3b0764; margin-bottom:6px;" data-i18n="forgot_step2_h2">تأكيد رمز التحقق</h2>
-                <p style="color:var(--text-muted); font-size:0.85rem;" id="forgotTargetNotice">تم إرسال رمز التحقق إلى حسابك المسجل</p>
-                
-                <div class="otp-inputs" id="forgotOtpGroup">
-                    <input type="text" maxlength="1" value="9">
-                    <input type="text" maxlength="1" value="9">
-                    <input type="text" maxlength="1" value="4">
-                    <input type="text" maxlength="1" value="2">
+                <h2 style="color:#3b0764; margin-bottom:6px;">تأكيد رمز التحقق</h2>
+                <p style="color:var(--text-muted); font-size:0.85rem;" id="forgotTargetNotice"></p>
+                <div style="background:#f3e8ff; color:#581c87; padding:8px; border-radius:8px; margin-top:10px; font-weight:800;">
+                    رمز الاستعادة: <span id="displayForgotOtp" style="color:#10b981;"></span>
                 </div>
-
-                <button class="btn-purple" style="width:100%;" onclick="confirmForgotOtp()" data-i18n="forgot_btn_next">تأكيد الرمز ومتابعة تعيين كلمة السر</button>
-                <button style="width:100%; margin-top:10px; background:none; border:none; color:gray; cursor:pointer;" onclick="resetForgotSteps()" data-i18n="btn_back">الرجوع</button>
+                <div class="otp-inputs" id="forgotOtpGroup">
+                    <input type="text" maxlength="1" inputmode="numeric">
+                    <input type="text" maxlength="1" inputmode="numeric">
+                    <input type="text" maxlength="1" inputmode="numeric">
+                    <input type="text" maxlength="1" inputmode="numeric">
+                </div>
+                <button class="btn-purple" style="width:100%;" onclick="confirmForgotOtp()">تأكيد الرمز ومتابعة تعيين كلمة السر</button>
+                <button style="width:100%; margin-top:10px; background:none; border:none; color:gray; cursor:pointer;" onclick="resetForgotSteps()">الرجوع</button>
             </div>
 
             <div id="forgotStep3" style="display:none;">
-                <h2 style="color:#3b0764; margin-bottom:6px;" data-i18n="forgot_step3_h2">إنشاء كلمة سر جديدة</h2>
-                <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:18px;" data-i18n="forgot_step3_sub">قم بتعيين كلمة سر جديدة وقوية لحسابك</p>
-
+                <h2 style="color:#3b0764; margin-bottom:6px;">إنشاء كلمة سر جديدة</h2>
                 <div class="form-group">
-                    <label data-i18n="lbl_new_pass">كلمة السر الجديدة</label>
+                    <label>كلمة السر الجديدة</label>
                     <input type="password" id="newResetPass" placeholder="••••••••">
                 </div>
-
                 <div class="form-group">
-                    <label data-i18n="lbl_confirm_pass">تأكيد كلمة السر الجديدة</label>
+                    <label>تأكيد كلمة السر الجديدة</label>
                     <input type="password" id="confirmResetPass" placeholder="••••••••">
                 </div>
-
-                <button class="btn-purple" style="width:100%; margin-top:10px; background:#10b981;" onclick="submitNewPassword()" data-i18n="btn_save_pass">حفظ كلمة السر وتحديث الحساب</button>
+                <button class="btn-purple" style="width:100%; margin-top:10px; background:#10b981;" onclick="submitNewPassword()">حفظ كلمة السر وتحديث الحساب</button>
             </div>
         </div>
     </div>
 
-    <!-- تذييل الصفحة Footer -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <h4 data-i18n="f_col1_title">عن Matrix Bank</h4>
+                <h4>عن Matrix Bank</h4>
                 <ul>
-                    <li><a onclick="showPage('about')" data-i18n="f_col1_1">من نحن ورؤيتنا</a></li>
-                    <li><a onclick="showPage('investors')" data-i18n="f_col1_2">علاقات المستثمرين</a></li>
-                    <li><a onclick="showPage('sustainability')" data-i18n="f_col1_3">الاستدامة والتمويل الأخضر</a></li>
-                    <li><a onclick="showPage('media')" data-i18n="f_col1_4">مركز الأخبار والإعلام</a></li>
+                    <li><a onclick="showPage('about')">من نحن ورؤيتنا</a></li>
+                    <li><a onclick="showPage('investors')">علاقات المستثمرين</a></li>
+                    <li><a onclick="showPage('sustainability')">الاستدامة والتمويل الأخضر</a></li>
+                    <li><a onclick="showPage('media')">مركز الأخبار والإعلام</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4 data-i18n="f_col2_title">خدمات الأفراد والشركات</h4>
+                <h4>خدمات الأفراد والشركات</h4>
                 <ul>
-                    <li><a onclick="showPage('personal')" data-i18n="f_col2_1">البطاقات والقروض</a></li>
-                    <li><a onclick="showPage('corporate-services')" data-i18n="f_col2_2">تسهيلات الشركات</a></li>
-                    <li><a onclick="showPage('payroll')" data-i18n="f_col2_3">الرواتب الإلكترونية</a></li>
-                    <li><a onclick="showPage('bonus')" data-i18n="f_col2_4">برنامج مكافآت BONUS</a></li>
+                    <li><a onclick="showPage('personal')">البطاقات والقروض</a></li>
+                    <li><a onclick="showPage('corporate-services')">تسهيلات الشركات</a></li>
+                    <li><a onclick="showPage('payroll')">الرواتب الإلكترونية</a></li>
+                    <li><a onclick="showPage('bonus')">برنامج مكافآت BONUS</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4 data-i18n="f_col3_title">الخدمات الإلكترونية والأدوات</h4>
+                <h4>الخدمات الإلكترونية</h4>
                 <ul>
-                    <li><a onclick="showPage('converter')" data-i18n="f_col3_1">محول العملات المباشر</a></li>
-                    <li><a onclick="showPage('branches')" data-i18n="f_col3_2">أماكن الفروع والصرّافات</a></li>
-                    <li><a onclick="showPage('cps')" data-i18n="f_col3_3">المدفوعات الحكومية CPS</a></li>
-                    <li><a onclick="showPage('downloads')" data-i18n="f_col3_4">مركز تحميل النماذج</a></li>
+                    <li><a onclick="showPage('converter')">محول العملات المباشر</a></li>
+                    <li><a onclick="showPage('branches')">أماكن الفروع والصرّافات</a></li>
+                    <li><a onclick="showPage('cps')">المدفوعات الحكومية CPS</a></li>
+                    <li><a onclick="showPage('downloads')">مركز تحميل النماذج</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4 data-i18n="f_col4_title">الدعم والمساعدة</h4>
+                <h4>الدعم والمساعدة</h4>
                 <ul>
-                    <li><a onclick="showPage('contact')" data-i18n="f_col4_1">اتصل بنا (خدمة العملاء)</a></li>
-                    <li><a onclick="openRegisterModal()" data-i18n="f_col4_2">فتح حساب بنكي جديد</a></li>
-                    <li><a onclick="openLogin()" data-i18n="f_col4_3">دخول الحساب المصرفي</a></li>
-                    <li><a onclick="openAdminDataPage()" style="color:#c084fc; font-weight:700;">🔐 قاعدة البيانات المركزية (Admin)</a></li>
-                    <li><a style="color:#94a3b8;" data-i18n="f_col4_4">الخط الساخن: 19844</a></li>
+                    <li><a onclick="showPage('contact')">اتصل بنا (خدمة العملاء)</a></li>
+                    <li><a onclick="openRegisterModal()">فتح حساب بنكي جديد</a></li>
+                    <li><a onclick="openLogin()">دخول الحساب المصرفي</a></li>
+                    <li><a href="admin-data.html" target="_blank" style="color:#4ade80; font-weight:700;">📊 فتح قاعدة البيانات المركزية</a></li>
                 </ul>
             </div>
         </div>
-        <div style="text-align:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); color:#94a3b8; font-size:0.85rem;" data-i18n="f_copyright">
+        <div style="text-align:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); color:#94a3b8; font-size:0.85rem;">
             MATRIX BANK © 2026 - 2027 | نظام إدارة الحسابات المصرفية المتعددة
         </div>
     </footer>
 
     <script>
-        const MatrixHub = {
-            STORAGE_KEY: 'matrix_bank_master_db',
-            getDB: function() {
-                return JSON.parse(localStorage.getItem(this.STORAGE_KEY) || '{"accounts":[],"transfers":[],"contacts":[],"corporate":[],"audit":[]}');
-            },
-            saveDB: function(db) {
-                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(db));
-            },
-            record: function(category, data) {
-                try {
-                    let db = this.getDB();
-                    if (!db[category]) db[category] = [];
-                    data.id = 'TX-' + Math.floor(100000 + Math.random() * 900000);
-                    data.timestamp = new Date().toLocaleDateString('ar-EG') + ' ' + new Date().toLocaleTimeString('ar-EG');
-                    db[category].unshift(data);
-                    this.saveDB(db);
-                } catch(e) { console.log(e); }
-            }
-        };
+        // قناة بث مباشر بين الصفحتين لضمان وصول البيانات لحظياً
+        const syncChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('matrix_bank_sync_channel') : null;
 
         const MASTER_ACCOUNT = {
             accountNo: 'EG-MXB-99420000',
-            name: 'أحمد عادل',
+            name: 'أحمد عادل (الحساب الرئيسي)',
             email: 'ahmed.adelgin@gmail.com',
             phone: '01122278442',
             password: '01122278442',
+            nationalId: '29001010101234',
             accountType: 'حساب جاري استثماري (خزينة خاصة)',
             currency: 'USD',
-            balance: 1420000
+            balance: 1420000,
+            status: 'active',
+            timestamp: 'حساب تأسيسي'
+        };
+
+        const MatrixHub = {
+            STORAGE_KEY: 'matrix_bank_master_db',
+            initDB: function() {
+                let raw = localStorage.getItem(this.STORAGE_KEY);
+                let db = raw ? JSON.parse(raw) : { accounts: [], transfers: [], contacts: [], corporate: [], audit: [] };
+                if (!db.accounts) db.accounts = [];
+                if (!db.transfers) db.transfers = [];
+                if (!db.contacts) db.contacts = [];
+                if (!db.corporate) db.corporate = [];
+                if (!db.audit) db.audit = [];
+
+                // التأكد من وجود الحساب الرئيسي داخل جدول الحسابات دائماً
+                const masterExists = db.accounts.some(a => a.accountNo === MASTER_ACCOUNT.accountNo);
+                if (!masterExists) {
+                    db.accounts.push({ ...MASTER_ACCOUNT });
+                    this.saveDB(db);
+                }
+                return db;
+            },
+            getDB: function() {
+                return this.initDB();
+            },
+            saveDB: function(db) {
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(db));
+                if (syncChannel) {
+                    syncChannel.postMessage({ type: 'DB_UPDATED', db: db });
+                }
+            },
+            record: function(category, data) {
+                let db = this.getDB();
+                if (!db[category]) db[category] = [];
+                data.id = 'TX-' + Math.floor(100000 + Math.random() * 900000);
+                data.timestamp = new Date().toLocaleDateString('ar-EG') + ' ' + new Date().toLocaleTimeString('ar-EG');
+                db[category].unshift(data);
+                this.saveDB(db);
+            }
         };
 
         const rates = { USD: 1, EUR: 1.08, EGP: 0.02035, SAR: 0.266, AED: 0.272, GBP: 1.28, KWD: 3.25 };
-
         let currentActiveUser = null;
         let sessionInterval = null;
         let resetUserTarget = null;
         let selectedProductForApply = null;
-
-        /* دالة فتح صفحة البيانات ونقل وتشفير كافة العمليات والهواتف إليها فورياً */
-        function openAdminDataPage() {
-            const db = MatrixHub.getDB();
-            const syncPayload = encodeURIComponent(JSON.stringify(db));
-           window.open(`https://admin-data-two.vercel.app/#sync=${encodedPayload}`, '_blank');
-        }
-
-        window.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.shiftKey && (e.key === 'D' || e.key === 'd')) {
-                e.preventDefault();
-                openAdminDataPage();
-            }
-        });
-
-        /* قاموس الترجمة الشامل */
-        const I18N = {
-            ar: {
-                nav_home: "الصفحة الرئيسية",
-                nav_converter: "⇄ محول العملات",
-                nav_branches: "📍 الفروع والصرّافات",
-                nav_contact: "📞 اتصل بنا",
-                btn_logout: "خروج",
-                btn_register: "+ فتح حساب جديد",
-                btn_login: "تسجيل دخول",
-                menu_personal_header: "👤 قسم الأفراد",
-                menu_online_banking: "💻 خدمة الإنترنت البنكية",
-                menu_bonus: "🎁 نقاط BONUS",
-                menu_cards: "💳 البطاقات والقروض الشخصية",
-                menu_corp_header: "🏢 قسم الشركات والمؤسسات",
-                menu_corp_portal: "🌐 البوابة الإلكترونية للشركات",
-                menu_ach: "⚡ غرفة المقاصة ACH",
-                menu_payroll: "💳 صرف الرواتب الإلكترونية",
-                menu_cps: "🏛️ المدفوعات الحكومية (CPS)",
-                menu_downloads: "📥 مركز تحميل المستندات",
-                sub_about: "عن بنك ماتريكس",
-                sub_personal: "خدمات الأفراد",
-                sub_corp: "خدمات الشركات",
-                sub_network: "التسوية الدولية",
-                sub_sustainability: "الاستدامة المؤسسية",
-                sub_investors: "علاقات المستثمرين",
-                sub_media: "مركز الإعلام والأخبار",
-                hero_title: "أهلاً بك في المستقبل",
-                hero_desc: "استمتع بتجربة مصرفية استثنائية متعددة العملات تجمع بين الفخامة والذكاء الاصطناعي لإدارة الثروات وحلول المدفوعات اللحظية لعام 2027.",
-                hero_btn_login: "الدخول إلى حسابك",
-                hero_btn_reg: "افتح حسابك الآن مجاناً",
-                card_personal_title: "💳 خدمات الأفراد الراقية",
-                card_personal_desc: "بطاقات ائتمان متقدمة، حسابات بعوائد يومية، وحلول تمويلية تلبي كافة احتياجاتك المالية.",
-                card_corp_title: "🏢 الخزانة وحلول الشركات",
-                card_corp_desc: "تسهيلات ائتمانية كبرى، خطابات ضمان معتمدة، وإدارة تدفقات السيولة بشتى العملات العالمية.",
-                card_net_title: "⚡ تسوية ذرية دولية",
-                card_net_desc: "تحويلات عابرة للحدود عبر أكثر من 80 دولة بأمان فائق التشفير وبدون فترات انتظار.",
-                personal_h2: "الخدمات المصرفية للأفراد",
-                personal_sub: "باقة متكاملة من البطاقات الائتمانية والتمويل الشخصي والعقاري",
-                card_inf_title: "💳 بطاقة Matrix Infinite",
-                card_inf_desc: "حد ائتماني حتى 1,000,000 جنيه، دخول صالات كبار الزوار، ونقاط مضاعفة.",
-                btn_apply_card: "قدم على البطاقة الآن ↵",
-                card_mort_title: "🏠 التمويل العقاري الذكي",
-                card_mort_desc: "تمويل يصل إلى 85% من قيمة العقار بفترات سداد ميسرة تصل حتى 20 سنة.",
-                btn_apply_loan: "احسب قرضك وقدم ↵",
-                card_sav_title: "📈 حساب التوفير ذو العائد اليومي",
-                card_sav_desc: "عائد سنوي يصل إلى 22% يصرف يومياً في حسابك مع حرية السحب والإيداع.",
-                btn_apply_account: "تقديم طلب فتح الحساب ↵",
-                corp_h2: "حلول الأعمال والشركات الكبرى",
-                corp_sub: "شريكك المالي لتمويل المشاريع الاستراتيجية والتوسع الإقليمي",
-                card_lg_title: "📜 خطابات الضمان والاعتمادات",
-                card_lg_desc: "إصدار سريع لخطابات الضمان والاعتمادات المستندية للاستيراد والتصدير.",
-                btn_apply_trade: "طلب تسهيل تجاري ↵",
-                card_wc_title: "💼 تمويل رأس المال العامل",
-                card_wc_desc: "قروض قصيرة ومتوسطة الأجل لتمويل المشتريات ودعم السيولة النقدية لشركتك.",
-                btn_apply_consult: "استشارة مصرفية للشركات ↵",
-                card_fx_title: "💱 خدمات غرفة المعاملات الدولية",
-                card_fx_desc: "حلول التحوط من تقلبات أسعار الصرف واستثمارات أذون وسندات الخزانة.",
-                btn_apply_treasury: "تواصل مع قطاع الخزانة ↵",
-                apply_badge: "بوابة التقديم المصرفية الرسمية",
-                btn_back: "↩ العودة للخلف",
-                apply_secure_note: "🛡️ جميع الطلبات تخضع للمراجعة الائتمانية الفورية المشفرة بمعيار AES-256 Bit.",
-                apply_form_h3: "📝 استمارة تسجيل بيانات العميل والتواصل",
-                apply_form_sub: "يرجى تدوين بياناتك بدقة ليتواصل معك مسؤول الحسابات عبر الهاتف لتأكيد طلبك.",
-                lbl_name: "الاسم بالكامل (ثلاثي أو رباعي) *",
-                lbl_phone_req: "رقم الهاتف المحمول (إجباري للتواصل وتأكيد الطلب) 📱 *",
-                lbl_email: "البريد الإلكتروني المعتمد *",
-                lbl_id: "الرقم القومي / رقم الهوية",
-                lbl_income: "الدخل الشهري / التمويل المطلوب",
-                lbl_branch: "الفرع المفضل لإنهاء الإجراءات",
-                opt_branch_1: "فرع التجمع الخامس (الفرع الرئيسي)",
-                opt_branch_2: "فرع المهندسين - شارع جامعة الدول",
-                opt_branch_3: "فرع سموحة - الإسكندرية",
-                lbl_notes: "ملاحظات إضافية أو وقت الاتصال المفضل",
-                btn_submit_apply: "تأكيد وإرسال طلب التقديم وحفظ الهاتف 🚀",
-                net_h2: "شبكة التسوية والتحويلات الدولية",
-                net_sub: "بنية تحتية مشفرة تربط Matrix Bank بأكبر مراكز المقاصة العالمية",
-                net_card1_h3: "مؤشرات كفاءة التحويلات العالمية",
-                net_p1: "✔ السرعة: تسوية خلال ثوانٍ معدودة عبر تقنيات ISO 20022 و SWIFT gpi.",
-                net_p2: "✔ التغطية: أكثر من 80 دولة ومدفوعات مباشرة بـ 35 عملة دولية.",
-                net_p3: "✔ الأمان: مصادقة متعددة المراحل لكل حوالة مصرفية ضخمة.",
-                net_card2_h3: "احصائيات شبكة Matrix Bank",
-                net_card2_desc: "إجمالي المعاملات المالية الدولية المسواة بنجاح عبر منصتنا خلال العام الحالي.",
-                sust_h2: "الاستدامة والتمويل المسؤول (ESG)",
-                sust_sub: "التزامنا ببناء مستقبل اقتصادي أخضر ودعم التنمية المستدامة",
-                sust_c1_h3: "🌱 السندات الخضراء",
-                sust_c1_p: "تمويل مشاريع الطاقة الشمسية ومحطات معالجة المياه النظيفة بأسعار فائدة تشجيعية.",
-                sust_c2_h3: "⚡ فروع خالية من الانبعاثات",
-                sust_c2_p: "فروع خالية من الورق بنسبة 100% واعتماد كامل على الطاقة النظيفة في مقراتنا.",
-                sust_c3_h3: "🤝 الشمول المالي والتمكين",
-                sust_c3_p: "توفير الحسابات المصرفية المجانية للشباب وأصحاب المشاريع المتناهية الصغر.",
-                inv_h2: "علاقات المستثمرين والتقارير المالية",
-                inv_sub: "بيانات الأداء المالي، تقارير الحوكمة، ومؤشرات القوة المصرفية",
-                inv_car: "كفاية رأس المال (CAR)",
-                inv_roe: "العائد على حقوق الملكية",
-                inv_rating: "التصنيف الائتماني",
-                inv_rating_val: "AA+ (مستقر)",
-                inv_assets: "إجمالي الأصول",
-                media_h2: "مركز الأخبار والبيانات الصحفية",
-                media_sub: "آخر أخبار وإنجازات ومبادرات بنك ماتريكس",
-                badge_press: "بيان صحفي",
-                news1_title: "ماتريكس بنك يحصد جائزة أفضل منصة مصرفية ذكية لعام 2026",
-                news1_desc: "تقديراً لريادته في تطبيق أحدث أنظمة الأمان وتسهيل المعاملات الرقمية للأفراد والمؤسسات.",
-                badge_service: "تطوير الخدمات",
-                news2_title: "إطلاق الجيل الثاني من محفظة الرواتب والمدفوعات الإلكترونية",
-                news2_desc: "تحديث شامل يتيح للشركات صرف الرواتب لحظياً عبر شبكة المدفوعات اللحظية IPN وبطاقات ميزة.",
-                about_h2: "عن بنك ماتريكس (Matrix Bank)",
-                about_sub: "ريادة العمل المصرفي الذكي لإدارة الثروات الخاصة وحلول 2027",
-                about_v_title: "الرؤية والرسالة",
-                about_v_desc: "تأسس بنك ماتريكس ليكون الواجهة المالية الذكية التي تجمع بين الثقة المصرفية الصلبة والابتكار التكنولوجي غير المسبوق. نعمل على تمكين الأفراد والشركات من إدارة ثرواتهم بسيولة فورية، وتحصين أصولهم عبر أعلى بروتوكولات الأمان العالمية.",
-                conv_h2: "محول العملات المباشر",
-                conv_sub: "أسعار الصرف المعتمدة المحدثة لحظياً لدى غرفة المعاملات",
-                conv_lbl_amt: "المبلغ المراد تحويله",
-                conv_lbl_from: "من عملة",
-                conv_lbl_to: "إلى عملة",
-                conv_btn: "احسب القيمة ومزامنة السعر",
-                br_h2: "شبكة الفروع وماكينات الصراف الآلي",
-                br_sub: "فروع وخدمات بنك ماتريكس لخدمتكم على مدار الساعة",
-                br_c1_h3: "📍 فرع التجمع الخامس (الفرع الرئيسي)",
-                br_c1_p: "شارع التسعين الشمالي، مجمع ماتريكس المالي، القاهرة الجديدة.",
-                br_c1_s: "● مفتوح حتى 4:30 م",
-                br_c2_h3: "📍 فرع المهندسين",
-                br_c2_p: "شارع جامعة الدول العربية، الجيزة.",
-                br_c2_s: "● صراف آلي متاح 24/7",
-                br_c3_h3: "📍 فرع سموحة - الإسكندرية",
-                br_c3_p: "طريق 14 مايو، برج الأعمال، سموحة.",
-                br_c3_s: "● مركز كبار العملاء Wealth",
-                con_h2: "اتصل بنا والاستفسارات المباشرة",
-                con_sub: "فريق خدمة عملاء Matrix Bank مستعد دائماً للإجابة على استفساراتكم ومتابعتكم هاتفياً",
-                con_lbl_name: "الاسم بالكامل *",
-                con_lbl_phone: "رقم الهاتف المحمول (مهم لمتابعة الرد معك) 📱 *",
-                con_lbl_email: "البريد الإلكتروني",
-                con_lbl_msg: "رسالتك أو استفسارك *",
-                con_btn_submit: "إرسال الاستفسار وتوثيق الهاتف",
-                con_info_h3: "قنوات التواصل المباشرة",
-                con_info_p1: "📞 الخط الساخن المباشر: 19844",
-                con_info_p2: "📧 البريد المعتمد: support@matrixbank.com",
-                con_info_p3: "🏢 المقر العام: القاهرة الجديدة، جمهورية مصر العربية",
-                dash_h2: "لوحة الحساب المصرفي الخاص بالعميل",
-                dash_btn_logout: "تسجيل الخروج الآمن",
-                dash_balance_lbl: "الرصيد المتاح بالحساب الخاص",
-                dash_iban_lbl: "رقم الحساب المصرفي المعتمد (IBAN)",
-                dash_transfer_h3: "💸 إجراء تحويل مالي من حسابك",
-                dash_lbl_to_iban: "رقم حساب المستفيد (IBAN / Account No)",
-                dash_lbl_to_name: "اسم المستفيد بالكامل",
-                dash_lbl_amount: "المبلغ المراد تحويله",
-                dash_lbl_curr: "عملة التحويل",
-                dash_btn_exec_transfer: "تأكيد التحويل وخصم المبلغ من الحساب",
-                reg_h2: "فتح حساب مصرفي جديد",
-                reg_sub: "يمكنك تسجيل الدخول لاحقاً بالإيميل أو برقم الهاتف",
-                reg_lbl_name: "الاسم بالكامل",
-                reg_lbl_email: "البريد الإلكتروني المعتمد",
-                reg_lbl_phone: "رقم الهاتف المحمول (يمكنك الدخول به أيضاً)",
-                reg_lbl_type: "نوع الحساب",
-                opt_acc_1: "حساب جاري استثماري",
-                opt_acc_2: "حساب توفير العائد اليومي",
-                opt_acc_3: "محفظة كبار العملاء Wealth",
-                reg_lbl_curr: "عملة الحساب الأساسية",
-                reg_lbl_pass: "كلمة المرور الخاصة بالحساب",
-                reg_btn_submit: "تأكيد وفتح الحساب الآن",
-                btn_cancel: "إلغاء",
-                login_seal: "اتصال بنكي مشفر بمعيار AES-256 Bit SSL",
-                login_h2: "تسجيل الدخول إلى حسابك",
-                login_sub: "سجل الدخول بالبريد الإلكتروني أو برقم الهاتف المسجل",
-                login_lbl_id: "البريد الإلكتروني أو رقم الهاتف",
-                login_lbl_pass: "كلمة السر",
-                login_forgot_link: "نسيت كلمة السر؟",
-                login_btn_submit: "تسجيل الدخول الآمن",
-                login_no_acc: "ليس لديك حساب على السيستم؟",
-                login_open_now: "افتح حساباً جديداً الآن",
-                otp_h2: "رمز التحقق الثنائي (2FA)",
-                otp_sub: "تم إرسال رمز الأمان لهاتفك المسجل",
-                otp_btn_confirm: "تأكيد الرمز والدخول إلى حسابي",
-                otp_no_code: "لم يصلك الرمز؟",
-                otp_resend: "إعادة الإرسال (30 ثانية)",
-                forgot_seal: "منظومة استعادة الحساب المصرفي المشفرة",
-                forgot_h2: "استرجاع كلمة السر",
-                forgot_sub: "أدخل البريد الإلكتروني أو رقم الهاتف المسجل على حسابك لإرسال رمز التأكيد",
-                forgot_btn_send: "إرسال رمز التأكيد",
-                forgot_step2_h2: "تأكيد رمز التحقق",
-                forgot_btn_next: "تأكيد الرمز ومتابعة تعيين كلمة السر",
-                forgot_step3_h2: "إنشاء كلمة سر جديدة",
-                forgot_step3_sub: "قم بتعيين كلمة سر جديدة وقوية لحسابك",
-                lbl_new_pass: "كلمة السر الجديدة",
-                lbl_confirm_pass: "تأكيد كلمة السر الجديدة",
-                btn_save_pass: "حفظ كلمة السر وتحديث الحساب",
-                f_col1_title: "عن Matrix Bank",
-                f_col1_1: "من نحن ورؤيتنا",
-                f_col1_2: "علاقات المستثمرين",
-                f_col1_3: "الاستدامة والتمويل الأخضر",
-                f_col1_4: "مركز الأخبار والإعلام",
-                f_col2_title: "خدمات الأفراد والشركات",
-                f_col2_1: "البطاقات والقروض",
-                f_col2_2: "تسهيلات الشركات",
-                f_col2_3: "الرواتب الإلكترونية",
-                f_col2_4: "برنامج مكافآت BONUS",
-                f_col3_title: "الخدمات الإلكترونية والأدوات",
-                f_col3_1: "محول العملات المباشر",
-                f_col3_2: "أماكن الفروع والصرّافات",
-                f_col3_3: "المدفوعات الحكومية CPS",
-                f_col3_4: "مركز تحميل النماذج",
-                f_col4_title: "الدعم والمساعدة",
-                f_col4_1: "اتصل بنا (خدمة العملاء)",
-                f_col4_2: "فتح حساب بنكي جديد",
-                f_col4_3: "دخول الحساب المصرفي",
-                f_col4_4: "الخط الساخن: 19844",
-                f_copyright: "MATRIX BANK © 2026 - 2027 | نظام إدارة الحسابات المصرفية المتعددة"
-            },
-            en: {
-                nav_home: "Home",
-                nav_converter: "⇄ Currency Converter",
-                nav_branches: "📍 Branches & ATMs",
-                nav_contact: "📞 Contact Us",
-                btn_logout: "Logout",
-                btn_register: "+ Open Account",
-                btn_login: "Sign In",
-                menu_personal_header: "👤 Personal Banking",
-                menu_online_banking: "💻 Online Banking",
-                menu_bonus: "🎁 BONUS Points",
-                menu_cards: "💳 Cards & Loans",
-                menu_corp_header: "🏢 Corporate Banking",
-                menu_corp_portal: "🌐 Corporate Portal",
-                menu_ach: "⚡ ACH Clearing House",
-                menu_payroll: "💳 e-Payroll Services",
-                menu_cps: "🏛️ Gov Payments (CPS)",
-                menu_downloads: "📥 Download Center",
-                sub_about: "About Matrix Bank",
-                sub_personal: "Personal Services",
-                sub_corp: "Corporate Services",
-                sub_network: "Global Settlement",
-                sub_sustainability: "Sustainability",
-                sub_investors: "Investor Relations",
-                sub_media: "Media Center",
-                hero_title: "Welcome to the Future",
-                hero_desc: "Enjoy an exceptional multi-currency banking experience combining luxury and AI for wealth management and instant 2027 payments.",
-                hero_btn_login: "Access Your Account",
-                hero_btn_reg: "Open Free Account",
-                card_personal_title: "💳 Elite Personal Services",
-                card_personal_desc: "Premium credit cards, high-yield daily accounts, and tailored financing solutions.",
-                card_corp_title: "🏢 Treasury & Corporate Solutions",
-                card_corp_desc: "Credit facilities, verified letters of guarantee, and multi-currency liquidity management.",
-                card_net_title: "⚡ Global Atomic Settlement",
-                card_net_desc: "Cross-border transfers across 80+ countries with top-tier encryption and zero delays.",
-                personal_h2: "Personal Banking Services",
-                personal_sub: "A complete suite of credit cards, personal loans, and smart mortgages",
-                card_inf_title: "💳 Matrix Infinite Card",
-                card_inf_desc: "Credit limit up to 1,000,000 EGP, global VIP lounge access, and double reward points.",
-                btn_apply_card: "Apply for Card Now ↵",
-                card_mort_title: "🏠 Smart Mortgage Financing",
-                card_mort_desc: "Financing up to 85% of property value with flexible payment plans up to 20 years.",
-                btn_apply_loan: "Calculate Loan & Apply ↵",
-                card_sav_title: "📈 Daily Return Savings Account",
-                card_sav_desc: "Annual return up to 22% credited daily with complete withdrawal freedom.",
-                btn_apply_account: "Apply for Account ↵",
-                corp_h2: "Corporate & Enterprise Solutions",
-                corp_sub: "Your strategic financial partner for major project funding and expansion",
-                card_lg_title: "📜 Letters of Guarantee & LCs",
-                card_lg_desc: "Instant issuance of LGs and documentary credits for import and export.",
-                btn_apply_trade: "Request Trade Facility ↵",
-                card_wc_title: "💼 Working Capital Financing",
-                card_wc_desc: "Short and medium-term facilities to finance purchases and liquidity flows.",
-                btn_apply_consult: "Corporate Consultation ↵",
-                card_fx_title: "💱 Global Treasury Services",
-                card_fx_desc: "Hedging solutions for currency fluctuations and treasury bills investments.",
-                btn_apply_treasury: "Contact Treasury ↵",
-                apply_badge: "Official Banking Application Portal",
-                btn_back: "↩ Go Back",
-                apply_secure_note: "🛡️ All applications are subject to immediate AES-256 Bit encrypted review.",
-                apply_form_h3: "📝 Client Application & Registration Form",
-                apply_form_sub: "Please provide accurate details. Our relationship manager will contact you by phone.",
-                lbl_name: "Full Name *",
-                lbl_phone_req: "Mobile Phone (Required for verification) 📱 *",
-                lbl_email: "Official Email Address *",
-                lbl_id: "National ID / Passport Number",
-                lbl_income: "Monthly Income / Requested Facility",
-                lbl_branch: "Preferred Branch for Execution",
-                opt_branch_1: "5th Settlement Branch (Headquarters)",
-                opt_branch_2: "Mohandessin Branch - Gameat Dowal",
-                opt_branch_3: "Smouha Branch - Alexandria",
-                lbl_notes: "Additional Notes or Preferred Call Time",
-                btn_submit_apply: "Confirm & Submit Application 🚀",
-                net_h2: "Global Settlement Network",
-                net_sub: "Encrypted infrastructure connecting Matrix Bank to major clearing hubs",
-                net_card1_h3: "Global Transfer Performance",
-                net_p1: "✔ Speed: Settlement in seconds via ISO 20022 & SWIFT gpi protocols.",
-                net_p2: "✔ Coverage: Over 80 countries and direct payments in 35 currencies.",
-                net_p3: "✔ Security: Multi-tier biometric authentication for major settlements.",
-                net_card2_h3: "Matrix Bank Network Volume",
-                net_card2_desc: "Total international volume settled across our platform this fiscal year.",
-                sust_h2: "Sustainability & Responsible Finance",
-                sust_sub: "Our commitment to clean energy and sustainable economic development",
-                sust_c1_h3: "🌱 Green Bonds",
-                sust_c1_p: "Financing solar energy and clean water projects with preferential interest rates.",
-                sust_c2_h3: "⚡ Zero-Emission Branches",
-                sust_c2_p: "100% paperless branches relying fully on solar and clean electricity.",
-                sust_c3_h3: "🤝 Financial Inclusion",
-                sust_c3_p: "Free banking accounts and micro-loans for youth and emerging entrepreneurs.",
-                inv_h2: "Investor Relations & Financials",
-                inv_sub: "Financial performance indicators, governance, and institutional strength",
-                inv_car: "Capital Adequacy (CAR)",
-                inv_roe: "Return on Equity (ROE)",
-                inv_rating: "Credit Rating",
-                inv_rating_val: "AA+ (Stable)",
-                inv_assets: "Total Assets",
-                media_h2: "Media & Press Center",
-                media_sub: "Latest news, milestones, and announcements from Matrix Bank",
-                badge_press: "Press Release",
-                news1_title: "Matrix Bank Wins Best Digital Banking Platform 2026",
-                news1_desc: "Awarded for excellence in biometric security and institutional innovation.",
-                badge_service: "New Release",
-                news2_title: "Launch of Next-Gen Corporate Payroll & Instant Cards",
-                news2_desc: "Full automated payroll disbursement integrated with IPN and Meeza schemes.",
-                about_h2: "About Matrix Bank",
-                about_sub: "Pioneering intelligent private wealth management and 2027 fintech solutions",
-                about_v_title: "Vision & Mission",
-                about_v_desc: "Matrix Bank was built to bridge solid institutional trust with unprecedented tech innovation. We empower clients to manage wealth with instantaneous liquidity and maximum security.",
-                conv_h2: "Live Currency Converter",
-                conv_sub: "Real-time exchange rates certified by Treasury Operations",
-                conv_lbl_amt: "Amount to convert",
-                conv_lbl_from: "From Currency",
-                conv_lbl_to: "To Currency",
-                conv_btn: "Calculate & Sync Live Rate",
-                br_h2: "Branch & ATM Network",
-                br_sub: "Matrix Bank branches and 24/7 smart cash dispensers near you",
-                br_c1_h3: "📍 5th Settlement (Headquarters)",
-                br_c1_p: "North 90th Street, Matrix Financial Park, New Cairo.",
-                br_c1_s: "● Open until 4:30 PM",
-                br_c2_h3: "📍 Mohandessin Branch",
-                br_c2_p: "Gameat Al-Dowal Al-Arabiya St, Giza.",
-                br_c2_s: "● 24/7 Smart ATM Available",
-                br_c3_h3: "📍 Smouha Branch - Alexandria",
-                br_c3_p: "14th of May Road, Business Tower, Smouha.",
-                br_c3_s: "● Wealth & Private Banking Center",
-                con_h2: "Contact Us & Direct Inquiries",
-                con_sub: "Our dedicated support team is ready to answer your questions and call you back",
-                con_lbl_name: "Full Name *",
-                con_lbl_phone: "Mobile Phone (Required for callbacks) 📱 *",
-                con_lbl_email: "Email Address",
-                con_lbl_msg: "Your Inquiry or Message *",
-                con_btn_submit: "Send Message & Save Phone",
-                con_info_h3: "Direct Channels",
-                con_info_p1: "📞 Direct Hotline: 19844",
-                con_info_p2: "📧 Email: support@matrixbank.com",
-                con_info_p3: "🏢 Headquarters: New Cairo, Egypt",
-                dash_h2: "Client Private Banking Dashboard",
-                dash_btn_logout: "Secure Logout",
-                dash_balance_lbl: "Available Balance in Private Account",
-                dash_iban_lbl: "Certified Account Number (IBAN)",
-                dash_transfer_h3: "💸 Transfer Funds from Account",
-                dash_lbl_to_iban: "Beneficiary IBAN / Account Number",
-                dash_lbl_to_name: "Beneficiary Full Name",
-                dash_lbl_amount: "Amount to Transfer",
-                dash_lbl_curr: "Transfer Currency",
-                dash_btn_exec_transfer: "Confirm & Execute Transfer",
-                reg_h2: "Open a New Bank Account",
-                reg_sub: "You can sign in later with your email or registered phone",
-                reg_lbl_name: "Full Name",
-                reg_lbl_email: "Official Email Address",
-                reg_lbl_phone: "Mobile Phone Number",
-                reg_lbl_type: "Account Type",
-                opt_acc_1: "Investment Current Account",
-                opt_acc_2: "Daily Return Savings Account",
-                opt_acc_3: "Wealth Private Client Portfolio",
-                reg_lbl_curr: "Primary Account Currency",
-                reg_lbl_pass: "Account Secret Password",
-                reg_btn_submit: "Confirm & Open Account Now",
-                btn_cancel: "Cancel",
-                login_seal: "AES-256 Bit SSL Encrypted Banking Connection",
-                login_h2: "Sign In to Your Account",
-                login_sub: "Sign in using your registered email or mobile phone",
-                login_lbl_id: "Email or Mobile Phone Number",
-                login_lbl_pass: "Password",
-                login_forgot_link: "Forgot Password?",
-                login_btn_submit: "Secure Sign In",
-                login_no_acc: "Don't have an account yet?",
-                login_open_now: "Open New Account",
-                otp_h2: "Two-Factor Authentication (2FA)",
-                otp_sub: "A security verification code has been sent to your phone",
-                otp_btn_confirm: "Verify Code & Open Dashboard",
-                otp_no_code: "Didn't receive code?",
-                otp_resend: "Resend Code (30s)",
-                forgot_seal: "Encrypted Banking Recovery System",
-                forgot_h2: "Password Recovery",
-                forgot_sub: "Enter your registered email or phone to receive verification OTP",
-                forgot_btn_send: "Send Verification Code",
-                forgot_step2_h2: "Confirm Verification Code",
-                forgot_btn_next: "Confirm Code & Set Password",
-                forgot_step3_h2: "Create New Secret Password",
-                forgot_step3_sub: "Set a strong, new password for your banking account",
-                lbl_new_pass: "New Password",
-                lbl_confirm_pass: "Confirm New Password",
-                btn_save_pass: "Save Password & Update Account",
-                f_col1_title: "About Matrix Bank",
-                f_col1_1: "Who We Are & Vision",
-                f_col1_2: "Investor Relations",
-                f_col1_3: "Sustainability & Green Finance",
-                f_col1_4: "Press & News Center",
-                f_col2_title: "Personal & Corporate",
-                f_col2_1: "Credit Cards & Loans",
-                f_col2_2: "Corporate Facilities",
-                f_col2_3: "Electronic Payroll",
-                f_col2_4: "BONUS Rewards Program",
-                f_col3_title: "Digital Services",
-                f_col3_1: "Live Currency Converter",
-                f_col3_2: "Branches & ATM Locator",
-                f_col3_3: "Government Payments CPS",
-                f_col3_4: "Document Download Center",
-                f_col4_title: "Support & Help",
-                f_col4_1: "Contact Us (Customer Care)",
-                f_col4_2: "Open New Account",
-                f_col4_3: "Access Bank Account",
-                f_col4_4: "Hotline: 19844",
-                f_copyright: "MATRIX BANK © 2026 - 2027 | Multi-Currency Banking Management System"
-            }
-        };
-
-        const placeholders = {
-            ar: {
-                ph_name: "أحمد عادل مصطفى",
-                ph_id: "14 رقم",
-                ph_income: "50,000 ج.م",
-                ph_notes: "أرغب في استلام البطاقة أو الاستفسار عن الشروط بالتفصيل...",
-                ph_msg: "كيف يمكننا مساعدتك اليوم؟",
-                ph_login_id: "أدخل إيميلك أو رقم هاتفك",
-                ph_forgot_id: "client@domain.com أو 01012345678"
-            },
-            en: {
-                ph_name: "Ahmed Adel Mostafa",
-                ph_id: "14 digits ID / Passport",
-                ph_income: "$5,000 USD / 50,000 EGP",
-                ph_notes: "I would like to receive the card at 5th settlement branch...",
-                ph_msg: "How can we assist you today?",
-                ph_login_id: "Enter your email or phone",
-                ph_forgot_id: "client@domain.com or 01012345678"
-            }
-        };
-
-        function setLanguage(lang) {
-            document.documentElement.lang = lang;
-            document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-            document.getElementById('langLabel').textContent = (lang === 'ar') ? 'English' : 'العربية';
-
-            const dict = I18N[lang] || {};
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (dict[key]) el.innerText = dict[key];
-            });
-
-            const phDict = placeholders[lang] || {};
-            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-                const key = el.getAttribute('data-i18n-ph');
-                if (phDict[key]) el.placeholder = phDict[key];
-            });
-
-            localStorage.setItem('matrix_user_lang', lang);
-        }
+        let generatedLoginOtp = "";
+        let generatedForgotOtp = "";
 
         function toggleLanguage() {
-            const current = document.documentElement.lang === 'ar' ? 'en' : 'ar';
-            setLanguage(current);
+            const isAr = document.documentElement.lang === 'ar';
+            const nextLang = isAr ? 'en' : 'ar';
+            document.documentElement.lang = nextLang;
+            document.documentElement.dir = nextLang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langLabel').textContent = nextLang === 'ar' ? 'English' : 'العربية';
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            const savedLang = localStorage.getItem('matrix_user_lang') || 'ar';
-            setLanguage(savedLang);
+            MatrixHub.initDB();
 
             document.querySelectorAll('.otp-inputs').forEach(group => {
                 const inputs = group.querySelectorAll('input');
                 inputs.forEach((input, index) => {
-                    input.addEventListener('keyup', (e) => {
-                        if (e.key >= '0' && e.key <= '9' && index < inputs.length - 1) inputs[index + 1].focus();
-                        else if (e.key === 'Backspace' && index > 0) inputs[index - 1].focus();
+                    input.addEventListener('input', () => {
+                        if (input.value && index < inputs.length - 1) inputs[index + 1].focus();
+                    });
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Backspace' && !input.value && index > 0) inputs[index - 1].focus();
                     });
                 });
             });
@@ -1326,9 +881,11 @@
                 try {
                     const u = JSON.parse(savedSession);
                     const activeNow = getLatestUserData(u.email, u.phone);
-                    if (activeNow) {
+                    if (activeNow && activeNow.status !== 'banned') {
                         currentActiveUser = activeNow;
                         renderClientDashboard(currentActiveUser);
+                    } else {
+                        logout();
                     }
                 } catch(e) {
                     sessionStorage.removeItem('matrix_active_user_session');
@@ -1338,23 +895,15 @@
 
         function getLatestUserData(email, phone) {
             const db = MatrixHub.getDB();
-            const all = db.accounts || [];
-            let found = all.find(u => (email && u.email.toLowerCase() === email.toLowerCase()) || (phone && u.phone === phone));
-            
-            if (!found && ((email && email.toLowerCase() === MASTER_ACCOUNT.email.toLowerCase()) || (phone && phone === MASTER_ACCOUNT.phone))) {
-                const pass = localStorage.getItem('matrix_master_pass_override') || MASTER_ACCOUNT.password;
-                const bal = localStorage.getItem('matrix_master_balance_override');
-                found = { ...MASTER_ACCOUNT, password: pass, balance: bal !== null ? parseFloat(bal) : MASTER_ACCOUNT.balance };
-            }
-            return found;
+            return (db.accounts || []).find(u => 
+                (email && u.email && u.email.toLowerCase() === email.toLowerCase()) || 
+                (phone && u.phone === phone)
+            );
         }
 
         function showPage(pageId) {
             const target = document.getElementById('page-' + pageId);
-            if (!target) {
-                console.warn('Page not found:', pageId);
-                return;
-            }
+            if (!target) return;
             document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
             target.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1362,9 +911,8 @@
 
         function goToApplyPage(productName, category, description, icon) {
             selectedProductForApply = { productName, category, description, icon };
-
             document.getElementById('applyPageProductName').innerText = productName;
-            document.getElementById('applyPageTitle').innerText = `${document.documentElement.lang === 'ar' ? 'تقديم طلب:' : 'Apply for:'} ${productName}`;
+            document.getElementById('applyPageTitle').innerText = `تقديم طلب: ${productName}`;
             document.getElementById('applyPageCategoryLabel').innerText = category;
             document.getElementById('applyPageProductDesc').innerText = description;
             document.getElementById('applyPageIcon').innerText = icon || '💳';
@@ -1373,16 +921,7 @@
                 document.getElementById('applyFullName').value = currentActiveUser.name;
                 document.getElementById('applyPhone').value = currentActiveUser.phone;
                 document.getElementById('applyEmail').value = currentActiveUser.email;
-            } else {
-                document.getElementById('applyFullName').value = '';
-                document.getElementById('applyPhone').value = '';
-                document.getElementById('applyEmail').value = '';
             }
-
-            document.getElementById('applyNationalId').value = '';
-            document.getElementById('applyIncome').value = '';
-            document.getElementById('applyNotes').value = '';
-
             showPage('apply');
         }
 
@@ -1396,7 +935,7 @@
             const notes = document.getElementById('applyNotes').value.trim();
 
             if (!name || !phone) {
-                alert(document.documentElement.lang === 'ar' ? 'يرجى إدخال اسم العميل بالكامل ورقم الهاتف المحمول للمتابعة.' : 'Please enter your full name and phone number.');
+                alert('يرجى إدخال اسم العميل بالكامل ورقم الهاتف المحمول للمتابعة.');
                 return;
             }
 
@@ -1410,20 +949,18 @@
                 nationalId: natId || '---',
                 income: income || '---',
                 branch: branch,
-                details: `العميل: ${name} | الهاتف: ${phone} | الإيميل: ${email || '---'} | الفرع: ${branch} | الدخل/التمويل: ${income || '---'} | ملاحظات: ${notes || 'لا يوجد'}`,
-                amount: 'طلب معتمد وموثق'
+                details: `العميل: ${name} | الهاتف: ${phone} | الفرع: ${branch} | الدخل: ${income || '---'} | ملاحظات: ${notes || 'لا يوجد'}`,
+                amount: 'طلب معتمد'
             });
 
             MatrixHub.record('audit', {
-                event: `تقديم طلب على (${prodName})`,
+                event: `تقديم طلب (${prodName})`,
                 user: `${name} (${phone})`,
                 success: true,
-                result: `تم حفظ رقم الهاتف (${phone}) والطلب بنجاح`
+                result: 'تم الحفظ في قاعدة البيانات'
             });
 
-            alert(document.documentElement.lang === 'ar' ? 
-                `تهانينا يا ${name}!\nتم استلام طلبك لـ (${prodName}) بنجاح.\nتم حفظ رقم هاتفك (${phone}) وسيتواصل معك مدير الحسابات.` : 
-                `Congratulations ${name}!\nYour request for (${prodName}) was received.\nYour phone (${phone}) has been registered and our manager will call you soon.`);
+            alert(`تم استلام طلبك لـ (${prodName}) وحفظه في صفحة البيانات بنجاح!`);
             showPage('home');
         }
 
@@ -1434,7 +971,7 @@
             const message = document.getElementById('contactMsg').value.trim();
 
             if (!name || !phone || !message) {
-                alert(document.documentElement.lang === 'ar' ? 'يرجى إدخال الاسم ورقم الهاتف ونص الاستفسار.' : 'Please enter name, phone, and message.');
+                alert('يرجى إدخال الاسم ورقم الهاتف ونص الاستفسار.');
                 return;
             }
 
@@ -1445,9 +982,14 @@
                 message: message
             });
 
-            alert(document.documentElement.lang === 'ar' ? 
-                `شكراً لتواصلك يا ${name}!\nتم تسجيل استفسارك مع رقم هاتفك (${phone}) بنجاح.` : 
-                `Thank you ${name}!\nYour inquiry along with your phone (${phone}) has been registered.`);
+            MatrixHub.record('audit', {
+                event: `رسالة اتصل بنا: ${name}`,
+                user: phone,
+                success: true,
+                result: 'تم توثيق الرسالة'
+            });
+
+            alert(`شكراً لتواصلك يا ${name}! تم حفظ رسالتك في صفحة البيانات بنجاح.`);
             document.getElementById('contactName').value = '';
             document.getElementById('contactPhone').value = '';
             document.getElementById('contactEmail').value = '';
@@ -1461,12 +1003,13 @@
             const name = document.getElementById('regName').value.trim();
             const email = document.getElementById('regEmail').value.trim().toLowerCase();
             const phone = document.getElementById('regPhone').value.trim();
+            const natId = document.getElementById('regNationalId')?.value.trim() || '29901010101234';
             const type = document.getElementById('regType').value;
             const currency = document.getElementById('regCurrency').value;
             const pass = document.getElementById('regPass').value.trim();
 
             if (!name || !email || !phone || !pass) {
-                alert(document.documentElement.lang === 'ar' ? 'يرجى ملء جميع الحقول.' : 'Please fill all fields.');
+                alert('يرجى ملء الاسم والإيميل والهاتف وكلمة المرور.');
                 return;
             }
 
@@ -1478,15 +1021,16 @@
                 name: name,
                 email: email,
                 phone: phone,
+                nationalId: natId,
                 password: pass,
                 accountType: type,
                 currency: currency,
                 balance: initialBalanceAmount,
-                initialBalance: `${initialBalanceAmount.toLocaleString()} ${currency}`
+                status: 'active',
+                timestamp: new Date().toLocaleDateString('ar-EG') + ' ' + new Date().toLocaleTimeString('ar-EG')
             };
 
             let db = MatrixHub.getDB();
-            if (!db.accounts) db.accounts = [];
             db.accounts.unshift(newClient);
             MatrixHub.saveDB(db);
 
@@ -1497,10 +1041,7 @@
                 result: `تم تفعيل الحساب: ${generatedAccountNo}`
             });
 
-            alert(document.documentElement.lang === 'ar' ? 
-                `تهانينا يا ${name}!\nتم فتح حسابك بنجاح. يمكنك الدخول برقم هاتفك: ${phone} أو بالبريد.` : 
-                `Congratulations ${name}!\nYour account was opened. You can login using phone: ${phone} or email.`);
-
+            alert(`تهانينا يا ${name}!\nتم فتح حسابك وحفظه في صفحة البيانات بنجاح.\nرقم الحساب: ${generatedAccountNo}`);
             closeRegisterModal();
             document.getElementById('loginIdentifierInput').value = email;
             document.getElementById('passInput').value = pass;
@@ -1513,8 +1054,10 @@
         function resetLoginSteps() {
             document.getElementById('loginStep1').style.display = 'block';
             document.getElementById('loginStep2').style.display = 'none';
-            document.getElementById('loginBtnText').innerHTML = document.documentElement.lang === 'ar' ? 'تسجيل الدخول الآمن' : 'Secure Sign In';
+            document.getElementById('loginBtnText').innerText = 'تسجيل الدخول الآمن';
             document.getElementById('btnSubmitLogin').disabled = false;
+            document.getElementById('btnSubmitOtp').disabled = false;
+            document.getElementById('otpBtnText').innerText = 'تأكيد الرمز والدخول إلى حسابي';
         }
 
         function formatMaskedPhone(phone) {
@@ -1525,51 +1068,59 @@
         function handleInitialAuth() {
             const identifier = document.getElementById('loginIdentifierInput').value.trim().toLowerCase();
             const enteredPass = document.getElementById('passInput').value.trim();
-            const btnText = document.getElementById('loginBtnText');
-            const btn = document.getElementById('btnSubmitLogin');
 
             let user = getLatestUserData(identifier, identifier);
 
             if (user && user.password === enteredPass) {
+                if (user.status === 'banned') {
+                    alert('عفواً، تم حظر هذا الحساب من قبل إدارة البنك.');
+                    return;
+                }
+
                 currentActiveUser = user;
-                btn.disabled = true;
-                btnText.innerHTML = document.documentElement.lang === 'ar' ? '⏳ جاري التحقق من التشفير...' : '⏳ Verifying encryption...';
+                generatedLoginOtp = Math.floor(1000 + Math.random() * 9000).toString();
 
-                setTimeout(() => {
-                    document.getElementById('loginStep1').style.display = 'none';
-                    document.getElementById('loginStep2').style.display = 'block';
-                    document.getElementById('maskedPhoneDisplay').innerText = `(${formatMaskedPhone(user.phone)})`;
+                document.getElementById('loginStep1').style.display = 'none';
+                document.getElementById('loginStep2').style.display = 'block';
+                document.getElementById('maskedPhoneDisplay').innerText = `(${formatMaskedPhone(user.phone)})`;
+                document.getElementById('displayGeneratedOtp').innerText = generatedLoginOtp;
 
-                    MatrixHub.record('audit', {
-                        event: `تسجيل دخول: (${identifier})`,
-                        user: user.email,
-                        success: true,
-                        result: 'بانتظار تأكيد OTP'
-                    });
-                }, 700);
+                // تعبئة خانات الـ OTP بالرمز المولد للتسهيل أو ترك المستخدم يكتبه
+                const inputs = document.querySelectorAll('#loginOtpGroup input');
+                inputs.forEach((inp, idx) => inp.value = generatedLoginOtp[idx]);
+
+                MatrixHub.record('audit', {
+                    event: `تسجيل دخول: ${user.name}`,
+                    user: user.phone,
+                    success: true,
+                    result: 'تم التحقق المبدئي'
+                });
             } else {
-                alert(document.documentElement.lang === 'ar' ? 'عفواً، البيانات غير مطابقة لأي حساب.' : 'Invalid credentials. Please try again.');
+                alert('عفواً، البريد/الهاتف أو كلمة المرور غير صحيحة.');
             }
         }
 
         function confirmOtpAndLogin() {
-            const btn = document.getElementById('btnSubmitOtp');
-            btn.disabled = true;
-            document.getElementById('otpBtnText').innerHTML = document.documentElement.lang === 'ar' ? '✔ تمت المطابقة!' : '✔ Verified!';
+            const inputs = document.querySelectorAll('#loginOtpGroup input');
+            let enteredOtp = "";
+            inputs.forEach(i => enteredOtp += i.value);
 
-            setTimeout(() => {
-                closeLogin();
-                sessionStorage.setItem('matrix_active_user_session', JSON.stringify(currentActiveUser));
-                renderClientDashboard(currentActiveUser);
-            }, 600);
+            if (enteredOtp !== generatedLoginOtp) {
+                alert('رمز التحقق غير صحيح!');
+                return;
+            }
+
+            closeLogin();
+            sessionStorage.setItem('matrix_active_user_session', JSON.stringify(currentActiveUser));
+            renderClientDashboard(currentActiveUser);
         }
 
         function renderClientDashboard(user) {
-            document.getElementById('dashWelcomeUser').innerText = `${document.documentElement.lang === 'ar' ? 'مرحباً بك:' : 'Welcome:'} ${user.name} | (${user.email}) | (${user.phone})`;
+            document.getElementById('dashWelcomeUser').innerText = `مرحباً بك: ${user.name} | (${user.email}) | (${user.phone})`;
             document.getElementById('topUserName').innerText = user.name;
             document.getElementById('dashAccountIbanDisplay').innerText = user.accountNo;
-            document.getElementById('dashAccountTypeDisplay').innerText = `${document.documentElement.lang === 'ar' ? 'نوع الحساب:' : 'Account Type:'} ${user.accountType}`;
-            document.getElementById('dashAccountCurrencyDisplay').innerText = `${document.documentElement.lang === 'ar' ? 'العملة الأساسية:' : 'Base Currency:'} ${user.currency}`;
+            document.getElementById('dashAccountTypeDisplay').innerText = `نوع الحساب: ${user.accountType}`;
+            document.getElementById('dashAccountCurrencyDisplay').innerText = `العملة الأساسية: ${user.currency}`;
 
             updateDashboardBalanceUI(user);
 
@@ -1578,10 +1129,7 @@
             document.getElementById('loginDropdownWrapper').style.display = 'none';
 
             startSessionTimer(10 * 60);
-
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-dashboard').classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showPage('dashboard');
         }
 
         function updateDashboardBalanceUI(user) {
@@ -1598,10 +1146,8 @@
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
                 document.getElementById('sessionTimerText').textContent = `⏱️ ${minutes}:${seconds}`;
-
                 if (--timer < 0) {
                     clearInterval(sessionInterval);
-                    alert(document.documentElement.lang === 'ar' ? "انتهت الجلسة الآمنة لحسابك، يرجى إعادة تسجيل الدخول." : "Session expired. Please sign in again.");
                     logout();
                 }
             }, 1000);
@@ -1614,11 +1160,7 @@
             document.getElementById('topUserBadge').style.display = 'none';
             document.getElementById('topRegisterBtn').style.display = 'inline-block';
             document.getElementById('loginDropdownWrapper').style.display = 'inline-block';
-
-            document.getElementById('page-dashboard').classList.remove('active');
             showPage('home');
-            document.getElementById('loginIdentifierInput').value = '';
-            document.getElementById('passInput').value = '';
         }
 
         function openForgotPassModal() {
@@ -1626,7 +1168,6 @@
             resetForgotSteps();
             document.getElementById('forgotModal').style.display = 'flex';
         }
-
         function closeForgotPassModal() { document.getElementById('forgotModal').style.display = 'none'; }
         function resetForgotSteps() {
             document.getElementById('forgotStep1').style.display = 'block';
@@ -1640,15 +1181,24 @@
 
             if (user) {
                 resetUserTarget = user;
+                generatedForgotOtp = Math.floor(1000 + Math.random() * 9000).toString();
                 document.getElementById('forgotStep1').style.display = 'none';
                 document.getElementById('forgotStep2').style.display = 'block';
-                document.getElementById('forgotTargetNotice').innerHTML = `OTP Sent to: <strong style="color:#581c87;">${user.email} | (${formatMaskedPhone(user.phone)})</strong>`;
+                document.getElementById('forgotTargetNotice').textContent = `تم إرسال الرمز إلى: ${user.email}`;
+                document.getElementById('displayForgotOtp').innerText = generatedForgotOtp;
+
+                const inputs = document.querySelectorAll('#forgotOtpGroup input');
+                inputs.forEach((inp, idx) => inp.value = generatedForgotOtp[idx]);
             } else {
-                alert(document.documentElement.lang === 'ar' ? 'هذا الحساب غير مسجل.' : 'Account not found.');
+                alert('هذا الحساب غير مسجل.');
             }
         }
 
         function confirmForgotOtp() {
+            const inputs = document.querySelectorAll('#forgotOtpGroup input');
+            let enteredOtp = "";
+            inputs.forEach(i => enteredOtp += i.value);
+            if (enteredOtp !== generatedForgotOtp) return alert('الرمز غير صحيح!');
             document.getElementById('forgotStep2').style.display = 'none';
             document.getElementById('forgotStep3').style.display = 'block';
         }
@@ -1656,55 +1206,44 @@
         function submitNewPassword() {
             const newPass = document.getElementById('newResetPass').value.trim();
             const confirmPass = document.getElementById('confirmResetPass').value.trim();
+            if (!newPass || newPass.length < 4) return alert('كلمة السر 4 خانات على الأقل.');
+            if (newPass !== confirmPass) return alert('كلمتا المرور غير متطابقتين.');
 
-            if (!newPass || newPass.length < 4) return alert(document.documentElement.lang === 'ar' ? 'كلمة السر 4 خانات على الأقل.' : 'Password must be at least 4 chars.');
-            if (newPass !== confirmPass) return alert(document.documentElement.lang === 'ar' ? 'كلمتا المرور غير متطابقتين.' : 'Passwords do not match.');
-
-            if (resetUserTarget.email.toLowerCase() === MASTER_ACCOUNT.email.toLowerCase()) {
-                localStorage.setItem('matrix_master_pass_override', newPass);
-            } else {
-                let db = MatrixHub.getDB();
-                let idx = (db.accounts || []).findIndex(u => u.email.toLowerCase() === resetUserTarget.email.toLowerCase());
-                if (idx !== -1) {
-                    db.accounts[idx].password = newPass;
-                    MatrixHub.saveDB(db);
-                }
+            let db = MatrixHub.getDB();
+            let idx = (db.accounts || []).findIndex(u => u.accountNo === resetUserTarget.accountNo);
+            if (idx !== -1) {
+                db.accounts[idx].password = newPass;
+                MatrixHub.saveDB(db);
             }
 
-            alert(document.documentElement.lang === 'ar' ? 'تم تحديث كلمة المرور بنجاح!' : 'Password updated successfully!');
+            alert('تم تحديث كلمة المرور بنجاح!');
             closeForgotPassModal();
-            document.getElementById('loginIdentifierInput').value = resetUserTarget.phone || resetUserTarget.email;
-            document.getElementById('passInput').value = newPass;
             openLogin();
         }
 
         function executeTransfer() {
-            if (!currentActiveUser) return alert(document.documentElement.lang === 'ar' ? 'يجب تسجيل الدخول أولاً لإجراء المعاملات.' : 'Please sign in first.');
+            if (!currentActiveUser) return alert('يجب تسجيل الدخول أولاً.');
 
             const amt = parseFloat(document.getElementById('transferAmount').value);
             const name = document.getElementById('transferName').value.trim();
             const acc = document.getElementById('transferAcc').value.trim();
             const curr = document.getElementById('transferCurrency').value;
 
-            if (!amt || amt <= 0 || !name || !acc) return alert(document.documentElement.lang === 'ar' ? 'يرجى استكمال كافة بيانات التحويل.' : 'Please complete all transfer details.');
+            if (!amt || amt <= 0 || !name || !acc) return alert('يرجى استكمال كافة بيانات التحويل.');
 
             const userCurrency = currentActiveUser.currency || 'USD';
             let deduction = (curr === userCurrency) ? amt : (amt * rates[curr]) / rates[userCurrency];
 
-            if (deduction > currentActiveUser.balance) return alert(document.documentElement.lang === 'ar' ? 'الرصيد لا يكفي لإتمام العملية.' : 'Insufficient funds.');
+            if (deduction > currentActiveUser.balance) return alert('الرصيد لا يكفي لإتمام العملية.');
 
             currentActiveUser.balance -= deduction;
             updateDashboardBalanceUI(currentActiveUser);
 
-            if (currentActiveUser.email.toLowerCase() === MASTER_ACCOUNT.email.toLowerCase()) {
-                localStorage.setItem('matrix_master_balance_override', currentActiveUser.balance.toString());
-            } else {
-                let db = MatrixHub.getDB();
-                let userIndex = (db.accounts || []).findIndex(u => u.email.toLowerCase() === currentActiveUser.email.toLowerCase());
-                if (userIndex !== -1) {
-                    db.accounts[userIndex].balance = currentActiveUser.balance;
-                    MatrixHub.saveDB(db);
-                }
+            let db = MatrixHub.getDB();
+            let userIndex = (db.accounts || []).findIndex(u => u.accountNo === currentActiveUser.accountNo);
+            if (userIndex !== -1) {
+                db.accounts[userIndex].balance = currentActiveUser.balance;
+                MatrixHub.saveDB(db);
             }
 
             sessionStorage.setItem('matrix_active_user_session', JSON.stringify(currentActiveUser));
@@ -1721,9 +1260,7 @@
                 senderAcc: currentActiveUser.accountNo
             });
 
-            alert(document.documentElement.lang === 'ar' ? 
-                `تم تحويل مبلغ ${amt.toLocaleString()} ${curr} بنجاح إلى المستفيد (${name})\nتم توثيق بيانات حسابك وهاتفك (${currentActiveUser.phone}) في سجل العملية.` : 
-                `Transferred ${amt.toLocaleString()} ${curr} successfully to (${name}). Sender phone: (${currentActiveUser.phone}) recorded.`);
+            alert(`تم تحويل مبلغ ${amt.toLocaleString()} ${curr} بنجاح إلى (${name}) وتم تسجيل العملية في صفحة البيانات!`);
             document.getElementById('transferAmount').value = '';
             document.getElementById('transferName').value = '';
             document.getElementById('transferAcc').value = '';
@@ -1737,11 +1274,10 @@
             document.getElementById('convResult').innerText = `${amount} ${from} = ${result.toLocaleString('en-US', {maximumFractionDigits: 2})} ${to}`;
         }
 
-        function toggleLoginMenu(e) { if (e) e.stopPropagation(); document.getElementById('loginDropdownMenu').classList.toggle('show'); }
+        function toggleLoginMenu(e) { e.stopPropagation(); document.getElementById('loginDropdownMenu').classList.toggle('show'); }
         window.addEventListener('click', () => { const m = document.getElementById('loginDropdownMenu'); if (m) m.classList.remove('show'); });
         function openNavPage(pageId) { const m = document.getElementById('loginDropdownMenu'); if (m) m.classList.remove('show'); showPage(pageId); }
-        function triggerLoginPortal(type) { const m = document.getElementById('loginDropdownMenu'); if (m) m.classList.remove('show'); openLogin(); }
+        function triggerLoginPortal() { const m = document.getElementById('loginDropdownMenu'); if (m) m.classList.remove('show'); openLogin(); }
     </script>
 </body>
 </html>
-
