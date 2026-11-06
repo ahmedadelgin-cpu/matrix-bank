@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matrix Bank | قاعدة البيانات المركزية المشفرة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- مكتبة SheetJS لتصدير ملفات الإكسيل -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <style>
@@ -218,7 +216,6 @@
         .badge-purple { background: #f3e8ff; color: #6b21a8; }
         .badge-warning { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
 
-        /* أزرار الإجراءات في الجداول */
         .btn-table-action {
             border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.78rem;
             font-weight: 700; cursor: pointer; transition: all 0.2s; display: inline-flex;
@@ -238,7 +235,6 @@
 
         .empty-state { padding: 40px; text-align: center; color: var(--text-muted); font-weight: 600; }
 
-        /* نافذة التعديل المنبثقة Modal */
         .modal-edit-overlay {
             display: none; position: fixed; inset: 0; background: rgba(30, 5, 56, 0.75);
             backdrop-filter: blur(8px); justify-content: center; align-items: center;
@@ -287,7 +283,7 @@
         </div>
     </div>
 
-    <!-- 2. واجهة البيانات المركزية الكاملة -->
+    <!-- 2. واجهة البيانات المركزية -->
     <div id="adminMainContent">
         <header>
             <div class="header-title">
@@ -311,14 +307,14 @@
         </header>
 
         <div class="container">
-            <!-- شريط تنبيه البنك المركزي للحسابات التي تتجاوز 100 ألف لمن هم تحت السن -->
+            <!-- شريط تنبيه البنك المركزي -->
             <div id="cbeAlertBanner" class="cbe-alert-banner">
                 <div>
                     <h3 style="color:#b45309; display:flex; align-items:center; gap:8px;">
                         🚨 إشعار رقابي: تم رصد حسابات تتخطى 100,000 ج.م تحت السن القانوني (مكافحة غسل الأموال AML)
                     </h3>
                     <p style="color:#78350f; font-size:0.86rem; margin-top:4px;">
-                        طبقا للضوابط الرقابية لحسابات الشباب، تم تمييز هذه الحسابات في الجدول باللون الأصفر لفحص المستندات والإبلاغ.
+                        طبقاً للضوابط الرقابية لحسابات الشباب، تم تمييز هذه الحسابات في الجدول باللون الأصفر لفحص المستندات والإبلاغ.
                     </p>
                 </div>
                 <button class="btn-header" style="background:#b45309; color:#fff;" onclick="filterCbeAccounts()">
@@ -326,7 +322,7 @@
                 </button>
             </div>
 
-            <!-- شبكة الإحصائيات الأصلية -->
+            <!-- شبكة الإحصائيات -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <span data-adm-i18n="stat_total">إجمالي كافة العمليات</span>
@@ -354,6 +350,7 @@
                 </div>
             </div>
 
+            <!-- صندوق البحث -->
             <div class="search-container">
                 <div class="search-box-input">
                     <input type="text" id="globalSearchInput" placeholder="🔍 ابحث برقم هاتف المرسل أو المستفيد، بالإيميل، بالاسم، برقم الحساب (IBAN)، أو رقم العملية..." oninput="handleSearch()" data-adm-ph="ph_search">
@@ -434,7 +431,7 @@
                 </div>
             </div>
 
-            <!-- 3. جدول استفسارات صفحة اتصل بنا -->
+            <!-- 3. جدول الاستفسارات -->
             <div id="panel-contacts" class="data-panel">
                 <div class="panel-header">
                     <h3 data-adm-i18n="inq_panel_h3">رسائل واستفسارات صفحة "اتصل بنا" موثقة بأرقام الهواتف</h3>
@@ -458,7 +455,7 @@
                 </div>
             </div>
 
-            <!-- 4. جدول الحسابات المنشأة مع ميزات (التعديل ✏️ - فك الحظر 🟢 - الحظر 🚫 - فحص البنك المركزي 🏛️) -->
+            <!-- 4. جدول الحسابات -->
             <div id="panel-accounts" class="data-panel">
                 <div class="panel-header">
                     <h3 data-adm-i18n="acc_panel_h3">سجل العملاء والحسابات الجديدة المنشأة (إدارة وتعديل وحظر وفك حظر)</h3>
@@ -479,7 +476,7 @@
                             </tr>
                         </thead>
                         <tbody id="accountsTableBody">
-                            <tr><td colspan="8" class="empty-state">لا توجد حسابات جديدة.</td></tr>
+                            <tr><td colspan="8" class="empty-state">لا توجد حسابات مسجلة.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -509,7 +506,7 @@
         </div>
     </div>
 
-    <!-- 3. نافذة التعديل المنبثقة (Edit Modal) لتعديل أي حساب -->
+    <!-- نافذة تعديل بيانات الحساب المصرفي -->
     <div class="modal-edit-overlay" id="editModalOverlay">
         <div class="modal-edit-box">
             <h3 style="color:#581c87; margin-bottom:15px; font-size:1.25rem; display:flex; align-items:center; gap:8px;">
@@ -715,15 +712,19 @@
             if (labelEl) labelEl.textContent = (lang === 'ar') ? 'English' : 'العربية';
             document.querySelectorAll('.lockLangLabel').forEach(el => el.textContent = (lang === 'ar') ? 'English' : 'العربية');
             const dict = ADMIN_I18N[lang];
-            document.querySelectorAll('[data-adm-i18n]').forEach(el => {
-                const key = el.getAttribute('data-adm-i18n');
-                if (dict[key]) el.innerText = dict[key];
-            });
+            if (dict) {
+                document.querySelectorAll('[data-adm-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-adm-i18n');
+                    if (dict[key]) el.innerText = dict[key];
+                });
+            }
             const ph = adminPlaceholders[lang];
-            document.querySelectorAll('[data-adm-ph]').forEach(el => {
-                const key = el.getAttribute('data-adm-ph');
-                if (ph[key]) el.placeholder = ph[key];
-            });
+            if (ph) {
+                document.querySelectorAll('[data-adm-ph]').forEach(el => {
+                    const key = el.getAttribute('data-adm-ph');
+                    if (ph[key]) el.placeholder = ph[key];
+                });
+            }
             localStorage.setItem('matrix_admin_lang', lang);
             loadAndRenderData();
         }
@@ -734,7 +735,7 @@
 
         function escapeHtml(str) {
             if (!str) return '---';
-            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
         }
 
         function checkSession() {
@@ -775,15 +776,27 @@
             if (el) el.innerText = text;
         }
 
-        /* فحص الرقم القومي المصري لحساب السن بدقة */
+        /* حساب السن بدقة باليوم والشهر والسنة */
         function calculateAgeFromNationalId(natId) {
-            if (!natId || natId.length < 14) return null;
+            if (!natId || natId.length !== 14 || !/^\d+$/.test(natId)) return null;
             try {
-                const c = natId.charAt(0);
-                const prefix = (c === '2') ? '19' : (c === '3' ? '20' : '19');
-                const birthYear = parseInt(prefix + natId.substr(1, 2), 10);
-                const age = new Date().getFullYear() - birthYear;
-                return (age > 0 && age < 120) ? age : null;
+                const centuryChar = natId.charAt(0);
+                const prefix = (centuryChar === '2') ? 1900 : (centuryChar === '3' ? 2000 : null);
+                if (!prefix) return null;
+
+                const year = prefix + parseInt(natId.substr(1, 2), 10);
+                const month = parseInt(natId.substr(3, 2), 10) - 1;
+                const day = parseInt(natId.substr(5, 2), 10);
+
+                const birthDate = new Date(year, month, day);
+                const today = new Date();
+
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return (age >= 0 && age < 120) ? age : null;
             } catch(e) { return null; }
         }
 
@@ -809,7 +822,7 @@
                     if (a.status === 'banned') bannedAccs++; else activeAccs++;
                     const bal = parseFloat(a.balance || 0);
                     const age = calculateAgeFromNationalId(a.nationalId);
-                    if (bal >= 100000 && ((age !== null && age < 21) || !a.nationalId)) {
+                    if (bal >= 100000 && age !== null && age < 21) {
                         cbeAlertCount++;
                     }
                 });
@@ -844,10 +857,10 @@
                     (isAr ? `نتائج البحث: تم العثور على ${foundCount} سجل` : `Search results: ${foundCount} found`) : 
                     (isAr ? `إجمالي السجلات: ${total} عملية` : `Total Records: ${total}`));
 
-                // 1. جدول التحويلات
+                // 1. جدول التحويلات (حذف بواسطة ID الحقيقي لتجنب حذف سجل خاطئ)
                 const transfersBody = document.getElementById('transfersTableBody');
                 if (transfersBody) {
-                    transfersBody.innerHTML = filteredTransfers.length ? filteredTransfers.map((tx, idx) => `
+                    transfersBody.innerHTML = filteredTransfers.length ? filteredTransfers.map(tx => `
                         <tr>
                             <td><span class="badge badge-purple">${escapeHtml(tx.id || 'TX-000')}</span></td>
                             <td>${escapeHtml(tx.timestamp || 'اليوم')}</td>
@@ -859,15 +872,15 @@
                             <td><strong>${escapeHtml(tx.name || 'عميل مستفيد')}</strong><br><small style="color:#64748b;">${escapeHtml(tx.acc || '---')}</small></td>
                             <td style="color:#7c3aed; font-weight:800; font-size:1rem;">${escapeHtml(tx.displayAmount || tx.amount)}</td>
                             <td><span class="badge badge-success">● منجز وناجح</span></td>
-                            <td><button class="btn-table-action btn-del" onclick="deleteItem('transfers', ${idx})">🗑️ حذف</button></td>
+                            <td><button class="btn-table-action btn-del" onclick="deleteRecord('transfers', 'id', '${tx.id}')">🗑️ حذف</button></td>
                         </tr>
                     `).join('') : `<tr><td colspan="7" class="empty-state">لا توجد تحويلات مسجلة.</td></tr>`;
                 }
 
-                // 2. جدول طلبات التقديم
+                // 2. جدول طلبات التقديم (حذف بواسطة ID الحقيقي)
                 const corpBody = document.getElementById('corporateTableBody');
                 if (corpBody) {
-                    corpBody.innerHTML = filteredCorporate.length ? filteredCorporate.map((op, idx) => `
+                    corpBody.innerHTML = filteredCorporate.length ? filteredCorporate.map(op => `
                         <tr>
                             <td>${escapeHtml(op.timestamp || 'اليوم')}</td>
                             <td><strong>${escapeHtml(op.clientName || 'عميل')}</strong></td>
@@ -876,34 +889,34 @@
                             <td>${escapeHtml(op.branch || 'الفرع الرئيسي')}</td>
                             <td style="white-space:normal; max-width:300px;">${escapeHtml(op.details || op.income || '---')}</td>
                             <td><span class="badge badge-success">● موثق</span></td>
-                            <td><button class="btn-table-action btn-del" onclick="deleteItem('corporate', ${idx})">🗑️ حذف</button></td>
+                            <td><button class="btn-table-action btn-del" onclick="deleteRecord('corporate', 'id', '${op.id}')">🗑️ حذف</button></td>
                         </tr>
                     `).join('') : `<tr><td colspan="8" class="empty-state">لا توجد طلبات تقديم مسجلة.</td></tr>`;
                 }
 
-                // 3. جدول الرسائل
+                // 3. جدول الرسائل (حذف بواسطة ID الحقيقي)
                 const contactsBody = document.getElementById('contactsTableBody');
                 if (contactsBody) {
-                    contactsBody.innerHTML = filteredContacts.length ? filteredContacts.map((c, idx) => `
+                    contactsBody.innerHTML = filteredContacts.length ? filteredContacts.map(c => `
                         <tr>
                             <td>${escapeHtml(c.timestamp || 'اليوم')}</td>
                             <td><strong>${escapeHtml(c.name || '---')}</strong></td>
                             <td><span class="badge badge-purple">📞 ${escapeHtml(c.phone || '---')}</span></td>
                             <td>${escapeHtml(c.email || '---')}</td>
                             <td style="white-space:normal; max-width:320px;">${escapeHtml(c.message || '---')}</td>
-                            <td><button class="btn-table-action btn-del" onclick="deleteItem('contacts', ${idx})">🗑️ حذف</button></td>
+                            <td><button class="btn-table-action btn-del" onclick="deleteRecord('contacts', 'id', '${c.id}')">🗑️ حذف</button></td>
                         </tr>
                     `).join('') : `<tr><td colspan="6" class="empty-state">لا توجد استفسارات مسجلة.</td></tr>`;
                 }
 
-                // 4. جدول الحسابات مع ميزة (تعديل ✏️ - فك حظر 🟢 - حظر 🚫 - فحص البنك المركزي 🏛️)
+                // 4. جدول الحسابات
                 const accountsBody = document.getElementById('accountsTableBody');
                 if (accountsBody) {
                     accountsBody.innerHTML = filteredAccounts.length ? filteredAccounts.map(acc => {
                         const isBanned = (acc.status === 'banned');
                         const bal = parseFloat(acc.balance || 0);
                         const age = calculateAgeFromNationalId(acc.nationalId);
-                        const isCbeAlert = (bal >= 100000 && ((age !== null && age < 21) || !acc.nationalId));
+                        const isCbeAlert = (bal >= 100000 && age !== null && age < 21);
 
                         return `
                             <tr style="${isCbeAlert ? 'background:#fffbeb;' : (isBanned ? 'background:#fef2f2;' : '')}">
@@ -917,9 +930,9 @@
                                 <td>
                                     ${isCbeAlert ? `
                                         <span class="badge badge-warning" title="حساب يتجاوز 100 ألف تحت السن القانوني للمصارف">
-                                            🚨 تنبيه بنك مركزي (>100 ألف / ${age ? age + ' سنة' : 'فحص'})
+                                            🚨 تنبيه بنك مركزي (>100 ألف / ${age} سنة)
                                         </span>
-                                    ` : (age ? `<span class="badge badge-success">${age} سنة (بالغ)</span>` : '<span style="color:#94a3b8;">طبيعي</span>')}
+                                    ` : (age ? `<span class="badge badge-success">${age} سنة (بالغ)</span>` : '<span style="color:#94a3b8;">تم التحقق</span>')}
                                 </td>
                                 <td>
                                     ${isBanned ? 
@@ -927,12 +940,10 @@
                                         '<span class="badge badge-success">● نشط ومصرّح</span>'}
                                 </td>
                                 <td>
-                                    <!-- زر التعديل -->
                                     <button class="btn-table-action btn-edit" onclick="openEditAccountModal('${escapeHtml(acc.accountNo)}')">
                                         ✏️ تعديل
                                     </button>
 
-                                    <!-- زر فك الحظر أو الحظر -->
                                     ${isBanned ? `
                                         <button class="btn-table-action btn-unban" onclick="toggleAccountBanStatus('${escapeHtml(acc.accountNo)}', false)">
                                             🟢 فك الحظر
@@ -943,7 +954,6 @@
                                         </button>
                                     `}
 
-                                    <!-- زر الحذف -->
                                     <button class="btn-table-action btn-del" onclick="deleteAccountPermanent('${escapeHtml(acc.accountNo)}')">
                                         🗑️ حذف
                                     </button>
@@ -969,11 +979,6 @@
             } catch(e) { console.error(e); }
         }
 
-        /* ========================================================
-           دوال التعديل والحظر وفك الحظر والحذف
-        ======================================================== */
-
-        // فتح نافذة التعديل
         function openEditAccountModal(accountNo) {
             const db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[]}');
             const acc = (db.accounts || []).find(a => a.accountNo === accountNo);
@@ -996,7 +1001,6 @@
             document.getElementById('editModalOverlay').style.display = 'none';
         }
 
-        // حفظ التعديلات في قاعدة البيانات
         function submitAccountUpdates() {
             const accNo = document.getElementById('editTargetAccNo').value;
             let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"audit":[]}');
@@ -1014,7 +1018,6 @@
 
             if (!name || !phone) return alert('يرجى كتابة الاسم ورقم الهاتف على الأقل.');
 
-            // تطبيق التحديثات
             db.accounts[idx].name = name;
             db.accounts[idx].phone = phone;
             db.accounts[idx].email = email;
@@ -1024,7 +1027,6 @@
             db.accounts[idx].accountType = accType;
             db.accounts[idx].status = status;
 
-            // توثيق التعديل في سجل الأمان
             if (!db.audit) db.audit = [];
             db.audit.unshift({
                 timestamp: new Date().toLocaleTimeString('ar-EG'),
@@ -1040,7 +1042,6 @@
             alert('تم حفظ التعديلات بنجاح وتحديث بيانات الحساب!');
         }
 
-        // فك الحظر أو الحظر
         function toggleAccountBanStatus(accountNo, shouldBan) {
             let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"audit":[]}');
             let acc = (db.accounts || []).find(a => a.accountNo === accountNo);
@@ -1069,25 +1070,22 @@
             loadAndRenderData();
         }
 
-        // حذف نهائي
-        function deleteAccountPermanent(accountNo) {
-            if (confirm(`هل أنت متأكد من حذف الحساب (${accountNo}) نهائياً من قاعدة البيانات؟`)) {
-                let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[]}');
-                db.accounts = (db.accounts || []).filter(a => a.accountNo !== accountNo);
+        function deleteRecord(category, key, value) {
+            if (!confirm("هل أنت متأكد من حذف هذا السجل بشكل نهائي؟")) return;
+            let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            if (db[category]) {
+                db[category] = db[category].filter(item => String(item[key]) !== String(value));
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
                 loadAndRenderData();
             }
         }
 
-        function deleteItem(category, idx) {
-            if (confirm("هل تريد حذف هذا السجل؟")) {
-                let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-                if (db[category]) {
-                    db[category].splice(idx, 1);
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-                    loadAndRenderData();
-                }
-            }
+        function deleteAccountPermanent(accountNo) {
+            if (!confirm(`هل أنت متأكد من حذف الحساب (${accountNo}) نهائياً من قاعدة البيانات؟`)) return;
+            let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[]}');
+            db.accounts = (db.accounts || []).filter(a => a.accountNo !== accountNo);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+            loadAndRenderData();
         }
 
         function filterCbeAccounts() {
@@ -1138,7 +1136,6 @@
             let db = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"accounts":[],"transfers":[],"contacts":[],"corporate":[],"audit":[]}');
             const now = new Date().toLocaleTimeString('ar-EG');
 
-            // إضافة حساب تجريبي تحت السن برصيد فوق 100 ألف لفحص تنبيه البنك المركزي
             db.accounts.unshift({
                 accountNo: 'EG-MXB-10022334',
                 name: 'يوسف رامي فهمي (شاب)',
@@ -1146,7 +1143,7 @@
                 email: 'youssef@test.com',
                 balance: 145000,
                 currency: 'EGP',
-                nationalId: '30705120104432', // مواليد 2007 (أقل من 21 سنة)
+                nationalId: '30705120104432',
                 accountType: 'حساب توفير الشباب',
                 status: 'active',
                 timestamp: now
@@ -1177,10 +1174,10 @@
             }
         }
 
-        setInterval(() => {
-            const input = document.getElementById('globalSearchInput');
-            if (!input || document.activeElement !== input) loadAndRenderData();
-        }, 1500);
+        // التحديث الفوري التلقائي بمجرد حدوث أي تغيير في التبويبات الأخرى
+        window.addEventListener('storage', (e) => {
+            if (e.key === STORAGE_KEY) loadAndRenderData();
+        });
 
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('matrix_admin_lang') || 'ar';
